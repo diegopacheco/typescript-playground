@@ -22,3 +22,16 @@ class GoodGreeter {
 
 const g = new GoodGreeter();
 console.log(g.greet());
+
+interface Pingable {
+  ping(): void;
+}
+
+class Sonar implements Pingable {
+  ping() {
+    console.log("from Sonar... ping!");
+  }
+}
+
+const pingable:Pingable = new Sonar();
+pingable.ping();
