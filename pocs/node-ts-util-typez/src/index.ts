@@ -3,6 +3,8 @@ import { obj2 } from './requireds';
 import { todo2 } from './partials';
 import { todo } from './picks';
 import { todoOmit } from './omits';
+import { resultExclude } from './excludes';
+import { extractResult } from './extracts';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -18,3 +20,9 @@ console.log("Pick  ",todo);
 
 // Omit Type
 console.log("Omit ",todoOmit);
+
+// Exclude T from U 
+console.log("Exclude ",resultExclude);
+
+// Extract type must be in T and U
+console.log("Extract ",extractResult);
