@@ -6,6 +6,7 @@ import { todoOmit } from './omits';
 import { resultExclude } from './excludes';
 import { extractResult } from './extracts';
 import { NonNullableResult } from './nonnullables';
+import { parametersResult } from './parameters';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -30,3 +31,6 @@ console.log("Extract ",extractResult);
 
 // NonNullable
 console.log("NonNullable ", NonNullableResult);
+
+// Parameters
+console.log("Parameters ",parametersResult);
