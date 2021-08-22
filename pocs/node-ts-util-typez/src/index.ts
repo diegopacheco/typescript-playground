@@ -7,6 +7,7 @@ import { resultExclude } from './excludes';
 import { extractResult } from './extracts';
 import { NonNullableResult } from './nonnullables';
 import { parametersResult } from './parameters';
+import { constructorParametersResult } from './constructorparameters';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -34,3 +35,6 @@ console.log("NonNullable ", NonNullableResult);
 
 // Parameters
 console.log("Parameters ",parametersResult);
+
+// ConstructorParameter
+console.log("ConstructorParameter ", constructorParametersResult);
