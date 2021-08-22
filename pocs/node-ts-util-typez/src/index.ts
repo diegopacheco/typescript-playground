@@ -5,6 +5,7 @@ import { todo } from './picks';
 import { todoOmit } from './omits';
 import { resultExclude } from './excludes';
 import { extractResult } from './extracts';
+import { NonNullableResult } from './nonnullables';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -26,3 +27,6 @@ console.log("Exclude ",resultExclude);
 
 // Extract type must be in T and U
 console.log("Extract ",extractResult);
+
+// NonNullable
+console.log("NonNullable ", NonNullableResult);
