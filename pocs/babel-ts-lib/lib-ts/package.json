@@ -1,0 +1,23 @@
+{
+  "name": "lib-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",  
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0"
+  },
+  "scripts": {
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --project ./",
+    "build:js": "babel src/ --out-dir dist/ --extensions \".js,.jsx,.ts,.tsx\" --source-maps inline"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
