@@ -11,6 +11,7 @@ import { constructorParametersResult } from './constructorparameters';
 import { returnTypeResult } from './returntypes';
 import { resultInstaceTypes } from './instancetypes';
 import { numberToString } from './thisparametertypes';
+import { fiveToHex } from './omitthisparameters';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -50,3 +51,6 @@ console.log("InstaceTypes ",resultInstaceTypes);
 
 // ThisParameterType
 console.log("ThisParameterType ",numberToString(42));
+
+// OmitThisParameter
+console.log("OmitThisParameter " + fiveToHex());
