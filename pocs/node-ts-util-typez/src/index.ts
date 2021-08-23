@@ -13,6 +13,8 @@ import { resultInstaceTypes } from './instancetypes';
 import { numberToString } from './thisparametertypes';
 import { fiveToHex } from './omitthisparameters';
 import { thisTypesResult } from './thistypes';
+import { stringLiteralsClasses } from './intrinsicstringmanipulationtypess';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -58,3 +60,6 @@ console.log("OmitThisParameter " + fiveToHex());
 
 // ThisTypes
 console.log("ThisTypes ",thisTypesResult);
+
+// Intrinsic String Manipulation Types
+console.log("Intrinsic String Manipulation Types ",stringLiteralsClasses)
