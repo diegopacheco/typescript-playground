@@ -10,6 +10,7 @@ import { parametersResult } from './parameters';
 import { constructorParametersResult } from './constructorparameters';
 import { returnTypeResult } from './returntypes';
 import { resultInstaceTypes } from './instancetypes';
+import { numberToString } from './thisparametertypes';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -46,3 +47,6 @@ console.log("RetutnType ",returnTypeResult);
 
 // InstaceTypes
 console.log("InstaceTypes ",resultInstaceTypes);
+
+// ThisParameterType
+console.log("ThisParameterType ",numberToString(42));
