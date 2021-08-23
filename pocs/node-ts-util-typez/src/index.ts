@@ -8,6 +8,7 @@ import { extractResult } from './extracts';
 import { NonNullableResult } from './nonnullables';
 import { parametersResult } from './parameters';
 import { constructorParametersResult } from './constructorparameters';
+import { returnTypeResult } from './returntypes';
 
 // Partial Type
 console.log("Partial ",todo2);
@@ -38,3 +39,6 @@ console.log("Parameters ",parametersResult);
 
 // ConstructorParameter
 console.log("ConstructorParameter ", constructorParametersResult);
+
+// ReturnType 
+console.log("RetutnType ",returnTypeResult);
