@@ -14,7 +14,6 @@ import { numberToString } from './thisparametertypes';
 import { fiveToHex } from './omitthisparameters';
 import { thisTypesResult } from './thistypes';
 import { stringLiteralsClasses } from './intrinsicstringmanipulationtypess';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 // Partial Type
 console.log("Partial ",todo2);
