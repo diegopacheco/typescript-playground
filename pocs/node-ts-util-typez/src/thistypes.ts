@@ -3,6 +3,18 @@
  * This utility does not return a transformed type. 
  * Instead, it serves as a marker for a contextual this type. 
  * Note that the noImplicitThis flag must be enabled to use this utility.
+ * 
+ * In the example above, the methods object in the argument to makeObject has a 
+ * contextual type that includes ThisType<D & M> and therefore the type of this in 
+ * methods within the methods object is 
+ * { x: number, y: number } & { moveBy(dx: number, dy: number): number }. 
+ * Notice how the type of the methods property simultaneously is an inference 
+ * target and a source for the this type in methods.
+ * 
+ * The ThisType<T> marker interface is simply an empty 
+ * interface declared in lib.d.ts. Beyond being recognized in the 
+ * contextual type of an object literal, the interface acts like any empty interface.
+ * 
  */
 type ObjectDescriptor<D, M> = {
     data?: D;
