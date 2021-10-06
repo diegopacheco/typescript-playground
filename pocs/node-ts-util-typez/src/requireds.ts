@@ -1,3 +1,8 @@
+/**
+ * Required<Type>
+ * Constructs a type consisting of all properties of Type set to required. 
+ * The opposite of Partial.
+ */
 interface Props {
     a?: number;
     b?: string;

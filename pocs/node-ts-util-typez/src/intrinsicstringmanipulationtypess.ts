@@ -1,3 +1,10 @@
+/*
+ * Intrinsic String Manipulation Types
+ * Uppercase<StringType>
+ * Lowercase<StringType>
+ * Capitalize<StringType>
+ * Uncapitalize<StringType>
+ */
 type Greeting = "Hello, world"
 type ShoutyGreeting = Uppercase<Greeting>
 // try to add any other string - does not work!

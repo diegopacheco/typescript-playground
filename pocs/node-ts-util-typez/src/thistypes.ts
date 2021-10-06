@@ -1,3 +1,9 @@
+/**
+ * ThisType<Type>
+ * This utility does not return a transformed type. 
+ * Instead, it serves as a marker for a contextual this type. 
+ * Note that the noImplicitThis flag must be enabled to use this utility.
+ */
 type ObjectDescriptor<D, M> = {
     data?: D;
     methods?: M & ThisType<D & M>; // Type of 'this' in methods is D & M

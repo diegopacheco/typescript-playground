@@ -1,3 +1,8 @@
+/**
+ * NonNullable<Type>
+ *  Constructs a type by excluding null and undefined from Type.
+ */
+// For type constructions not for type values
 type T0 = NonNullable<string | null | undefined>;
 type T1 = NonNullable<number | null | undefined>;
 

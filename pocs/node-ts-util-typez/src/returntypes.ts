@@ -1,3 +1,7 @@
+/**
+ * ReturnType<Type>
+ * Constructs a type consisting of the return type of function Type.
+ */
 declare function funcRet(i:number): { a: number; b: string };
 
 type T0 = ReturnType<typeof funcRet>;

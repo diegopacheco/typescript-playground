@@ -1,3 +1,8 @@
+/*
+ * InstanceType<Type>
+ * Constructs a type consisting of the instance type of a constructor 
+ * function in Type.
+ */
 class Points {
     x = 0;
     y = 0;
