@@ -11,6 +11,7 @@ function greeter(fn: fnConsumerStr): fnConsumerVoid {
   };
 }
 
-let lazyResult:fnConsumerVoid = greeter(printToConsole);
+let lazyResult: fnConsumerVoid = greeter(printToConsole);
 console.log(lazyResult);
 console.log(lazyResult());
+console.log(lazyResult.apply(0));
