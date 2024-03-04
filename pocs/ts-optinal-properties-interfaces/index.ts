@@ -12,6 +12,7 @@ function printMe(s: String, opt: LogOptions): void {
   if (typeof opt.reason !== "undefined") {
     extra += "reason: " + opt.reason + "";
   }
+  console.log(opt.reason);
   console.log(opt.sufix + " " + s + " " + extra);
 }
 
