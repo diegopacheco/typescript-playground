@@ -1,14 +1,17 @@
-import { Some, None, Option } from '../src/index';
+import { Some, None, OptionTrait } from '../index';
 
 // Helper functions for testing
-const f = (x: number): Option<number> => new Some(x + 1);
-const g = (x: number): Option<number> => new Some(x * 2);
+const f = (x: number): OptionTrait<number> => new Some(x + 1);
+const g = (x: number): OptionTrait<number> => new Some(x * 2);
 
 describe('OptionTrait Monad Laws', () => {
   test('Left Identity: return a >>= f is equivalent to f a', () => {
     const some = new Some(5);
     const leftIdentity = some.flatMap(f);
     const rightIdentity = f(5);
+
+    console.log('Left Identity - leftIdentity:', leftIdentity);
+    console.log('Left Identity - rightIdentity:', rightIdentity);
 
     expect(leftIdentity).toEqual(rightIdentity);
   });
@@ -19,6 +22,9 @@ describe('OptionTrait Monad Laws', () => {
 
     const rightIdentitySome = some.flatMap(x => new Some(x));
     const rightIdentityNone = none.flatMap(() => new None<number>());
+
+    console.log('Right Identity - rightIdentitySome:', rightIdentitySome);
+    console.log('Right Identity - rightIdentityNone:', rightIdentityNone);
 
     expect(rightIdentitySome).toEqual(some);
     expect(rightIdentityNone).toEqual(none);
@@ -34,16 +40,18 @@ describe('OptionTrait Monad Laws', () => {
     const leftAssociativityNone = none.flatMap(f).flatMap(g);
     const rightAssociativityNone = none.flatMap((x: number) => f(x).flatMap(g));
 
+    console.log('Associativity - leftAssociativitySome:', leftAssociativitySome);
+    console.log('Associativity - rightAssociativitySome:', rightAssociativitySome);
+    console.log('Associativity - leftAssociativityNone:', leftAssociativityNone);
+    console.log('Associativity - rightAssociativityNone:', rightAssociativityNone);
+
     expect(leftAssociativitySome).toEqual(rightAssociativitySome);
     expect(leftAssociativityNone).toEqual(rightAssociativityNone);
   });
 
   test('Some Monad usage', () => {
     const some = new Some(5);
-    const none = new None();
     const result = some.flatMap((value) => new Some(value + 5));
-    console.log(result);
     expect(result).toEqual(new Some(10));
   });
-
 });

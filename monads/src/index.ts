@@ -25,4 +25,4 @@ class None<T> implements Option<T> {
 
 }
 
-export { Some, None, Option};
+export { Some, None, Option as OptionTrait };
