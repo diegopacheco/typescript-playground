@@ -37,4 +37,13 @@ describe('OptionTrait Monad Laws', () => {
     expect(leftAssociativitySome).toEqual(rightAssociativitySome);
     expect(leftAssociativityNone).toEqual(rightAssociativityNone);
   });
+
+  test('Some Monad usage', () => {
+    const some = new Some(5);
+    const none = new None();
+    const result = some.flatMap((value) => new Some(value + 5));
+    console.log(result);
+    expect(result).toEqual(new Some(10));
+  });
+
 });
