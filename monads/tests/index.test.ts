@@ -1,8 +1,8 @@
-import { Some, None, OptionTrait } from '../src/index';
+import { Some, None, Option } from '../src/index';
 
 // Helper functions for testing
-const f = (x: number): OptionTrait<number> => new Some(x + 1);
-const g = (x: number): OptionTrait<number> => new Some(x * 2);
+const f = (x: number): Option<number> => new Some(x + 1);
+const g = (x: number): Option<number> => new Some(x * 2);
 
 describe('OptionTrait Monad Laws', () => {
   test('Left Identity: return a >>= f is equivalent to f a', () => {

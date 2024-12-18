@@ -1,28 +1,28 @@
-// implement identidy
-interface OptionTrait<T> {
-    map<U>(f: (value: T) => U): OptionTrait<U>;
-    flatMap<U>(f: (value: T) => OptionTrait<U>): OptionTrait<U>;
+interface Option<T> {
+    map<U>(f: (value: T) => U): Option<U>;
+    flatMap<U>(f: (value: T) => Option<U>): Option<U>;
 }
 
-class Some<T> implements OptionTrait<T> {
+class Some<T> implements Option<T> {
     constructor(private value: T) {}
 
-    map<U>(f: (value: T) => U): OptionTrait<U> {
+    map<U>(f: (value: T) => U): Option<U> {
         return new Some(f(this.value));
     }
 
-    flatMap<U>(f: (value: T) => OptionTrait<U>): OptionTrait<U> {
+    flatMap<U>(f: (value: T) => Option<U>): Option<U> {
         return f(this.value);
     }
 }
 
-class None<T> implements OptionTrait<T> {
-    map<U>(): OptionTrait<U> {
+class None<T> implements Option<T> {
+    map<U>(): Option<U> {
         return new None();
     }
-    flatMap<U>(f: (value: T) => OptionTrait<U>): OptionTrait<U> {
+    flatMap<U>(f: (value: T) => Option<U>): Option<U> {
         return new None();
     }
 
 }
-export { Some, None, OptionTrait };
+
+export { Some, None, Option};
