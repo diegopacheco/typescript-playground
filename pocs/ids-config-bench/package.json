@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
+    "generate": "ts-node src/generate-ids.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts"
