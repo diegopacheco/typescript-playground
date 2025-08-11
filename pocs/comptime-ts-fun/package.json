@@ -1,0 +1,26 @@
+{
+  "name": "comptime-ts-fun",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "run": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "comptime": "npx comptime.ts --project tsconfig.json --outdir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "comptime.ts": "^0.7.0"
+  }
+}
