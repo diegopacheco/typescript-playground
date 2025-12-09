@@ -1,0 +1,19 @@
+{
+  "name": "sam-local-lambda-serverless-test",
+  "version": "1.0.0",
+  "main": "dist/handler.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "start:api": "sam local start-api --docker-network host",
+    "invoke": "sam local invoke SumFunction --event event.json"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda function that sums two numbers
+
+Globals:
+  Function:
+    Timeout: 10
+    Runtime: nodejs20.x
+
+Resources:
+  SumFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: handler.handler
+      CodeUri: dist/
+      Events:
+        SumApi:
+          Type: Api
+          Properties:
+            Path: /sum
+            Method: post
+
+Outputs:
+  SumApi:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/sum/"
+  SumFunction:
+    Description: Lambda Function ARN
+    Value: !GetAtt SumFunction.Arn
