@@ -1,0 +1,29 @@
+{
+  "name": "pizza-delivery-app",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:server": "bun run --watch server/index.ts",
+    "dev:client": "bunx vite",
+    "build": "bunx vite build",
+    "start": "bun run server/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@tanstack/react-form": "^0.39.0",
+    "@tanstack/react-query": "^5.62.7",
+    "@tanstack/react-router": "^1.91.0",
+    "@tanstack/react-table": "^8.20.5",
+    "hono": "^4.6.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  }
+}
