@@ -1,0 +1,8 @@
+site_name: TypeScript Utilities
+nav:
+  - Home: index.md
+  - Calculator: calculator.md
+  - String Utils: stringUtils.md
+  - Array Utils: arrayUtils.md
+theme:
+  name: material
