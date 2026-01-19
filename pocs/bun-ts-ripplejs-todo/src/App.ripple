@@ -1,0 +1,226 @@
+import { track, TrackedArray } from 'ripple';
+
+interface GroceryItem {
+	id: number;
+	name: string;
+	bought: boolean;
+}
+
+export component App() {
+	let items = new TrackedArray<GroceryItem>([
+		{ id: 1, name: 'Milk', bought: false },
+		{ id: 2, name: 'Bread', bought: false },
+		{ id: 3, name: 'Eggs', bought: true },
+	]);
+	let inputValue = track('');
+	let nextId = track(4);
+	let boughtCount = track(() => items.filter((i) => i.bought).length);
+
+	function addItem() {
+		const name = @inputValue.trim();
+		if (name) {
+			items.push({ id: @nextId++, name, bought: false });
+			@inputValue = '';
+		}
+	}
+
+	function toggleBought(id: number) {
+		const item = items.find((i) => i.id === id);
+		if (item) {
+			item.bought = !item.bought;
+		}
+	}
+
+	function removeItem(id: number) {
+		const index = items.findIndex((i) => i.id === id);
+		if (index !== -1) {
+			items.splice(index, 1);
+		}
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key === 'Enter') {
+			addItem();
+		}
+	}
+
+	<div class="app">
+		<div class="card">
+			<h1 class="title">{'Grocery List'}</h1>
+
+			<div class="input-row">
+				<input
+					type="text"
+					class="input"
+					placeholder="Add item..."
+					value={@inputValue}
+					onInput={(e) => (@inputValue = (e.target as HTMLInputElement).value)}
+					onKeyDown={handleKeyDown}
+				/>
+				<button class="add-btn" onClick={addItem}>{'Add'}</button>
+			</div>
+
+			<ul class="list">
+				for (const item of items; key item.id) {
+					<li class={item.bought ? 'item bought' : 'item'}>
+						<label class="checkbox-label">
+							<input
+								type="checkbox"
+								checked={item.bought}
+								onChange={() => toggleBought(item.id)}
+							/>
+							<span class="item-name">{item.name}</span>
+						</label>
+						<button class="delete-btn" onClick={() => removeItem(item.id)}>
+							{'X'}
+						</button>
+					</li>
+				}
+			</ul>
+
+			<div class="stats">
+				<span>
+					{'Total: '}
+					{items.length}
+					{' | Bought: '}
+					{@boughtCount}
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.app {
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: linear-gradient(135deg, #1a1c2b 0%, #2d3748 100%);
+			color: #f2f4f8;
+			font-family: 'Inter', 'Segoe UI', sans-serif;
+			padding: 1rem;
+		}
+
+		.card {
+			background: rgba(18, 19, 29, 0.9);
+			padding: 2rem;
+			border-radius: 1rem;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+			width: 100%;
+			max-width: 450px;
+			box-sizing: border-box;
+		}
+
+		.title {
+			text-align: center;
+			margin: 0 0 1.5rem 0;
+			font-size: 1.8rem;
+			color: #a8b2ff;
+		}
+
+		.input-row {
+			display: flex;
+			gap: 0.5rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.input {
+			flex: 1;
+			padding: 0.75rem 1rem;
+			border-radius: 0.5rem;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			background: rgba(31, 32, 46, 0.9);
+			color: #f2f4f8;
+			font-size: 1rem;
+			outline: none;
+		}
+
+		.input:focus {
+			border-color: #a8b2ff;
+		}
+
+		.add-btn {
+			padding: 0.75rem 1.25rem;
+			border-radius: 0.5rem;
+			border: none;
+			background: #4c51bf;
+			color: white;
+			font-size: 1rem;
+			font-weight: 500;
+			cursor: pointer;
+		}
+
+		.add-btn:hover {
+			background: #5a67d8;
+		}
+
+		.list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			max-height: 400px;
+			overflow-y: auto;
+		}
+
+		.item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.75rem;
+			margin-bottom: 0.5rem;
+			background: rgba(31, 32, 46, 0.7);
+			border-radius: 0.5rem;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.item.bought {
+			opacity: 0.6;
+		}
+
+		.item.bought .item-name {
+			text-decoration: line-through;
+			color: #9fa3b9;
+		}
+
+		.checkbox-label {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			cursor: pointer;
+			flex: 1;
+		}
+
+		.checkbox-label input[type='checkbox'] {
+			width: 18px;
+			height: 18px;
+			cursor: pointer;
+			accent-color: #4c51bf;
+		}
+
+		.item-name {
+			font-size: 1rem;
+		}
+
+		.delete-btn {
+			padding: 0.4rem 0.7rem;
+			border-radius: 0.4rem;
+			border: none;
+			background: rgba(220, 38, 38, 0.8);
+			color: white;
+			font-size: 0.85rem;
+			cursor: pointer;
+		}
+
+		.delete-btn:hover {
+			background: rgba(220, 38, 38, 1);
+		}
+
+		.stats {
+			margin-top: 1rem;
+			text-align: center;
+			color: #9fa3b9;
+			font-size: 0.9rem;
+		}
+	</style>
+}
