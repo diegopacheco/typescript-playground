@@ -1,0 +1,24 @@
+pocs/control-flow-testing/design-doc.md
+  e4fb474b56349d84 106-117,243-244,248,251-255,265-266,269-278,302-304
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "298b4c1b344da55f5bbca7009aec3d473a355a3a",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 36,
+      "total_deletions": 5,
+      "accepted_lines": 36,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/09f04ba859918e280f60a5087e88d56d5657af5eaf475568d7c847158e89b3d2"
+    }
+  }
+}
