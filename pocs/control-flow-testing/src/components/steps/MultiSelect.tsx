@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StepConfig } from "../../types/flow";
+import type { StepConfig } from "../../types/flow";
 
 interface Props {
   step: StepConfig;

@@ -1,5 +1,5 @@
 import { useReactTable, getCoreRowModel, flexRender, createColumnHelper } from "@tanstack/react-table";
-import { TestCase } from "../types/flow";
+import type { TestCase } from "../types/flow";
 
 interface Props {
   tests: TestCase[];

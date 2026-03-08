@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
-import { FlowDefinition, FlowState, FlowContextValue, StepOutput, StepConfig } from "../types/flow";
+import { createContext, useContext, useState, useCallback } from "react";
+import type { ReactNode } from "react";
+import type { FlowDefinition, FlowState, FlowContextValue, StepOutput, StepConfig } from "../types/flow";
 import defaultFlow from "../default-flow.json";
 
 const initialState: FlowState = {

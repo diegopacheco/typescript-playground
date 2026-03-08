@@ -1,4 +1,4 @@
-import { FlowDefinition, StepConfig, TestCase } from "../types/flow";
+import type { FlowDefinition, StepConfig, TestCase } from "../types/flow";
 import { validateStepOutput } from "./flow-validator";
 
 function getOrderedSteps(def: FlowDefinition): StepConfig[] {

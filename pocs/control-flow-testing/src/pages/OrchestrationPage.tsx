@@ -3,7 +3,7 @@ import { useFlow } from "../context/FlowContext";
 import { JsonEditor } from "../components/JsonEditor";
 import { FlowGraph } from "../components/FlowGraph";
 import { compileGraph } from "../engine/graph-compiler";
-import { FlowDefinition, CompilationResult } from "../types/flow";
+import type { FlowDefinition, CompilationResult } from "../types/flow";
 
 export function OrchestrationPage() {
   const { definition, setDefinition } = useFlow();

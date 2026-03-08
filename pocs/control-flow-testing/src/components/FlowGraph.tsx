@@ -1,4 +1,4 @@
-import { FlowDefinition, StepConfig, ValidationError } from "../types/flow";
+import type { FlowDefinition, StepConfig } from "../types/flow";
 
 interface Props {
   definition: FlowDefinition;

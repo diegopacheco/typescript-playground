@@ -1,4 +1,4 @@
-import { StepConfig, StepOutput } from "../types/flow";
+import type { StepConfig, StepOutput } from "../types/flow";
 
 export function validateStepOutput(step: StepConfig, output: StepOutput): string[] {
   const errors: string[] = [];

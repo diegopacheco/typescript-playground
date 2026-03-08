@@ -1,4 +1,4 @@
-import { StepConfig } from "../types/flow";
+import type { StepConfig } from "../types/flow";
 import { SingleSelect } from "./steps/SingleSelect";
 import { MultiSelect } from "./steps/MultiSelect";
 import { FormStep } from "./steps/FormStep";

@@ -1,4 +1,4 @@
-import { FlowDefinition, ValidationError, CompilationResult } from "../types/flow";
+import type { FlowDefinition, ValidationError, CompilationResult } from "../types/flow";
 
 function validateRequiredFields(flow: FlowDefinition): ValidationError[] {
   const errors: ValidationError[] = [];

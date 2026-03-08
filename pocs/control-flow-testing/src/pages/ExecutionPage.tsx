@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useFlow } from "../context/FlowContext";
 import { FlowGraph } from "../components/FlowGraph";
 import { StepRenderer } from "../components/StepRenderer";
-import { StepConfig } from "../types/flow";
+import type { StepConfig } from "../types/flow";
 
 export function ExecutionPage() {
   const { definition, state, goNext, goBack, getCurrentStep, resetFlow } = useFlow();
