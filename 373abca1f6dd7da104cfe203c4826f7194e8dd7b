@@ -1,0 +1,64 @@
+pocs/control-flow-testing/index.html
+  e4fb474b56349d84 7
+pocs/control-flow-testing/src/components/steps/SingleSelect.tsx
+  e4fb474b56349d84 2
+pocs/control-flow-testing/stop.sh
+  e4fb474b56349d84 1-2
+pocs/control-flow-testing/src/components/steps/FormStep.tsx
+  e4fb474b56349d84 2
+pocs/control-flow-testing/src/components/StepRenderer.tsx
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/components/FlowGraph.tsx
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/App.tsx
+  e4fb474b56349d84 1-6,8-13,15-27,30-54,56-57
+pocs/control-flow-testing/src/engine/test-generator.ts
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/main.tsx
+  e4fb474b56349d84 1-3,5,8-9
+pocs/control-flow-testing/src/components/steps/MultiSelect.tsx
+  e4fb474b56349d84 2
+pocs/control-flow-testing/src/pages/TestingPage.tsx
+  e4fb474b56349d84 1-79
+pocs/control-flow-testing/src/components/ContractViewer.tsx
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/pages/OrchestrationPage.tsx
+  e4fb474b56349d84 6
+pocs/control-flow-testing/src/engine/graph-compiler.ts
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/components/TestResultsTable.tsx
+  e4fb474b56349d84 2
+pocs/control-flow-testing/src/engine/flow-validator.ts
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/pages/ExecutionPage.tsx
+  e4fb474b56349d84 5
+pocs/control-flow-testing/src/pages/DetailsPage.tsx
+  e4fb474b56349d84 1-15
+pocs/control-flow-testing/run.sh
+  e4fb474b56349d84 1-3
+pocs/control-flow-testing/src/components/steps/Summary.tsx
+  e4fb474b56349d84 1
+pocs/control-flow-testing/src/context/FlowContext.tsx
+  e4fb474b56349d84 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "373abca1f6dd7da104cfe203c4826f7194e8dd7b",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 161,
+      "total_deletions": 54,
+      "accepted_lines": 175,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/312307511ff54bfc1b04ba162a6b375863abd20713053424be5813ae1af8180b"
+    }
+  }
+}
