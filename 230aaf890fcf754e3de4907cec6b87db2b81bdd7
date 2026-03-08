@@ -1,0 +1,24 @@
+pocs/control-flow-testing/README.md
+  e4fb474b56349d84 1,3,5-6,8-10,13,15-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "230aaf890fcf754e3de4907cec6b87db2b81bdd7",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 15,
+      "total_deletions": 68,
+      "accepted_lines": 15,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/94fadd1c558bc4da0f44f1134a6776a3d2abc01228fd76a8ca3328f887d5a931"
+    }
+  }
+}
