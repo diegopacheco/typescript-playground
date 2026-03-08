@@ -103,6 +103,18 @@ A `FlowContext` (React Context) holds the current FlowDefinition, FlowState, and
 - Loads with the default pizza order flow
 - JSON validation on save (schema check)
 - Stores the parsed flow in TanStack Query cache so all other tabs react to changes
+- **Live graph preview**: side-by-side layout with the JSON editor on the left and a mini flow graph on the right. As the user edits the JSON, the graph updates in real-time showing the step nodes and connections. Invalid JSON grays out the preview with an error indicator.
+- **Compile & Validate button**: compiles the graph and runs validation checks. Shows a clear VALID/INVALID status with detailed error messages. Validation rules:
+  - JSON is syntactically valid
+  - All required fields present on each step (id, name, order, type, next)
+  - No duplicate step IDs
+  - Every `next` reference points to an existing step ID (or is null for the last step)
+  - No circular references (detects cycles in the graph)
+  - Exactly one terminal step (next: null)
+  - All steps are reachable from the first step
+  - Step types have their required fields (options for select types, fields for form type)
+  - Graph is fully connected (no orphan steps)
+- Valid graphs show green status with a checkmark. Invalid graphs show red status with the list of errors and highlight the problematic steps in the preview.
 
 ### Tab 2 - Execution
 
@@ -228,26 +240,42 @@ src/
     ContractViewer.tsx
     TestRunner.tsx
     TestResultsTable.tsx
+  context/
+    FlowContext.tsx
   engine/
     flow-engine.ts
     flow-validator.ts
+    graph-compiler.ts
     step-registry.ts
     iframe-bridge.ts
+  pages/
+    OrchestrationPage.tsx
+    ExecutionPage.tsx
+    DetailsPage.tsx
+    TestingPage.tsx
   types/
     flow.ts
     steps.ts
   tests/
     test-generator.ts
     test-runner.ts
-  routes/
-    orchestration.tsx
-    execution.tsx
-    details.tsx
-    testing.tsx
   App.tsx
   main.tsx
   default-flow.json
+run.sh
+stop.sh
 ```
+
+Pages live in `src/pages/` and are tab-level containers. Components live in `src/components/` and are reusable building blocks that work both standalone and inside the flow.
+
+## Scripts
+
+### run.sh
+- Installs dependencies (`bun install`)
+- Starts the dev server (`bun run dev`)
+
+### stop.sh
+- Finds and kills the Vite dev server process
 
 ## Data Flow
 
@@ -271,3 +299,6 @@ src/
 3. **JSON-driven**: changing the JSON changes everything - the execution flow, the contracts, and the generated tests.
 4. **TanStack Query as shared state**: the flow definition lives in the query cache, all tabs subscribe to it reactively.
 5. **Test generation from schema**: tests are auto-generated from the flow definition, not hand-written.
+6. **Component independence**: every step component works standalone (with props) or inside the flow. No coupling between components.
+7. **Bidirectional navigation**: users can go forward and backward through the flow, preserving data at each step.
+8. **React Context for shared state**: FlowContext provides the flow definition, runtime state, and navigation functions to all components and pages.
