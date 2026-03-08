@@ -1,0 +1,49 @@
+{
+  "id": "pizza-order",
+  "name": "Pizza Order",
+  "steps": [
+    {
+      "id": "style",
+      "name": "Select Style",
+      "order": 1,
+      "type": "single-select",
+      "options": ["NY", "Deep Dish", "Thin", "Ultra-Thin"],
+      "next": "flavor"
+    },
+    {
+      "id": "flavor",
+      "name": "Select Flavor",
+      "order": 2,
+      "type": "single-select",
+      "options": ["Pepperoni", "Steak", "Chicken", "Margherita"],
+      "next": "toppings"
+    },
+    {
+      "id": "toppings",
+      "name": "Select Toppings",
+      "order": 3,
+      "type": "multi-select",
+      "options": ["Garlic", "Salt", "Pepper", "Mayo", "Cheese", "Bacon"],
+      "next": "delivery"
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery Details",
+      "order": 4,
+      "type": "form",
+      "fields": [
+        { "name": "address", "type": "text", "required": true },
+        { "name": "phone", "type": "text", "required": true },
+        { "name": "notes", "type": "text", "required": false }
+      ],
+      "next": "summary"
+    },
+    {
+      "id": "summary",
+      "name": "Order Accepted",
+      "order": 5,
+      "type": "summary",
+      "next": null
+    }
+  ]
+}
