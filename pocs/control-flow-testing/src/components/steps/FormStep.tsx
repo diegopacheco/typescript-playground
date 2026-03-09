@@ -21,7 +21,7 @@ export function FormStep({ step, initialValue, onComplete }: Props) {
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {};
     step.fields?.forEach((f) => {
-      if (f.required && !values[f.name]?.trim()) {
+      if (f.required && (!values[f.name] || !values[f.name].trim())) {
         newErrors[f.name] = `${f.name} is required`;
       }
     });

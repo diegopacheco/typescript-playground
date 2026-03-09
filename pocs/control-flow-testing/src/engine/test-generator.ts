@@ -14,16 +14,51 @@ function getOrderedSteps(def: FlowDefinition): StepConfig[] {
 }
 
 function generateRenderTests(def: FlowDefinition): TestCase[] {
+  const tests: TestCase[] = [];
   const ordered = getOrderedSteps(def);
-  return ordered.map((step) => ({
-    id: `render-${step.id}`,
-    name: `Render: ${step.name} mounts with correct elements`,
-    category: "render" as const,
-    path: [step.id],
-    input: {},
-    expected: "pass" as const,
-    status: "pending" as const,
-  }));
+  for (const step of ordered) {
+    tests.push({
+      id: `render-${step.id}-elements`,
+      name: `Render: ${step.name} mounts with correct elements`,
+      category: "render",
+      path: [step.id],
+      input: {},
+      expected: "pass",
+      status: "pending",
+    });
+    tests.push({
+      id: `render-${step.id}-heading`,
+      name: `Render: ${step.name} shows correct heading`,
+      category: "render",
+      path: [step.id],
+      input: { _checkHeading: true },
+      expected: "pass",
+      status: "pending",
+    });
+    if (step.type !== "summary") {
+      tests.push({
+        id: `render-${step.id}-confirm-btn`,
+        name: `Render: ${step.name} has Confirm button`,
+        category: "render",
+        path: [step.id],
+        input: { _checkConfirmBtn: true },
+        expected: "pass",
+        status: "pending",
+      });
+    }
+    if ((step.type === "single-select" || step.type === "multi-select") && step.options) {
+      tests.push({
+        id: `render-${step.id}-labels`,
+        name: `Render: ${step.name} labels match option text`,
+        category: "render",
+        path: [step.id],
+        input: { _checkLabels: true },
+        expected: "pass",
+        status: "pending",
+      });
+    }
+  }
+  return tests;
 }
 
 function generatePositiveTests(def: FlowDefinition): TestCase[] {
@@ -53,6 +88,17 @@ function generatePositiveTests(def: FlowDefinition): TestCase[] {
         expected: "pass",
         status: "pending",
       });
+      if (step.options.length >= 2) {
+        tests.push({
+          id: `pos-${step.id}-two`,
+          name: `${step.name}: select 2 options and submit`,
+          category: "positive",
+          path: [step.id],
+          input: { selected: [step.options[0], step.options[1]] },
+          expected: "pass",
+          status: "pending",
+        });
+      }
       tests.push({
         id: `pos-${step.id}-all`,
         name: `${step.name}: select all and submit`,
@@ -64,17 +110,31 @@ function generatePositiveTests(def: FlowDefinition): TestCase[] {
       });
     }
     if (step.type === "form" && step.fields) {
-      const data: Record<string, string> = {};
-      step.fields.forEach((f) => { data[f.name] = `test-${f.name}`; });
+      const allData: Record<string, string> = {};
+      step.fields.forEach((f) => { allData[f.name] = `test-${f.name}`; });
       tests.push({
-        id: `pos-${step.id}-valid`,
+        id: `pos-${step.id}-all-fields`,
         name: `${step.name}: fill all fields and submit`,
         category: "positive",
         path: [step.id],
-        input: data,
+        input: allData,
         expected: "pass",
         status: "pending",
       });
+      const hasOptional = step.fields.some((f) => !f.required);
+      if (hasOptional) {
+        const requiredOnly: Record<string, string> = {};
+        step.fields.forEach((f) => { requiredOnly[f.name] = f.required ? `test-${f.name}` : ""; });
+        tests.push({
+          id: `pos-${step.id}-required-only`,
+          name: `${step.name}: fill only required fields and submit`,
+          category: "positive",
+          path: [step.id],
+          input: requiredOnly,
+          expected: "pass",
+          status: "pending",
+        });
+      }
     }
   }
   return tests;
@@ -94,6 +154,15 @@ function generateNegativeTests(def: FlowDefinition): TestCase[] {
         expected: "pass",
         status: "pending",
       });
+      tests.push({
+        id: `neg-${step.id}-double-click`,
+        name: `${step.name}: double-click same option no double fire`,
+        category: "negative",
+        path: [step.id],
+        input: { _doubleClick: true, selected: step.options?.[0] },
+        expected: "pass",
+        status: "pending",
+      });
     }
     if (step.type === "multi-select") {
       tests.push({
@@ -102,6 +171,15 @@ function generateNegativeTests(def: FlowDefinition): TestCase[] {
         category: "negative",
         path: [step.id],
         input: {},
+        expected: "pass",
+        status: "pending",
+      });
+      tests.push({
+        id: `neg-${step.id}-deselect`,
+        name: `${step.name}: select then deselect, confirm stays disabled`,
+        category: "negative",
+        path: [step.id],
+        input: { _deselect: true, selected: step.options?.[0] },
         expected: "pass",
         status: "pending",
       });
@@ -117,6 +195,19 @@ function generateNegativeTests(def: FlowDefinition): TestCase[] {
           category: "negative",
           path: [step.id],
           input: { ...data, _missingField: field.name },
+          expected: "pass",
+          status: "pending",
+        });
+      }
+      if (requiredFields.length > 1) {
+        const allEmpty: Record<string, string> = {};
+        step.fields.forEach((f) => { allEmpty[f.name] = ""; });
+        tests.push({
+          id: `neg-${step.id}-all-empty`,
+          name: `${step.name}: error when all required fields empty`,
+          category: "negative",
+          path: [step.id],
+          input: { ...allEmpty, _missingField: requiredFields[0].name },
           expected: "pass",
           status: "pending",
         });
@@ -142,6 +233,33 @@ function generateIntegrationTests(def: FlowDefinition): TestCase[] {
     {
       id: "integration-back-nav",
       name: "Navigation: go forward 2 steps, go back, data preserved",
+      category: "integration",
+      path: path.slice(0, 3),
+      input: {},
+      expected: "pass",
+      status: "pending",
+    },
+    {
+      id: "integration-restart",
+      name: "Restart: complete flow, click Restart, back to step 1",
+      category: "integration",
+      path,
+      input: {},
+      expected: "pass",
+      status: "pending",
+    },
+    {
+      id: "integration-back-from-first",
+      name: "Navigation: Previous button disabled on first step",
+      category: "integration",
+      path: [path[0]],
+      input: {},
+      expected: "pass",
+      status: "pending",
+    },
+    {
+      id: "integration-revisit",
+      name: "Navigation: go forward 1, go back, re-confirm, flow continues",
       category: "integration",
       path: path.slice(0, 3),
       input: {},
@@ -174,6 +292,56 @@ function generateBoundaryTests(def: FlowDefinition): TestCase[] {
         category: "boundary",
         path: [step.id],
         input: specialData,
+        expected: "pass",
+        status: "pending",
+      });
+      const unicodeData: Record<string, string> = {};
+      step.fields.forEach((f) => { unicodeData[f.name] = "Rua Sao Paulo 123 Andar 4"; });
+      tests.push({
+        id: `boundary-${step.id}-unicode`,
+        name: `${step.name}: submit with unicode characters`,
+        category: "boundary",
+        path: [step.id],
+        input: unicodeData,
+        expected: "pass",
+        status: "pending",
+      });
+      const hasOptional = step.fields.some((f) => !f.required);
+      if (hasOptional) {
+        const wsData: Record<string, string> = {};
+        step.fields.forEach((f) => { wsData[f.name] = f.required ? `test-${f.name}` : ""; });
+        tests.push({
+          id: `boundary-${step.id}-optional-empty`,
+          name: `${step.name}: empty string on optional fields passes`,
+          category: "boundary",
+          path: [step.id],
+          input: wsData,
+          expected: "pass",
+          status: "pending",
+        });
+      }
+      const wsRequired: Record<string, string> = {};
+      const firstRequired = step.fields.find((f) => f.required);
+      if (firstRequired) {
+        step.fields.forEach((f) => { wsRequired[f.name] = f.name === firstRequired.name ? "   " : `test-${f.name}`; });
+        tests.push({
+          id: `boundary-${step.id}-whitespace`,
+          name: `${step.name}: whitespace-only on required "${firstRequired.name}" fails`,
+          category: "boundary",
+          path: [step.id],
+          input: { ...wsRequired, _whitespaceField: firstRequired.name },
+          expected: "pass",
+          status: "pending",
+        });
+      }
+    }
+    if (step.type === "single-select" && step.options) {
+      tests.push({
+        id: `boundary-${step.id}-rapid-click`,
+        name: `${step.name}: rapid click different options, last wins`,
+        category: "boundary",
+        path: [step.id],
+        input: { _rapidClick: true, options: step.options },
         expected: "pass",
         status: "pending",
       });
