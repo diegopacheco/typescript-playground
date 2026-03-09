@@ -5,19 +5,17 @@ import { generateAllTests } from "../engine/test-generator";
 import { executeTest } from "../engine/test-executor";
 import type { TestCase } from "../types/flow";
 
-function yieldToMain(): Promise<void> {
-  return new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
-}
-
 export function TestingPage() {
   const { definition } = useFlow();
   const [tests, setTests] = useState<TestCase[]>([]);
   const [generated, setGenerated] = useState(false);
   const [running, setRunning] = useState(false);
   const abortRef = useRef(false);
+  const testsRef = useRef<TestCase[]>([]);
 
   const handleGenerate = useCallback(() => {
     const allTests = generateAllTests(definition);
+    testsRef.current = allTests;
     setTests(allTests);
     setGenerated(true);
     abortRef.current = false;
@@ -26,20 +24,20 @@ export function TestingPage() {
   const handleRunAll = useCallback(async () => {
     setRunning(true);
     abortRef.current = false;
-    const current: TestCase[] = tests.map((t) => ({ ...t, status: "pending" as const, actual: undefined, error: undefined }));
-    setTests([...current]);
-    for (let i = 0; i < current.length; i++) {
+    const snapshot = testsRef.current.map((t) => ({ ...t, status: "pending" as const, actual: undefined, error: undefined }));
+    testsRef.current = snapshot;
+    setTests([...snapshot]);
+    for (let i = 0; i < snapshot.length; i++) {
       if (abortRef.current) break;
-      const result = await executeTest(current[i], definition);
-      current[i] = result;
-      if (i % 5 === 4 || i === current.length - 1) {
-        setTests([...current]);
-        await yieldToMain();
+      const result = await executeTest(snapshot[i], definition);
+      snapshot[i] = result;
+      if (i % 10 === 9 || i === snapshot.length - 1) {
+        setTests([...snapshot]);
       }
     }
-    setTests([...current]);
+    setTests([...snapshot]);
     setRunning(false);
-  }, [tests, definition]);
+  }, [definition]);
 
   const handleStop = useCallback(() => {
     abortRef.current = true;
