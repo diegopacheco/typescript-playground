@@ -5,6 +5,10 @@ import { generateAllTests } from "../engine/test-generator";
 import { executeTest } from "../engine/test-executor";
 import type { TestCase } from "../types/flow";
 
+function yieldToMain(): Promise<void> {
+  return new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
+}
+
 export function TestingPage() {
   const { definition } = useFlow();
   const [tests, setTests] = useState<TestCase[]>([]);
@@ -23,14 +27,17 @@ export function TestingPage() {
     setRunning(true);
     abortRef.current = false;
     const current: TestCase[] = tests.map((t) => ({ ...t, status: "pending" as const, actual: undefined, error: undefined }));
-    setTests(current);
+    setTests([...current]);
     for (let i = 0; i < current.length; i++) {
       if (abortRef.current) break;
-      setTests((prev) => prev.map((t, idx) => idx === i ? { ...t, status: "running" } : t));
       const result = await executeTest(current[i], definition);
       current[i] = result;
-      setTests((prev) => prev.map((t, idx) => idx === i ? result : t));
+      if (i % 5 === 4 || i === current.length - 1) {
+        setTests([...current]);
+        await yieldToMain();
+      }
     }
+    setTests([...current]);
     setRunning(false);
   }, [tests, definition]);
 
