@@ -17,7 +17,7 @@ React, TypeScript, Vite, Bun, TanStack
 | Orchestration | ![Flow](1.flow.png) |
 | Execution | ![Execution](2.execution.png) |
 | Details | ![Contracts](3.contracts.png) |
-| Testing | ![Tests](4.tests-generated.png) |
+| Testing | ![Tests](4.gen-tests-passing.png) |
 
 ## Testing Categories
 
