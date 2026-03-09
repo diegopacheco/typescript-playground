@@ -6,6 +6,7 @@ import { FormStep } from "../components/steps/FormStep";
 import { Summary } from "../components/steps/Summary";
 import { FlowProvider } from "../context/FlowContext";
 import { ExecutionPage } from "../pages/ExecutionPage";
+import { StepRenderer } from "../components/StepRenderer";
 import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
 const DELAY = 80;
@@ -640,6 +641,244 @@ async function testIntegrationRevisit(def: FlowDefinition): Promise<R> {
   }
 }
 
+async function testRenderDataValues(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    const sampleData: Record<string, Record<string, unknown>> = {};
+    for (const s of allSteps) {
+      if (s.type === "single-select" && s.options) sampleData[s.id] = { selected: s.options[0] };
+      if (s.type === "multi-select" && s.options) sampleData[s.id] = { selected: [s.options[0]] };
+      if (s.type === "form" && s.fields) {
+        const d: Record<string, string> = {};
+        s.fields.forEach((f) => { d[f.name] = `test-${f.name}`; });
+        sampleData[s.id] = d;
+      }
+    }
+    root.render(createElement(Summary, { step, allData: sampleData, steps: allSteps }));
+    await wait(DELAY);
+    const text = container.textContent || "";
+    for (const s of allSteps) {
+      if (s.type === "summary") continue;
+      const data = sampleData[s.id];
+      if (!data) continue;
+      for (const val of Object.values(data)) {
+        const strVal = Array.isArray(val) ? val[0] : String(val);
+        if (!text.includes(String(strVal)))
+          return { passed: false, error: `Data value "${strVal}" from step "${s.name}" not found in summary` };
+      }
+    }
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testRenderRequiredIndicator(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FormStep, { step, onComplete: () => {} }));
+    await wait(DELAY);
+    const text = container.textContent || "";
+    if (!text.includes("*"))
+      return { passed: false, error: "Required field indicator (*) not found" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testRenderStepRenderer(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(StepRenderer, { step, allData: {}, allSteps, onComplete: () => {} }));
+    await wait(DELAY);
+    if (step.type === "single-select") {
+      if (!container.querySelector('input[type="radio"]'))
+        return { passed: false, error: "StepRenderer did not render SingleSelect (no radios)" };
+    } else if (step.type === "multi-select") {
+      if (!container.querySelector('input[type="checkbox"]'))
+        return { passed: false, error: "StepRenderer did not render MultiSelect (no checkboxes)" };
+    } else if (step.type === "form") {
+      if (!container.querySelector("input"))
+        return { passed: false, error: "StepRenderer did not render FormStep (no inputs)" };
+    }
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testPositiveChangeSelection(step: StepConfig, first: string, second: string): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    const cb: { data: Record<string, unknown> | null } = { data: null };
+    const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
+    root.render(createElement(SingleSelect, { step, onComplete }));
+    await wait(DELAY);
+    const r1 = container.querySelector(`input[value="${first}"]`) as HTMLInputElement;
+    if (!r1) return { passed: false, error: `Radio for "${first}" not found` };
+    r1.click();
+    await wait(DELAY);
+    const r2 = container.querySelector(`input[value="${second}"]`) as HTMLInputElement;
+    if (!r2) return { passed: false, error: `Radio for "${second}" not found` };
+    r2.click();
+    await wait(DELAY);
+    const btn = findConfirmBtn(container);
+    if (!btn) return { passed: false, error: "Confirm button not found" };
+    btn.click();
+    await wait(DELAY);
+    if (!cb.data) return { passed: false, error: "onComplete was not called" };
+    if (cb.data.selected !== second)
+      return { passed: false, error: `Expected "${second}", got "${cb.data.selected}"` };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testPositiveSummaryDisplay(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
+  return testRenderDataValues(step, allSteps);
+}
+
+async function testNegativeDeselectAll(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    let called = false;
+    const onComplete = () => { called = true; };
+    root.render(createElement(MultiSelect, { step, onComplete }));
+    await wait(DELAY);
+    if (!step.options) return { passed: false, error: "No options" };
+    for (const opt of step.options) {
+      for (const label of container.querySelectorAll("label")) {
+        if (label.textContent?.trim().includes(opt)) {
+          const cb = label.querySelector('input[type="checkbox"]') as HTMLInputElement;
+          if (cb) cb.click();
+          break;
+        }
+      }
+      await wait(DELAY);
+    }
+    for (const opt of step.options) {
+      for (const label of container.querySelectorAll("label")) {
+        if (label.textContent?.trim().includes(opt)) {
+          const cb = label.querySelector('input[type="checkbox"]') as HTMLInputElement;
+          if (cb) cb.click();
+          break;
+        }
+      }
+      await wait(DELAY);
+    }
+    const btn = findConfirmBtn(container);
+    if (!btn) return { passed: false, error: "Confirm button not found" };
+    if (!btn.disabled) return { passed: false, error: "Confirm should be disabled after deselecting all" };
+    btn.click();
+    await wait(DELAY);
+    if (called) return { passed: false, error: "onComplete should not fire after deselecting all" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testNegativeErrorRecovery(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    const cb: { data: Record<string, unknown> | null } = { data: null };
+    const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
+    root.render(createElement(FormStep, { step, onComplete }));
+    await wait(DELAY);
+    const btn = findConfirmBtn(container);
+    if (!btn) return { passed: false, error: "Confirm button not found" };
+    btn.click();
+    await wait(DELAY);
+    if (cb.data) return { passed: false, error: "onComplete should not fire on empty required fields" };
+    const errorText = container.textContent || "";
+    if (!errorText.toLowerCase().includes("required"))
+      return { passed: false, error: "No error message shown" };
+    const inputs = container.querySelectorAll("input");
+    if (!step.fields) return { passed: false, error: "No fields" };
+    for (let i = 0; i < step.fields.length; i++) {
+      const input = inputs[i] as HTMLInputElement;
+      if (input) {
+        setNativeInputValue(input, `test-${step.fields[i].name}`);
+        await wait(DELAY);
+      }
+    }
+    btn.click();
+    await wait(DELAY);
+    if (!cb.data) return { passed: false, error: "onComplete was not called after fixing errors" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testIntegrationSummaryData(def: FlowDefinition): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(def);
+    for (const step of ordered) {
+      if (step.type === "summary") continue;
+      const err = await completeStep(container, step);
+      if (err) return { passed: false, error: err };
+    }
+    const text = container.textContent || "";
+    for (const step of ordered) {
+      if (step.type === "summary") continue;
+      if (!text.includes(step.name))
+        return { passed: false, error: `Summary missing step name "${step.name}"` };
+    }
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testIntegrationMinFlow(def: FlowDefinition): Promise<R> {
+  const ordered = getOrderedSteps(def);
+  if (ordered.length < 2) return { passed: false, error: "Need at least 2 steps" };
+  const minDef: FlowDefinition = {
+    id: "min-test",
+    name: "Min Flow",
+    steps: [
+      { ...ordered[0], next: "min-summary" },
+      { id: "min-summary", name: "Summary", order: 2, type: "summary", next: null },
+    ],
+  };
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: minDef, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    if (!container.textContent?.includes("Step 1 of 2"))
+      return { passed: false, error: "Min flow did not start at step 1 of 2" };
+    const err = await completeStep(container, minDef.steps[0]);
+    if (err) return { passed: false, error: err };
+    if (!findRestartBtn(container))
+      return { passed: false, error: "Min flow did not complete" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
   const stepMap = new Map(def.steps.map((s) => [s.id, s]));
   const ordered = getOrderedSteps(def);
@@ -655,12 +894,17 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
       if (test.input._checkHeading) return result(await testRenderHeading(step, ordered));
       if (test.input._checkConfirmBtn) return result(await testRenderConfirmBtn(step));
       if (test.input._checkLabels) return result(await testRenderLabels(step));
+      if (test.input._checkDataValues) return result(await testRenderDataValues(step, ordered));
+      if (test.input._checkRequiredIndicator) return result(await testRenderRequiredIndicator(step));
+      if (test.input._checkStepRenderer) return result(await testRenderStepRenderer(step, ordered));
       return result(await testRenderElements(step, ordered));
     }
 
     if (test.category === "positive") {
       const step = stepMap.get(test.path[0]);
       if (!step) return result({ passed: false, error: "Step not found" });
+      if (test.input._changeSelection) return result(await testPositiveChangeSelection(step, test.input.first as string, test.input.second as string));
+      if (test.input._summaryDisplay) return result(await testPositiveSummaryDisplay(step, ordered));
       if (step.type === "single-select") return result(await testPositiveSingleSelect(step, test.input.selected as string));
       if (step.type === "multi-select") return result(await testPositiveMultiSelect(step, test.input.selected as string[]));
       if (step.type === "form") return result(await testPositiveForm(step, test.input as Record<string, string>));
@@ -672,6 +916,8 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
       if (!step) return result({ passed: false, error: "Step not found" });
       if (test.input._doubleClick) return result(await testNegativeDoubleClick(step, test.input.selected as string));
       if (test.input._deselect) return result(await testNegativeDeselect(step, test.input.selected as string));
+      if (test.input._deselectAll) return result(await testNegativeDeselectAll(step));
+      if (test.input._errorRecovery) return result(await testNegativeErrorRecovery(step));
       if (step.type === "single-select" || step.type === "multi-select") return result(await testNegativeSelectEmpty(step));
       if (step.type === "form") {
         const missingField = test.input._missingField as string;
@@ -688,6 +934,8 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
       if (test.id === "integration-restart") return result(await testIntegrationRestart(def));
       if (test.id === "integration-back-from-first") return result(await testIntegrationBackFromFirst(def));
       if (test.id === "integration-revisit") return result(await testIntegrationRevisit(def));
+      if (test.id === "integration-summary-data") return result(await testIntegrationSummaryData(def));
+      if (test.id === "integration-min-flow") return result(await testIntegrationMinFlow(def));
       return result({ passed: false, error: "Unknown integration test" });
     }
 
@@ -701,6 +949,10 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
         return result(await testBoundaryWhitespace(step, data, wsField));
       }
       if (test.input._rapidClick) return result(await testBoundaryRapidClick(step));
+      if (test.input._singleOption && step.type === "single-select")
+        return result(await testPositiveSingleSelect(step, test.input.selected as string));
+      if (test.input._singleOption && step.type === "multi-select")
+        return result(await testPositiveMultiSelect(step, test.input.selected as string[]));
       return result(await testPositiveForm(step, test.input as Record<string, string>));
     }
 
