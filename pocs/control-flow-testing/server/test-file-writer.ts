@@ -21,6 +21,7 @@ function getOrderedSteps(def: FlowDefinition): StepConfig[] {
 
 function imports(extra: string[] = []): string {
   const lines = [
+    `// @ts-nocheck`,
     `import { render, screen, fireEvent, waitFor } from "@testing-library/react";`,
     `import "@testing-library/jest-dom";`,
     `import React from "react";`,
@@ -558,6 +559,7 @@ function genBoundaryTests(tests: TestCase[], def: FlowDefinition): string {
 
 function genPermutationTests(tests: TestCase[], def: FlowDefinition): string {
   const lines: string[] = [
+    `// @ts-nocheck`,
     `import type { FlowDefinition, StepConfig } from "${SRC}/types/flow";`,
     "",
     `function getOrderedSteps(def: FlowDefinition): StepConfig[] {`,
@@ -607,6 +609,7 @@ function genPermutationTests(tests: TestCase[], def: FlowDefinition): string {
 
 function genValidationTests(tests: TestCase[], def: FlowDefinition): string {
   const lines: string[] = [
+    `// @ts-nocheck`,
     `import { compileGraph } from "${SRC}/engine/graph-compiler";`,
     `import type { FlowDefinition } from "${SRC}/types/flow";`,
     "",

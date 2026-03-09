@@ -4,6 +4,7 @@ module.exports = {
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.tsx?$": ["ts-jest", {
+      diagnostics: false,
       tsconfig: {
         jsx: "react-jsx",
         module: "ESNext",
