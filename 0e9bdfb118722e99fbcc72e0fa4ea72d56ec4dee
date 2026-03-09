@@ -1,0 +1,28 @@
+pocs/control-flow-testing/src/engine/test-generator.ts
+  e4fb474b56349d84 17,19-42,44-47,49-61,91-101,113-114,116,120,124-137,157-162,177-182,202-210,242-253,255-263,298-344
+pocs/control-flow-testing/src/engine/test-executor.tsx
+  e4fb474b56349d84 46-69,79,113,126-189,196,200-201,208,213-215,223,227-228,243,247-248,261,265-266,278,282,284-285,294,303,316-370,378,398-399,406-428,430-434,442-453,455-463,468-494,496-500,503,512-515,517,519-520,522,531,538-540,542-543,545,550-551,553,555-572,574-583,585-623,627-635,646-650,654-658,660,663-667,669,672-675,680,682,684,686-691,693,696-704,706-707,709
+pocs/control-flow-testing/src/components/steps/FormStep.tsx
+  e4fb474b56349d84 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "0e9bdfb118722e99fbcc72e0fa4ea72d56ec4dee",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 620,
+      "total_deletions": 205,
+      "accepted_lines": 595,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/318ef8637a7e70f6c66971a837574925224875e820c727e7f8b6ec381c02218d"
+    }
+  }
+}
