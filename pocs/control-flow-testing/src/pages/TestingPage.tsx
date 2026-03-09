@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from "react";
 import { useFlow } from "../context/FlowContext";
 import { TestResultsTable } from "../components/TestResultsTable";
 import { generateAllTests } from "../engine/test-generator";
-import { executeTest } from "../engine/test-executor";
+import { runTestsViaBackend } from "../engine/test-runner-client";
 import type { TestCase } from "../types/flow";
 
 export function TestingPage() {
@@ -10,7 +10,7 @@ export function TestingPage() {
   const [tests, setTests] = useState<TestCase[]>([]);
   const [generated, setGenerated] = useState(false);
   const [running, setRunning] = useState(false);
-  const abortRef = useRef(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const testsRef = useRef<TestCase[]>([]);
 
   const handleGenerate = useCallback(() => {
@@ -18,29 +18,28 @@ export function TestingPage() {
     testsRef.current = allTests;
     setTests(allTests);
     setGenerated(true);
-    abortRef.current = false;
   }, [definition]);
 
   const handleRunAll = useCallback(async () => {
     setRunning(true);
-    abortRef.current = false;
-    const snapshot = testsRef.current.map((t) => ({ ...t, status: "pending" as const, actual: undefined, error: undefined }));
-    testsRef.current = snapshot;
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const snapshot = testsRef.current.map((t) => ({ ...t, status: "running" as const, actual: undefined, error: undefined }));
     setTests([...snapshot]);
-    for (let i = 0; i < snapshot.length; i++) {
-      if (abortRef.current) break;
-      await new Promise<void>((r) => setTimeout(r, 0));
-      const result = await executeTest(snapshot[i], definition);
-      snapshot[i] = result;
-      if (i % 20 === 19 || i === snapshot.length - 1) {
-        setTests([...snapshot]);
+    try {
+      const results = await runTestsViaBackend(snapshot, definition, controller.signal);
+      setTests(results);
+    } catch (err: unknown) {
+      if ((err as Error).name !== "AbortError") {
+        setTests(snapshot.map((t) => ({ ...t, status: "failed" as const, actual: "fail" as const, error: (err as Error).message })));
       }
     }
     setRunning(false);
+    abortControllerRef.current = null;
   }, [definition]);
 
   const handleStop = useCallback(() => {
-    abortRef.current = true;
+    abortControllerRef.current?.abort();
   }, []);
 
   const passed = tests.filter((t) => t.status === "passed").length;
@@ -101,7 +100,7 @@ export function TestingPage() {
           </button>
         )}
         {running && (
-          <span style={{ fontSize: "13px", color: "#6b7280" }}>Running tests...</span>
+          <span style={{ fontSize: "13px", color: "#6b7280" }}>Running tests on server...</span>
         )}
         {tests.length > 0 && (
           <div style={{ display: "flex", gap: "16px", marginLeft: "auto", fontSize: "13px" }}>
