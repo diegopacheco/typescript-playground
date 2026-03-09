@@ -16,34 +16,19 @@ function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
-let _activeRoot: ReturnType<typeof createRoot> | null = null;
-let _activeContainer: HTMLDivElement | null = null;
-
-function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot> } {
-  if (_activeRoot) {
-    try { _activeRoot.unmount(); } catch {}
-  }
-  if (_activeContainer) {
-    try { _activeContainer.remove(); } catch {}
-  }
+function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot>; teardown: () => void } {
   const container = document.createElement("div");
   container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
   document.body.appendChild(container);
   const root = createRoot(container);
-  _activeRoot = root;
-  _activeContainer = container;
-  return { container, root };
-}
-
-function teardownTest() {
-  if (_activeRoot) {
-    try { _activeRoot.unmount(); } catch {}
-    _activeRoot = null;
-  }
-  if (_activeContainer) {
-    try { _activeContainer.remove(); } catch {}
-    _activeContainer = null;
-  }
+  let tornDown = false;
+  const teardown = () => {
+    if (tornDown) return;
+    tornDown = true;
+    try { root.unmount(); } catch {}
+    try { container.remove(); } catch {}
+  };
+  return { container, root, teardown };
 }
 
 function setNativeInputValue(input: HTMLInputElement, value: string) {
@@ -94,7 +79,7 @@ function findRestartBtn(container: HTMLDivElement): HTMLButtonElement | null {
 type R = { passed: boolean; error?: string };
 
 async function testRenderElements(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const onComplete = () => {};
     if (step.type === "single-select") {
@@ -144,12 +129,12 @@ async function testRenderElements(step: StepConfig, allSteps: StepConfig[]): Pro
     }
     return { passed: false, error: `Unknown step type: ${step.type}` };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderHeading(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const onComplete = () => {};
     if (step.type === "single-select") root.render(createElement(SingleSelect, { step, onComplete }));
@@ -170,12 +155,12 @@ async function testRenderHeading(step: StepConfig, allSteps: StepConfig[]): Prom
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderConfirmBtn(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const onComplete = () => {};
     if (step.type === "single-select") root.render(createElement(SingleSelect, { step, onComplete }));
@@ -186,12 +171,12 @@ async function testRenderConfirmBtn(step: StepConfig): Promise<R> {
     if (!btn) return { passed: false, error: "Confirm button not found" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderLabels(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const onComplete = () => {};
     if (step.type === "single-select") root.render(createElement(SingleSelect, { step, onComplete }));
@@ -208,12 +193,12 @@ async function testRenderLabels(step: StepConfig): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testPositiveSingleSelect(step: StepConfig, option: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
@@ -233,12 +218,12 @@ async function testPositiveSingleSelect(step: StepConfig, option: string): Promi
       return { passed: false, error: `Expected selected="${option}", got "${cb.data.selected}"` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testPositiveMultiSelect(step: StepConfig, options: string[]): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
@@ -269,12 +254,12 @@ async function testPositiveMultiSelect(step: StepConfig, options: string[]): Pro
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testPositiveForm(step: StepConfig, data: Record<string, string>): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (d: Record<string, unknown>) => { cb.data = d; };
@@ -300,12 +285,12 @@ async function testPositiveForm(step: StepConfig, data: Record<string, string>):
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testNegativeSelectEmpty(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let called = false;
     const onComplete = () => { called = true; };
@@ -320,12 +305,12 @@ async function testNegativeSelectEmpty(step: StepConfig): Promise<R> {
     if (called) return { passed: false, error: "onComplete should not be called when nothing selected" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testNegativeDoubleClick(step: StepConfig, option: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let callCount = 0;
     const onComplete = () => { callCount++; };
@@ -344,12 +329,12 @@ async function testNegativeDoubleClick(step: StepConfig, option: string): Promis
     if (callCount !== 1) return { passed: false, error: `onComplete called ${callCount} times, expected 1` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testNegativeDeselect(step: StepConfig, option: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let called = false;
     const onComplete = () => { called = true; };
@@ -378,12 +363,12 @@ async function testNegativeDeselect(step: StepConfig, option: string): Promise<R
     if (called) return { passed: false, error: "onComplete should not be called after deselecting" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testNegativeFormMissing(step: StepConfig, data: Record<string, string>, missingField: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let called = false;
     const onComplete = () => { called = true; };
@@ -411,12 +396,12 @@ async function testNegativeFormMissing(step: StepConfig, data: Record<string, st
       return { passed: false, error: `Expected error message for missing "${missingField}"` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testBoundaryWhitespace(step: StepConfig, data: Record<string, string>, wsField: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let called = false;
     const onComplete = () => { called = true; };
@@ -438,12 +423,12 @@ async function testBoundaryWhitespace(step: StepConfig, data: Record<string, str
     if (called) return { passed: false, error: `onComplete should not be called when "${wsField}" is whitespace-only` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testBoundaryRapidClick(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
@@ -465,7 +450,7 @@ async function testBoundaryRapidClick(step: StepConfig): Promise<R> {
       return { passed: false, error: `Expected last option "${lastOption}", got "${cb.data.selected}"` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
@@ -502,7 +487,7 @@ async function completeStep(container: HTMLDivElement, step: StepConfig): Promis
 }
 
 async function testIntegrationForward(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -523,12 +508,12 @@ async function testIntegrationForward(def: FlowDefinition): Promise<R> {
       return { passed: false, error: "Flow did not reach completed state (Restart button missing)" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIntegrationBackNav(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -552,12 +537,12 @@ async function testIntegrationBackNav(def: FlowDefinition): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIntegrationRestart(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -580,12 +565,12 @@ async function testIntegrationRestart(def: FlowDefinition): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIntegrationBackFromFirst(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -598,12 +583,12 @@ async function testIntegrationBackFromFirst(def: FlowDefinition): Promise<R> {
       return { passed: false, error: "Clicking disabled Previous moved away from step 1" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIntegrationRevisit(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -627,12 +612,12 @@ async function testIntegrationRevisit(def: FlowDefinition): Promise<R> {
       return { passed: false, error: "Did not advance to step 3 after revisit" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderDataValues(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const sampleData: Record<string, Record<string, unknown>> = {};
     for (const s of allSteps) {
@@ -659,12 +644,12 @@ async function testRenderDataValues(step: StepConfig, allSteps: StepConfig[]): P
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderRequiredIndicator(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FormStep, { step, onComplete: () => {} }));
     await wait(DELAY);
@@ -673,12 +658,12 @@ async function testRenderRequiredIndicator(step: StepConfig): Promise<R> {
       return { passed: false, error: "Required field indicator (*) not found" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testRenderStepRenderer(step: StepConfig, allSteps: StepConfig[]): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(StepRenderer, { step, allData: {}, allSteps, onComplete: () => {} }));
     await wait(DELAY);
@@ -694,12 +679,12 @@ async function testRenderStepRenderer(step: StepConfig, allSteps: StepConfig[]):
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testPositiveChangeSelection(step: StepConfig, first: string, second: string): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
@@ -722,7 +707,7 @@ async function testPositiveChangeSelection(step: StepConfig, first: string, seco
       return { passed: false, error: `Expected "${second}", got "${cb.data.selected}"` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
@@ -731,7 +716,7 @@ async function testPositiveSummaryDisplay(step: StepConfig, allSteps: StepConfig
 }
 
 async function testNegativeDeselectAll(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     let called = false;
     const onComplete = () => { called = true; };
@@ -766,12 +751,12 @@ async function testNegativeDeselectAll(step: StepConfig): Promise<R> {
     if (called) return { passed: false, error: "onComplete should not fire after deselecting all" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testNegativeErrorRecovery(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     const cb: { data: Record<string, unknown> | null } = { data: null };
     const onComplete = (data: Record<string, unknown>) => { cb.data = data; };
@@ -799,12 +784,12 @@ async function testNegativeErrorRecovery(step: StepConfig): Promise<R> {
     if (!cb.data) return { passed: false, error: "onComplete was not called after fixing errors" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIntegrationSummaryData(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -822,7 +807,7 @@ async function testIntegrationSummaryData(def: FlowDefinition): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
@@ -837,7 +822,7 @@ async function testIntegrationMinFlow(def: FlowDefinition): Promise<R> {
       { id: "min-summary", name: "Summary", order: 2, type: "summary", next: null },
     ],
   };
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: minDef, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -849,7 +834,7 @@ async function testIntegrationMinFlow(def: FlowDefinition): Promise<R> {
       return { passed: false, error: "Min flow did not complete" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
@@ -980,7 +965,7 @@ async function testValidation(input: Record<string, unknown>, def: FlowDefinitio
 }
 
 async function testIdempotencyDoubleRun(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -1004,12 +989,12 @@ async function testIdempotencyDoubleRun(def: FlowDefinition): Promise<R> {
     if (!findRestartBtn(container)) return { passed: false, error: "Second run did not complete" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testIdempotencyRestartClean(def: FlowDefinition): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
     await wait(DELAY * 2);
@@ -1040,12 +1025,12 @@ async function testIdempotencyRestartClean(def: FlowDefinition): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testA11yRadioName(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(SingleSelect, { step, onComplete: () => {} }));
     await wait(DELAY);
@@ -1059,12 +1044,12 @@ async function testA11yRadioName(step: StepConfig): Promise<R> {
       return { passed: false, error: `Radio name should be "${step.id}", got "${[...names][0]}"` };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testA11yFormLabels(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     root.render(createElement(FormStep, { step, onComplete: () => {} }));
     await wait(DELAY);
@@ -1084,12 +1069,12 @@ async function testA11yFormLabels(step: StepConfig): Promise<R> {
     }
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
 async function testA11yBtnText(step: StepConfig): Promise<R> {
-  const { container, root } = setupTest();
+  const { container, root, teardown } = setupTest();
   try {
     if (step.type === "single-select") root.render(createElement(SingleSelect, { step, onComplete: () => {} }));
     else if (step.type === "multi-select") root.render(createElement(MultiSelect, { step, onComplete: () => {} }));
@@ -1100,7 +1085,7 @@ async function testA11yBtnText(step: StepConfig): Promise<R> {
     if (!btn.textContent?.trim()) return { passed: false, error: "Button has no text content (bad for screen readers)" };
     return { passed: true };
   } finally {
-    teardownTest();
+    teardown();
   }
 }
 
