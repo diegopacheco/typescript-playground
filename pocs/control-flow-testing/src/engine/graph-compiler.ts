@@ -1,5 +1,7 @@
 import type { FlowDefinition, ValidationError, CompilationResult } from "../types/flow";
 
+const VALID_STEP_TYPES = ["single-select", "multi-select", "form", "summary"];
+
 function validateRequiredFields(flow: FlowDefinition): ValidationError[] {
   const errors: ValidationError[] = [];
   if (!flow.id) errors.push({ message: "Flow must have an id" });
@@ -12,7 +14,11 @@ function validateRequiredFields(flow: FlowDefinition): ValidationError[] {
     if (!step.id) errors.push({ stepId: step.id, message: `Step is missing id` });
     if (!step.name) errors.push({ stepId: step.id, message: `Step "${step.id}" is missing name` });
     if (step.order === undefined) errors.push({ stepId: step.id, message: `Step "${step.id}" is missing order` });
-    if (!step.type) errors.push({ stepId: step.id, message: `Step "${step.id}" is missing type` });
+    if (!step.type) {
+      errors.push({ stepId: step.id, message: `Step "${step.id}" is missing type` });
+    } else if (!VALID_STEP_TYPES.includes(step.type)) {
+      errors.push({ stepId: step.id, message: `Step "${step.id}" has invalid type "${step.type}". Must be one of: ${VALID_STEP_TYPES.join(", ")}` });
+    }
     if (step.next === undefined) errors.push({ stepId: step.id, message: `Step "${step.id}" is missing next` });
   }
   return errors;
