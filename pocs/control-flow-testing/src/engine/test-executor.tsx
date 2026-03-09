@@ -16,30 +16,34 @@ function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
-type Root = ReturnType<typeof createRoot>;
-let _tc: HTMLDivElement | null = null;
-let _tr: Root | null = null;
-let _seq = 0;
+let _activeRoot: ReturnType<typeof createRoot> | null = null;
+let _activeContainer: HTMLDivElement | null = null;
 
-function setupTest(): { container: HTMLDivElement; root: Root } {
-  if (!_tc) {
-    _tc = document.createElement("div");
-    _tc.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
-    document.body.appendChild(_tc);
-    _tr = createRoot(_tc);
+function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot> } {
+  if (_activeRoot) {
+    try { _activeRoot.unmount(); } catch {}
   }
-  _seq++;
-  const seq = _seq;
-  const proxy = {
-    render(element: Parameters<Root["render"]>[0]) {
-      _tr!.render(createElement("div", { key: `t${seq}` }, element));
-    },
-    unmount() {},
-  };
-  return { container: _tc, root: proxy as unknown as Root };
+  if (_activeContainer) {
+    try { _activeContainer.remove(); } catch {}
+  }
+  const container = document.createElement("div");
+  container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
+  document.body.appendChild(container);
+  const root = createRoot(container);
+  _activeRoot = root;
+  _activeContainer = container;
+  return { container, root };
 }
 
 function teardownTest() {
+  if (_activeRoot) {
+    try { _activeRoot.unmount(); } catch {}
+    _activeRoot = null;
+  }
+  if (_activeContainer) {
+    try { _activeContainer.remove(); } catch {}
+    _activeContainer = null;
+  }
 }
 
 function setNativeInputValue(input: HTMLInputElement, value: string) {
