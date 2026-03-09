@@ -1,0 +1,24 @@
+pocs/control-flow-testing/jest.config.cjs
+  e4fb474b56349d84 6-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "655a6f43ed8894063cf005aa6f8b7854e454186d",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 13,
+      "accepted_lines": 4,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/28fe9e4ca39576a8795569139fe76fe7bb7e5092b384e82dc5872124d2cec443"
+    }
+  }
+}
