@@ -10,7 +10,7 @@ import { StepRenderer } from "../components/StepRenderer";
 import { compileGraph } from "./graph-compiler";
 import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
-const DELAY = 80;
+const DELAY = 15;
 
 function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
