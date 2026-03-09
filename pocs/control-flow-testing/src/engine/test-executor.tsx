@@ -19,6 +19,7 @@ function wait(ms: number) {
 type Root = ReturnType<typeof createRoot>;
 let _tc: HTMLDivElement | null = null;
 let _tr: Root | null = null;
+let _seq = 0;
 
 function setupTest(): { container: HTMLDivElement; root: Root } {
   if (!_tc) {
@@ -27,13 +28,18 @@ function setupTest(): { container: HTMLDivElement; root: Root } {
     document.body.appendChild(_tc);
     _tr = createRoot(_tc);
   }
-  return { container: _tc, root: _tr! };
+  _seq++;
+  const seq = _seq;
+  const proxy = {
+    render(element: Parameters<Root["render"]>[0]) {
+      _tr!.render(createElement("div", { key: `t${seq}` }, element));
+    },
+    unmount() {},
+  };
+  return { container: _tc, root: proxy as unknown as Root };
 }
 
 function teardownTest() {
-  if (_tr) {
-    _tr.render(null);
-  }
 }
 
 function setNativeInputValue(input: HTMLInputElement, value: string) {
