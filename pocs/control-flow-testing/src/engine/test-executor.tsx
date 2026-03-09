@@ -1,5 +1,6 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { createElement } from "react";
+import { flushSync } from "react-dom";
 import { SingleSelect } from "../components/steps/SingleSelect";
 import { MultiSelect } from "../components/steps/MultiSelect";
 import { FormStep } from "../components/steps/FormStep";
@@ -10,7 +11,11 @@ import { StepRenderer } from "../components/StepRenderer";
 import { compileGraph } from "./graph-compiler";
 import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
-const DELAY = 4;
+const DELAY = 8;
+
+let _container: HTMLDivElement | null = null;
+let _root: ReturnType<typeof createRoot> | null = null;
+let _testKey = 0;
 
 interface TestRoot { render(element: React.ReactNode): void; }
 
@@ -23,20 +28,29 @@ function syncRender(root: TestRoot, element: React.ReactNode): void {
 }
 
 function setupTest(): { container: HTMLDivElement; root: TestRoot; teardown: () => void } {
-  const container = document.createElement("div");
-  container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
-  document.body.appendChild(container);
+  if (!_container) {
+    _container = document.createElement("div");
+    _container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
+    document.body.appendChild(_container);
+  }
+  if (!_root) {
+    _root = createRoot(_container);
+  }
+  _testKey++;
+  const key = _testKey;
+  const sharedRoot = _root;
+  const container = _container;
+  try { flushSync(() => { sharedRoot.render(null); }); } catch {}
   const root: TestRoot = {
     render(element: React.ReactNode) {
-      (ReactDOM as any).render(element, container);
+      flushSync(() => { sharedRoot.render(createElement("div", { key: `t${key}` }, element)); });
     },
   };
   let tornDown = false;
   const teardown = () => {
     if (tornDown) return;
     tornDown = true;
-    try { (ReactDOM as any).unmountComponentAtNode(container); } catch {}
-    try { container.remove(); } catch {}
+    try { flushSync(() => { sharedRoot.render(null); }); } catch {}
   };
   return { container, root, teardown };
 }
