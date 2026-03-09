@@ -10,14 +10,19 @@ import { StepRenderer } from "../components/StepRenderer";
 import { compileGraph } from "./graph-compiler";
 import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
-const DELAY = 4;
+const DELAY = 20;
 
 function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
+function cleanupLeakedContainers() {
+  document.querySelectorAll("[data-tc]").forEach((el) => el.remove());
+}
+
 function createTestContainer(): HTMLDivElement {
   const div = document.createElement("div");
+  div.setAttribute("data-tc", "1");
   div.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
   document.body.appendChild(div);
   return div;
@@ -1144,6 +1149,7 @@ async function testA11yBtnText(step: StepConfig): Promise<R> {
 }
 
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
+  cleanupLeakedContainers();
   let timer: ReturnType<typeof setTimeout>;
   const timeoutPromise = new Promise<TestCase>((_, reject) => {
     timer = setTimeout(() => reject(new Error("Test timed out after 5s")), 5000);
