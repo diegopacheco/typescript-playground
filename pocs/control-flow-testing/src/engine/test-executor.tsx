@@ -12,11 +12,21 @@ import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
 const DELAY = 20;
 
+let _currentTeardown: (() => void) | null = null;
+
 function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
+function yieldToMain() {
+  return new Promise<void>((r) => requestAnimationFrame(() => r()));
+}
+
 function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot>; teardown: () => void } {
+  if (_currentTeardown) {
+    _currentTeardown();
+    _currentTeardown = null;
+  }
   const container = document.createElement("div");
   container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
   document.body.appendChild(container);
@@ -27,7 +37,9 @@ function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof creat
     tornDown = true;
     try { root.unmount(); } catch {}
     try { container.remove(); } catch {}
+    if (_currentTeardown === teardown) _currentTeardown = null;
   };
+  _currentTeardown = teardown;
   return { container, root, teardown };
 }
 
@@ -1090,9 +1102,16 @@ async function testA11yBtnText(step: StepConfig): Promise<R> {
 }
 
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
+  await yieldToMain();
   let timer: ReturnType<typeof setTimeout>;
   const timeoutPromise = new Promise<TestCase>((_, reject) => {
-    timer = setTimeout(() => reject(new Error("Test timed out after 5s")), 5000);
+    timer = setTimeout(() => {
+      if (_currentTeardown) {
+        _currentTeardown();
+        _currentTeardown = null;
+      }
+      reject(new Error("Test timed out after 5s"));
+    }, 5000);
   });
   return Promise.race([runTest(test, def), timeoutPromise])
     .catch((e) => ({

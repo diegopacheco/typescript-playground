@@ -31,8 +31,9 @@ export function TestingPage() {
       if (abortRef.current) break;
       const result = await executeTest(snapshot[i], definition);
       snapshot[i] = result;
-      if (i % 10 === 9 || i === snapshot.length - 1) {
+      if (i % 5 === 4 || i === snapshot.length - 1) {
         setTests([...snapshot]);
+        await new Promise<void>((r) => requestAnimationFrame(() => r()));
       }
     }
     setTests([...snapshot]);
