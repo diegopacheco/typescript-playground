@@ -12,34 +12,35 @@ import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
 const DELAY = 20;
 
-let _currentTeardown: (() => void) | null = null;
+let _sharedContainer: HTMLDivElement | null = null;
+let _sharedRoot: ReturnType<typeof createRoot> | null = null;
 
 function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
 function yieldToMain() {
-  return new Promise<void>((r) => requestAnimationFrame(() => r()));
+  return new Promise<void>((r) => setTimeout(r, 0));
 }
 
 function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot>; teardown: () => void } {
-  if (_currentTeardown) {
-    _currentTeardown();
-    _currentTeardown = null;
+  if (!_sharedContainer) {
+    _sharedContainer = document.createElement("div");
+    _sharedContainer.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
+    document.body.appendChild(_sharedContainer);
   }
-  const container = document.createElement("div");
-  container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
-  document.body.appendChild(container);
-  const root = createRoot(container);
+  if (!_sharedRoot) {
+    _sharedRoot = createRoot(_sharedContainer);
+  }
+  _sharedRoot.render(null);
+  const container = _sharedContainer;
+  const root = _sharedRoot;
   let tornDown = false;
   const teardown = () => {
     if (tornDown) return;
     tornDown = true;
-    try { root.unmount(); } catch {}
-    try { container.remove(); } catch {}
-    if (_currentTeardown === teardown) _currentTeardown = null;
+    try { root.render(null); } catch {}
   };
-  _currentTeardown = teardown;
   return { container, root, teardown };
 }
 
@@ -1106,10 +1107,7 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
   let timer: ReturnType<typeof setTimeout>;
   const timeoutPromise = new Promise<TestCase>((_, reject) => {
     timer = setTimeout(() => {
-      if (_currentTeardown) {
-        _currentTeardown();
-        _currentTeardown = null;
-      }
+      try { _sharedRoot?.render(null); } catch {}
       reject(new Error("Test timed out after 5s"));
     }, 5000);
   });

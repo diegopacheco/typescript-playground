@@ -33,7 +33,7 @@ export function TestingPage() {
       snapshot[i] = result;
       if (i % 5 === 4 || i === snapshot.length - 1) {
         setTests([...snapshot]);
-        await new Promise<void>((r) => requestAnimationFrame(() => r()));
+        await new Promise<void>((r) => setTimeout(r, 0));
       }
     }
     setTests([...snapshot]);
