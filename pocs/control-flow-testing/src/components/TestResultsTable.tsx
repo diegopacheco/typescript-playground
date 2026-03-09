@@ -26,6 +26,10 @@ const columns = [
         negative: "#ef4444",
         integration: "#a855f7",
         boundary: "#f59e0b",
+        permutation: "#06b6d4",
+        validation: "#ec4899",
+        idempotency: "#8b5cf6",
+        accessibility: "#14b8a6",
       };
       return (
         <span style={{ color: colors[info.getValue()] || "#6b7280", fontWeight: 500 }}>

@@ -501,6 +501,200 @@ function generateBoundaryTests(def: FlowDefinition): TestCase[] {
   return tests;
 }
 
+function generatePermutationTests(def: FlowDefinition): TestCase[] {
+  const ordered = getOrderedSteps(def);
+  const path = ordered.map((s) => s.id);
+  const tests: TestCase[] = [];
+  if (ordered.length >= 3) {
+    const shuffled = [...def.steps].reverse();
+    tests.push({
+      id: "permutation-reversed-array",
+      name: "Permutation: reversed step array follows next pointers correctly",
+      category: "permutation",
+      path,
+      input: { _reversedSteps: shuffled.map((s) => s.id) },
+      expected: "pass",
+      status: "pending",
+    });
+  }
+  if (ordered.length >= 3) {
+    const mid = Math.floor(def.steps.length / 2);
+    const swapped = [...def.steps];
+    [swapped[0], swapped[mid]] = [swapped[mid], swapped[0]];
+    tests.push({
+      id: "permutation-swapped",
+      name: `Permutation: swap "${def.steps[0].name}" and "${def.steps[mid].name}" in array, flow unchanged`,
+      category: "permutation",
+      path,
+      input: { _swappedSteps: swapped.map((s) => s.id) },
+      expected: "pass",
+      status: "pending",
+    });
+  }
+  tests.push({
+    id: "permutation-order-field-ignored",
+    name: "Permutation: order field does not affect execution (next pointers win)",
+    category: "permutation",
+    path,
+    input: { _shuffledOrders: true },
+    expected: "pass",
+    status: "pending",
+  });
+  return tests;
+}
+
+function generateValidationTests(_def: FlowDefinition): TestCase[] {
+  const tests: TestCase[] = [];
+  tests.push({
+    id: "validation-valid-flow",
+    name: "Validation: current flow compiles as valid",
+    category: "validation",
+    path: [],
+    input: { _validFlow: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-cycle",
+    name: "Validation: cycle in graph detected",
+    category: "validation",
+    path: [],
+    input: { _cycle: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-orphan",
+    name: "Validation: orphan step detected",
+    category: "validation",
+    path: [],
+    input: { _orphan: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-duplicate-id",
+    name: "Validation: duplicate step ID detected",
+    category: "validation",
+    path: [],
+    input: { _duplicateId: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-invalid-type",
+    name: "Validation: invalid step type detected",
+    category: "validation",
+    path: [],
+    input: { _invalidType: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-missing-next",
+    name: "Validation: broken next reference detected",
+    category: "validation",
+    path: [],
+    input: { _brokenNext: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-no-terminal",
+    name: "Validation: no terminal step detected",
+    category: "validation",
+    path: [],
+    input: { _noTerminal: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-missing-options",
+    name: "Validation: select step without options detected",
+    category: "validation",
+    path: [],
+    input: { _missingOptions: true },
+    expected: "pass",
+    status: "pending",
+  });
+  tests.push({
+    id: "validation-empty-flow",
+    name: "Validation: empty steps array detected",
+    category: "validation",
+    path: [],
+    input: { _emptySteps: true },
+    expected: "pass",
+    status: "pending",
+  });
+  return tests;
+}
+
+function generateIdempotencyTests(def: FlowDefinition): TestCase[] {
+  const ordered = getOrderedSteps(def);
+  const path = ordered.map((s) => s.id);
+  return [
+    {
+      id: "idempotency-double-run",
+      name: "Idempotency: complete flow twice, second run identical",
+      category: "idempotency",
+      path,
+      input: {},
+      expected: "pass",
+      status: "pending",
+    },
+    {
+      id: "idempotency-restart-clean",
+      name: "Idempotency: restart clears all state, no leaks",
+      category: "idempotency",
+      path,
+      input: { _restartClean: true },
+      expected: "pass",
+      status: "pending",
+    },
+  ];
+}
+
+function generateAccessibilityTests(def: FlowDefinition): TestCase[] {
+  const tests: TestCase[] = [];
+  const ordered = getOrderedSteps(def);
+  for (const step of ordered) {
+    if (step.type === "single-select") {
+      tests.push({
+        id: `a11y-${step.id}-radio-name`,
+        name: `A11y: ${step.name} radios share same name attribute`,
+        category: "accessibility",
+        path: [step.id],
+        input: { _radioName: true },
+        expected: "pass",
+        status: "pending",
+      });
+    }
+    if (step.type === "form" && step.fields) {
+      tests.push({
+        id: `a11y-${step.id}-labels`,
+        name: `A11y: ${step.name} inputs have associated labels`,
+        category: "accessibility",
+        path: [step.id],
+        input: { _formLabels: true },
+        expected: "pass",
+        status: "pending",
+      });
+    }
+    if (step.type !== "summary") {
+      tests.push({
+        id: `a11y-${step.id}-btn-text`,
+        name: `A11y: ${step.name} Confirm button has text content`,
+        category: "accessibility",
+        path: [step.id],
+        input: { _btnText: true },
+        expected: "pass",
+        status: "pending",
+      });
+    }
+  }
+  return tests;
+}
+
 export function generateAllTests(def: FlowDefinition): TestCase[] {
   return [
     ...generateRenderTests(def),
@@ -508,5 +702,9 @@ export function generateAllTests(def: FlowDefinition): TestCase[] {
     ...generateNegativeTests(def),
     ...generateIntegrationTests(def),
     ...generateBoundaryTests(def),
+    ...generatePermutationTests(def),
+    ...generateValidationTests(def),
+    ...generateIdempotencyTests(def),
+    ...generateAccessibilityTests(def),
   ];
 }

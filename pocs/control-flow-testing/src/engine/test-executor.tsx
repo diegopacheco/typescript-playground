@@ -7,6 +7,7 @@ import { Summary } from "../components/steps/Summary";
 import { FlowProvider } from "../context/FlowContext";
 import { ExecutionPage } from "../pages/ExecutionPage";
 import { StepRenderer } from "../components/StepRenderer";
+import { compileGraph } from "./graph-compiler";
 import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
 const DELAY = 80;
@@ -879,6 +880,293 @@ async function testIntegrationMinFlow(def: FlowDefinition): Promise<R> {
   }
 }
 
+async function testPermutationReversed(def: FlowDefinition): Promise<R> {
+  const reversed: FlowDefinition = { ...def, steps: [...def.steps].reverse() };
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: reversed, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(reversed);
+    if (!container.textContent?.includes(`Step 1 of ${ordered.length}`))
+      return { passed: false, error: "Reversed array: did not start at step 1" };
+    const step1 = ordered[0];
+    if (step1.type === "single-select" && step1.options) {
+      const radio = container.querySelector(`input[value="${step1.options[0]}"]`) as HTMLInputElement;
+      if (!radio) return { passed: false, error: `First step "${step1.name}" not rendered correctly` };
+    }
+    const err = await completeStep(container, step1);
+    if (err) return { passed: false, error: `Step 1: ${err}` };
+    if (!container.textContent?.includes("Step 2 of"))
+      return { passed: false, error: "Did not advance to step 2 with reversed array" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testPermutationSwapped(def: FlowDefinition): Promise<R> {
+  const mid = Math.floor(def.steps.length / 2);
+  const swapped = [...def.steps];
+  [swapped[0], swapped[mid]] = [swapped[mid], swapped[0]];
+  const swappedDef: FlowDefinition = { ...def, steps: swapped };
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: swappedDef, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(swappedDef);
+    if (!container.textContent?.includes(`Step 1 of ${ordered.length}`))
+      return { passed: false, error: "Swapped array: did not start at step 1" };
+    const err = await completeStep(container, ordered[0]);
+    if (err) return { passed: false, error: err };
+    if (!container.textContent?.includes("Step 2 of"))
+      return { passed: false, error: "Did not advance to step 2 with swapped array" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testPermutationOrderFieldIgnored(def: FlowDefinition): Promise<R> {
+  const shuffled: FlowDefinition = {
+    ...def,
+    steps: def.steps.map((s, i) => ({ ...s, order: def.steps.length - i })),
+  };
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: shuffled, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(shuffled);
+    const firstStep = ordered[0];
+    if (!container.textContent?.includes(firstStep.name))
+      return { passed: false, error: `First step should be "${firstStep.name}" (follows next pointers, not order field)` };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testValidation(input: Record<string, unknown>, def: FlowDefinition): Promise<R> {
+  if (input._validFlow) {
+    const result = compileGraph(def);
+    if (!result.valid) return { passed: false, error: `Current flow should be valid but got: ${result.errors.map((e) => e.message).join(", ")}` };
+    return { passed: true };
+  }
+  if (input._cycle) {
+    const cyclic: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", options: ["x"], next: "b" },
+      { id: "b", name: "B", order: 2, type: "single-select", options: ["x"], next: "a" },
+    ]};
+    const result = compileGraph(cyclic);
+    if (result.valid) return { passed: false, error: "Cycle should be detected as invalid" };
+    if (!result.errors.some((e) => e.message.toLowerCase().includes("cycle") || e.message.toLowerCase().includes("terminal")))
+      return { passed: false, error: "Error message should mention cycle" };
+    return { passed: true };
+  }
+  if (input._orphan) {
+    const orphan: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", options: ["x"], next: null },
+      { id: "b", name: "B", order: 2, type: "single-select", options: ["x"], next: null },
+    ]};
+    const result = compileGraph(orphan);
+    if (result.valid) return { passed: false, error: "Orphan step should be detected" };
+    return { passed: true };
+  }
+  if (input._duplicateId) {
+    const dup: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", options: ["x"], next: null },
+      { id: "a", name: "A2", order: 2, type: "single-select", options: ["x"], next: null },
+    ]};
+    const result = compileGraph(dup);
+    if (result.valid) return { passed: false, error: "Duplicate ID should be detected" };
+    if (!result.errors.some((e) => e.message.toLowerCase().includes("duplicate")))
+      return { passed: false, error: "Error should mention duplicate" };
+    return { passed: true };
+  }
+  if (input._invalidType) {
+    const bad: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "dropdown" as "single-select", options: ["x"], next: null },
+    ]};
+    const result = compileGraph(bad);
+    if (result.valid) return { passed: false, error: "Invalid type should be detected" };
+    if (!result.errors.some((e) => e.message.toLowerCase().includes("invalid type")))
+      return { passed: false, error: "Error should mention invalid type" };
+    return { passed: true };
+  }
+  if (input._brokenNext) {
+    const broken: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", options: ["x"], next: "nonexistent" },
+    ]};
+    const result = compileGraph(broken);
+    if (result.valid) return { passed: false, error: "Broken next reference should be detected" };
+    return { passed: true };
+  }
+  if (input._noTerminal) {
+    const noTerm: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", options: ["x"], next: "b" },
+      { id: "b", name: "B", order: 2, type: "single-select", options: ["x"], next: "a" },
+    ]};
+    const result = compileGraph(noTerm);
+    if (result.valid) return { passed: false, error: "No terminal step should be detected" };
+    return { passed: true };
+  }
+  if (input._missingOptions) {
+    const noOpts: FlowDefinition = { id: "test", name: "test", steps: [
+      { id: "a", name: "A", order: 1, type: "single-select", next: null },
+    ]};
+    const result = compileGraph(noOpts);
+    if (result.valid) return { passed: false, error: "Missing options should be detected" };
+    return { passed: true };
+  }
+  if (input._emptySteps) {
+    const empty: FlowDefinition = { id: "test", name: "test", steps: [] };
+    const result = compileGraph(empty);
+    if (result.valid) return { passed: false, error: "Empty steps should be detected" };
+    return { passed: true };
+  }
+  return { passed: false, error: "Unknown validation test" };
+}
+
+async function testIdempotencyDoubleRun(def: FlowDefinition): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(def);
+    for (const step of ordered) {
+      if (step.type === "summary") continue;
+      const err = await completeStep(container, step);
+      if (err) return { passed: false, error: `First run: ${err}` };
+    }
+    if (!findRestartBtn(container)) return { passed: false, error: "First run did not complete" };
+    const restartBtn = findRestartBtn(container)!;
+    restartBtn.click();
+    await wait(DELAY * 2);
+    if (!container.textContent?.includes(`Step 1 of ${ordered.length}`))
+      return { passed: false, error: "Did not reset to step 1" };
+    for (const step of ordered) {
+      if (step.type === "summary") continue;
+      const err = await completeStep(container, step);
+      if (err) return { passed: false, error: `Second run: ${err}` };
+    }
+    if (!findRestartBtn(container)) return { passed: false, error: "Second run did not complete" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testIdempotencyRestartClean(def: FlowDefinition): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FlowProvider, { initialDefinition: def, children: createElement(ExecutionPage) }));
+    await wait(DELAY * 2);
+    const ordered = getOrderedSteps(def);
+    for (const step of ordered) {
+      if (step.type === "summary") continue;
+      const err = await completeStep(container, step);
+      if (err) return { passed: false, error: err };
+    }
+    const restartBtn = findRestartBtn(container);
+    if (!restartBtn) return { passed: false, error: "Restart not found" };
+    restartBtn.click();
+    await wait(DELAY * 2);
+    const radios = container.querySelectorAll('input[type="radio"]');
+    for (const r of radios) {
+      if ((r as HTMLInputElement).checked)
+        return { passed: false, error: "State leak: radio still checked after restart" };
+    }
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    for (const c of checkboxes) {
+      if ((c as HTMLInputElement).checked)
+        return { passed: false, error: "State leak: checkbox still checked after restart" };
+    }
+    const textInputs = container.querySelectorAll('input[type="text"]');
+    for (const t of textInputs) {
+      if ((t as HTMLInputElement).value)
+        return { passed: false, error: "State leak: text input still has value after restart" };
+    }
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testA11yRadioName(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(SingleSelect, { step, onComplete: () => {} }));
+    await wait(DELAY);
+    const radios = container.querySelectorAll('input[type="radio"]');
+    if (radios.length === 0) return { passed: false, error: "No radios found" };
+    const names = new Set<string>();
+    for (const r of radios) names.add((r as HTMLInputElement).name);
+    if (names.size !== 1)
+      return { passed: false, error: `Radios have ${names.size} different name attributes, should be 1` };
+    if (!names.has(step.id))
+      return { passed: false, error: `Radio name should be "${step.id}", got "${[...names][0]}"` };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testA11yFormLabels(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    root.render(createElement(FormStep, { step, onComplete: () => {} }));
+    await wait(DELAY);
+    if (!step.fields) return { passed: false, error: "No fields" };
+    const labels = container.querySelectorAll("label");
+    if (labels.length < step.fields.length)
+      return { passed: false, error: `Expected ${step.fields.length} labels, found ${labels.length}` };
+    for (const field of step.fields) {
+      let found = false;
+      for (const label of labels) {
+        if (label.textContent?.includes(field.name)) {
+          const input = label.querySelector("input") || label.parentElement?.querySelector("input");
+          if (input) { found = true; break; }
+        }
+      }
+      if (!found) return { passed: false, error: `Field "${field.name}" has no associated label with input` };
+    }
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
+async function testA11yBtnText(step: StepConfig): Promise<R> {
+  const container = createTestContainer();
+  const root = createRoot(container);
+  try {
+    if (step.type === "single-select") root.render(createElement(SingleSelect, { step, onComplete: () => {} }));
+    else if (step.type === "multi-select") root.render(createElement(MultiSelect, { step, onComplete: () => {} }));
+    else if (step.type === "form") root.render(createElement(FormStep, { step, onComplete: () => {} }));
+    await wait(DELAY);
+    const btn = findConfirmBtn(container);
+    if (!btn) return { passed: false, error: "Confirm button not found" };
+    if (!btn.textContent?.trim()) return { passed: false, error: "Button has no text content (bad for screen readers)" };
+    return { passed: true };
+  } finally {
+    root.unmount();
+    container.remove();
+  }
+}
+
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
   const stepMap = new Map(def.steps.map((s) => [s.id, s]));
   const ordered = getOrderedSteps(def);
@@ -954,6 +1242,32 @@ export async function executeTest(test: TestCase, def: FlowDefinition): Promise<
       if (test.input._singleOption && step.type === "multi-select")
         return result(await testPositiveMultiSelect(step, test.input.selected as string[]));
       return result(await testPositiveForm(step, test.input as Record<string, string>));
+    }
+
+    if (test.category === "permutation") {
+      if (test.id === "permutation-reversed-array") return result(await testPermutationReversed(def));
+      if (test.id === "permutation-swapped") return result(await testPermutationSwapped(def));
+      if (test.id === "permutation-order-field-ignored") return result(await testPermutationOrderFieldIgnored(def));
+      return result({ passed: false, error: "Unknown permutation test" });
+    }
+
+    if (test.category === "validation") {
+      return result(await testValidation(test.input, def));
+    }
+
+    if (test.category === "idempotency") {
+      if (test.id === "idempotency-double-run") return result(await testIdempotencyDoubleRun(def));
+      if (test.id === "idempotency-restart-clean") return result(await testIdempotencyRestartClean(def));
+      return result({ passed: false, error: "Unknown idempotency test" });
+    }
+
+    if (test.category === "accessibility") {
+      const step = stepMap.get(test.path[0]);
+      if (!step) return result({ passed: false, error: "Step not found" });
+      if (test.input._radioName) return result(await testA11yRadioName(step));
+      if (test.input._formLabels) return result(await testA11yFormLabels(step));
+      if (test.input._btnText) return result(await testA11yBtnText(step));
+      return result({ passed: false, error: "Unknown accessibility test" });
     }
 
     return result({ passed: false, error: "Unknown test category" });
