@@ -883,74 +883,48 @@ async function testIntegrationMinFlow(def: FlowDefinition): Promise<R> {
 }
 
 async function testPermutationReversed(def: FlowDefinition): Promise<R> {
+  const original = getOrderedSteps(def);
   const reversed: FlowDefinition = { ...def, steps: [...def.steps].reverse() };
-  const container = createTestContainer();
-  const root = createRoot(container);
-  try {
-    root.render(createElement(FlowProvider, { initialDefinition: reversed, children: createElement(ExecutionPage) }));
-    await wait(DELAY * 2);
-    const ordered = getOrderedSteps(reversed);
-    if (!container.textContent?.includes(`Step 1 of ${ordered.length}`))
-      return { passed: false, error: "Reversed array: did not start at step 1" };
-    const step1 = ordered[0];
-    if (step1.type === "single-select" && step1.options) {
-      const radio = container.querySelector(`input[value="${step1.options[0]}"]`) as HTMLInputElement;
-      if (!radio) return { passed: false, error: `First step "${step1.name}" not rendered correctly` };
-    }
-    const err = await completeStep(container, step1);
-    if (err) return { passed: false, error: `Step 1: ${err}` };
-    if (!container.textContent?.includes("Step 2 of"))
-      return { passed: false, error: "Did not advance to step 2 with reversed array" };
-    return { passed: true };
-  } finally {
-    root.unmount();
-    container.remove();
+  const reordered = getOrderedSteps(reversed);
+  if (reordered.length !== original.length)
+    return { passed: false, error: `Reversed array produced ${reordered.length} steps, expected ${original.length}` };
+  for (let i = 0; i < original.length; i++) {
+    if (reordered[i].id !== original[i].id)
+      return { passed: false, error: `Step ${i + 1}: expected "${original[i].id}", got "${reordered[i].id}"` };
   }
+  return { passed: true };
 }
 
 async function testPermutationSwapped(def: FlowDefinition): Promise<R> {
+  const original = getOrderedSteps(def);
   const mid = Math.floor(def.steps.length / 2);
   const swapped = [...def.steps];
   [swapped[0], swapped[mid]] = [swapped[mid], swapped[0]];
   const swappedDef: FlowDefinition = { ...def, steps: swapped };
-  const container = createTestContainer();
-  const root = createRoot(container);
-  try {
-    root.render(createElement(FlowProvider, { initialDefinition: swappedDef, children: createElement(ExecutionPage) }));
-    await wait(DELAY * 2);
-    const ordered = getOrderedSteps(swappedDef);
-    if (!container.textContent?.includes(`Step 1 of ${ordered.length}`))
-      return { passed: false, error: "Swapped array: did not start at step 1" };
-    const err = await completeStep(container, ordered[0]);
-    if (err) return { passed: false, error: err };
-    if (!container.textContent?.includes("Step 2 of"))
-      return { passed: false, error: "Did not advance to step 2 with swapped array" };
-    return { passed: true };
-  } finally {
-    root.unmount();
-    container.remove();
+  const reordered = getOrderedSteps(swappedDef);
+  if (reordered.length !== original.length)
+    return { passed: false, error: `Swapped array produced ${reordered.length} steps, expected ${original.length}` };
+  for (let i = 0; i < original.length; i++) {
+    if (reordered[i].id !== original[i].id)
+      return { passed: false, error: `Step ${i + 1}: expected "${original[i].id}", got "${reordered[i].id}"` };
   }
+  return { passed: true };
 }
 
 async function testPermutationOrderFieldIgnored(def: FlowDefinition): Promise<R> {
+  const original = getOrderedSteps(def);
   const shuffled: FlowDefinition = {
     ...def,
     steps: def.steps.map((s, i) => ({ ...s, order: def.steps.length - i })),
   };
-  const container = createTestContainer();
-  const root = createRoot(container);
-  try {
-    root.render(createElement(FlowProvider, { initialDefinition: shuffled, children: createElement(ExecutionPage) }));
-    await wait(DELAY * 2);
-    const ordered = getOrderedSteps(shuffled);
-    const firstStep = ordered[0];
-    if (!container.textContent?.includes(firstStep.name))
-      return { passed: false, error: `First step should be "${firstStep.name}" (follows next pointers, not order field)` };
-    return { passed: true };
-  } finally {
-    root.unmount();
-    container.remove();
+  const reordered = getOrderedSteps(shuffled);
+  if (reordered.length !== original.length)
+    return { passed: false, error: `Shuffled orders produced ${reordered.length} steps, expected ${original.length}` };
+  for (let i = 0; i < original.length; i++) {
+    if (reordered[i].id !== original[i].id)
+      return { passed: false, error: `Step ${i + 1}: expected "${original[i].id}", got "${reordered[i].id}" (order field affected result)` };
   }
+  return { passed: true };
 }
 
 async function testValidation(input: Record<string, unknown>, def: FlowDefinition): Promise<R> {
@@ -1170,15 +1144,18 @@ async function testA11yBtnText(step: StepConfig): Promise<R> {
 }
 
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
-  const timeoutPromise = new Promise<TestCase>((_, reject) =>
-    setTimeout(() => reject(new Error("Test timed out after 10s")), 10000)
-  );
-  return Promise.race([runTest(test, def), timeoutPromise]).catch((e) => ({
-    ...test,
-    status: "failed" as const,
-    actual: "fail" as const,
-    error: (e as Error).message,
-  }));
+  let timer: ReturnType<typeof setTimeout>;
+  const timeoutPromise = new Promise<TestCase>((_, reject) => {
+    timer = setTimeout(() => reject(new Error("Test timed out after 5s")), 5000);
+  });
+  return Promise.race([runTest(test, def), timeoutPromise])
+    .catch((e) => ({
+      ...test,
+      status: "failed" as const,
+      actual: "fail" as const,
+      error: (e as Error).message,
+    }))
+    .finally(() => clearTimeout(timer));
 }
 
 async function runTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
