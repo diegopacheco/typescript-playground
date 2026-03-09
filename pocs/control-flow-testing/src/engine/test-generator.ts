@@ -3,7 +3,9 @@ import type { FlowDefinition, StepConfig, TestCase } from "../types/flow";
 function getOrderedSteps(def: FlowDefinition): StepConfig[] {
   const stepMap = new Map(def.steps.map((s) => [s.id, s]));
   const ordered: StepConfig[] = [];
-  let current: string | null = def.steps[0]?.id;
+  const targets = new Set(def.steps.filter((s) => s.next).map((s) => s.next!));
+  const entry = def.steps.find((s) => !targets.has(s.id));
+  let current: string | null = entry?.id || def.steps[0]?.id || null;
   const visited = new Set<string>();
   while (current && !visited.has(current)) {
     visited.add(current);

@@ -35,7 +35,9 @@ function setNativeInputValue(input: HTMLInputElement, value: string) {
 function getOrderedSteps(def: FlowDefinition): StepConfig[] {
   const stepMap = new Map(def.steps.map((s) => [s.id, s]));
   const ordered: StepConfig[] = [];
-  let current: string | null = def.steps[0]?.id;
+  const targets = new Set(def.steps.filter((s) => s.next).map((s) => s.next!));
+  const entry = def.steps.find((s) => !targets.has(s.id));
+  let current: string | null = entry?.id || def.steps[0]?.id || null;
   const visited = new Set<string>();
   while (current && !visited.has(current)) {
     visited.add(current);
@@ -1168,6 +1170,18 @@ async function testA11yBtnText(step: StepConfig): Promise<R> {
 }
 
 export async function executeTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
+  const timeoutPromise = new Promise<TestCase>((_, reject) =>
+    setTimeout(() => reject(new Error("Test timed out after 10s")), 10000)
+  );
+  return Promise.race([runTest(test, def), timeoutPromise]).catch((e) => ({
+    ...test,
+    status: "failed" as const,
+    actual: "fail" as const,
+    error: (e as Error).message,
+  }));
+}
+
+async function runTest(test: TestCase, def: FlowDefinition): Promise<TestCase> {
   const stepMap = new Map(def.steps.map((s) => [s.id, s]));
   const ordered = getOrderedSteps(def);
 

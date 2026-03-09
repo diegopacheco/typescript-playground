@@ -22,8 +22,10 @@ export function FlowProvider({ children, initialDefinition }: { children: ReactN
 
   const getOrderedSteps = useCallback((): StepConfig[] => {
     const stepMap = new Map(definition.steps.map((s) => [s.id, s]));
+    const targets = new Set(definition.steps.filter((s) => s.next).map((s) => s.next!));
+    const entry = definition.steps.find((s) => !targets.has(s.id));
     const ordered: StepConfig[] = [];
-    let current: string | null = definition.steps[0]?.id;
+    let current: string | null = entry?.id || definition.steps[0]?.id || null;
     const visited = new Set<string>();
     while (current && !visited.has(current)) {
       visited.add(current);
