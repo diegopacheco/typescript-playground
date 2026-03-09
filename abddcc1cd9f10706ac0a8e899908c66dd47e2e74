@@ -1,0 +1,28 @@
+pocs/control-flow-testing/src/engine/test-generator.ts
+  e4fb474b56349d84 504-697,705-708
+pocs/control-flow-testing/src/components/TestResultsTable.tsx
+  e4fb474b56349d84 29-32
+pocs/control-flow-testing/src/engine/test-executor.tsx
+  e4fb474b56349d84 10,883-1169,1247-1272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "abddcc1cd9f10706ac0a8e899908c66dd47e2e74",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 517,
+      "total_deletions": 1,
+      "accepted_lines": 516,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/fa742aa99cebea32b708b04c7d09715e6a7252dd034ff537c085580c38d15833"
+    }
+  }
+}
