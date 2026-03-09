@@ -1,0 +1,24 @@
+pocs/control-flow-testing/src/engine/test-executor.tsx
+  e4fb474b56349d84 3,14,20-21,25-28,33-34,91,99,107,125,145-147,150,171-173,187-188,210,235,271,302-303,322,346,380,413,440,497,523,552,580,598,637,659,673,696,728,768,799,832,975,1004,1040,1059,1084-1086
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "94e481cf3fb78e409298682abfb2e99773cd347b",
+  "prompts": {
+    "e4fb474b56349d84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f031c419-2fb8-41ec-8b59-d9f54689b657",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 55,
+      "total_deletions": 67,
+      "accepted_lines": 53,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/bf308c0afa9eac854e129d98237b2a8dc18a52dd2599a8ceb255e24e0ff732bc"
+    }
+  }
+}
