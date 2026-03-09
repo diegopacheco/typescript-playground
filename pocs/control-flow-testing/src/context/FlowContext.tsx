@@ -16,8 +16,8 @@ interface FlowProviderContextValue extends FlowContextValue {
 
 const FlowContext = createContext<FlowProviderContextValue | null>(null);
 
-export function FlowProvider({ children }: { children: ReactNode }) {
-  const [definition, setDefinition] = useState<FlowDefinition>(defaultFlow as FlowDefinition);
+export function FlowProvider({ children, initialDefinition }: { children: ReactNode; initialDefinition?: FlowDefinition }) {
+  const [definition, setDefinition] = useState<FlowDefinition>((initialDefinition || defaultFlow) as FlowDefinition);
   const [state, setState] = useState<FlowState>(initialState);
 
   const getOrderedSteps = useCallback((): StepConfig[] => {
@@ -59,12 +59,13 @@ export function FlowProvider({ children }: { children: ReactNode }) {
           ? prev.completedSteps
           : [...prev.completedSteps, output.stepId];
         const nextIndex = prev.currentStepIndex + 1;
-        const isLast = nextIndex >= ordered.length;
+        const pastEnd = nextIndex >= ordered.length;
+        const reachedLast = nextIndex === ordered.length - 1;
         return {
-          currentStepIndex: isLast ? prev.currentStepIndex : nextIndex,
+          currentStepIndex: pastEnd ? prev.currentStepIndex : nextIndex,
           completedSteps: newCompleted,
           collectedData: newData,
-          status: isLast ? "completed" : "in-progress",
+          status: pastEnd || reachedLast ? "completed" : "in-progress",
         };
       });
     },

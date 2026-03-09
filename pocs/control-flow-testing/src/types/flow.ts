@@ -59,7 +59,7 @@ export interface CompilationResult {
 export interface TestCase {
   id: string;
   name: string;
-  category: "path" | "positive" | "negative" | "combinatorial" | "boundary";
+  category: "render" | "positive" | "negative" | "integration" | "boundary";
   path: string[];
   input: Record<string, unknown>;
   expected: "pass" | "fail";

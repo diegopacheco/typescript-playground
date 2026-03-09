@@ -8,15 +8,23 @@ interface Props {
 const columnHelper = createColumnHelper<TestCase>();
 
 const columns = [
+  columnHelper.display({
+    id: "tc",
+    header: "TC",
+    cell: (info) => (
+      <span style={{ fontWeight: 600, color: "#374151" }}>TC-{info.row.index + 1}</span>
+    ),
+    size: 60,
+  }),
   columnHelper.accessor("name", { header: "Test Name", size: 300 }),
   columnHelper.accessor("category", {
     header: "Category",
     cell: (info) => {
       const colors: Record<string, string> = {
-        path: "#3b82f6",
+        render: "#3b82f6",
         positive: "#22c55e",
         negative: "#ef4444",
-        combinatorial: "#a855f7",
+        integration: "#a855f7",
         boundary: "#f59e0b",
       };
       return (
