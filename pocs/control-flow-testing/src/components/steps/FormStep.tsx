@@ -41,10 +41,11 @@ export function FormStep({ step, initialValue, onComplete }: Props) {
       <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "16px" }}>
         {step.fields?.map((field) => (
           <div key={field.name}>
-            <label style={{ display: "block", marginBottom: "4px", fontWeight: 500, fontSize: "14px" }}>
+            <label htmlFor={`field-${field.name}`} style={{ display: "block", marginBottom: "4px", fontWeight: 500, fontSize: "14px" }}>
               {field.name} {field.required && <span style={{ color: "#ef4444" }}>*</span>}
             </label>
             <input
+              id={`field-${field.name}`}
               type={field.type}
               value={values[field.name] || ""}
               onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))}
