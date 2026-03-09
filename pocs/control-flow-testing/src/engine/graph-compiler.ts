@@ -1,6 +1,12 @@
-import type { FlowDefinition, ValidationError, CompilationResult } from "../types/flow";
+import type { FlowDefinition, ValidationError, CompilationResult, StepConfig } from "../types/flow";
 
 const VALID_STEP_TYPES = ["single-select", "multi-select", "form", "summary"];
+
+function findEntryId(steps: StepConfig[]): string | null {
+  const targets = new Set(steps.filter((s) => s.next).map((s) => s.next!));
+  const entry = steps.find((s) => !targets.has(s.id));
+  return entry?.id || steps[0]?.id || null;
+}
 
 function validateRequiredFields(flow: FlowDefinition): ValidationError[] {
   const errors: ValidationError[] = [];
@@ -61,7 +67,7 @@ function validateTerminalSteps(flow: FlowDefinition): ValidationError[] {
 function validateCycles(flow: FlowDefinition): ValidationError[] {
   const visited = new Set<string>();
   const stepMap = new Map(flow.steps.map((s) => [s.id, s]));
-  let current: string | null = flow.steps[0]?.id;
+  let current: string | null = findEntryId(flow.steps);
   while (current) {
     if (visited.has(current)) {
       return [{ stepId: current, message: `Cycle detected at step "${current}"` }];
@@ -75,7 +81,7 @@ function validateCycles(flow: FlowDefinition): ValidationError[] {
 function validateReachability(flow: FlowDefinition): ValidationError[] {
   const stepMap = new Map(flow.steps.map((s) => [s.id, s]));
   const reachable = new Set<string>();
-  let current: string | null = flow.steps[0]?.id;
+  let current: string | null = findEntryId(flow.steps);
   while (current) {
     reachable.add(current);
     current = stepMap.get(current)?.next ?? null;
@@ -105,7 +111,7 @@ function validateStepTypeFields(flow: FlowDefinition): ValidationError[] {
 function buildPath(flow: FlowDefinition): string[] {
   const stepMap = new Map(flow.steps.map((s) => [s.id, s]));
   const path: string[] = [];
-  let current: string | null = flow.steps[0]?.id;
+  let current: string | null = findEntryId(flow.steps);
   const visited = new Set<string>();
   while (current && !visited.has(current)) {
     visited.add(current);
