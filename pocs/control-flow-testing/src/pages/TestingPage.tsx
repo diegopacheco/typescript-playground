@@ -29,10 +29,13 @@ export function TestingPage() {
     setTests([...snapshot]);
     for (let i = 0; i < snapshot.length; i++) {
       if (abortRef.current) break;
+      await new Promise<void>((r) => setTimeout(r, 0));
       const result = await executeTest(snapshot[i], definition);
       snapshot[i] = result;
+      if (i % 20 === 19 || i === snapshot.length - 1) {
+        setTests([...snapshot]);
+      }
     }
-    setTests([...snapshot]);
     setRunning(false);
   }, [definition]);
 
