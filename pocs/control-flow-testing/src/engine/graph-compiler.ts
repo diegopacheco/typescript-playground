@@ -82,7 +82,7 @@ function validateReachability(flow: FlowDefinition): ValidationError[] {
   const stepMap = new Map(flow.steps.map((s) => [s.id, s]));
   const reachable = new Set<string>();
   let current: string | null = findEntryId(flow.steps);
-  while (current) {
+  while (current && !reachable.has(current)) {
     reachable.add(current);
     current = stepMap.get(current)?.next ?? null;
   }

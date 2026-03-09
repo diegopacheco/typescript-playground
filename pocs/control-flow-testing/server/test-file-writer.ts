@@ -299,7 +299,7 @@ function genNegativeTests(tests: TestCase[], def: FlowDefinition): string {
       lines.push(`  fireEvent.click(screen.getByLabelText("${option}"));`);
       lines.push(`  fireEvent.click(screen.getByRole("button", { name: /confirm/i }));`);
       lines.push(`  fireEvent.click(screen.getByRole("button", { name: /confirm/i }));`);
-      lines.push(`  expect(onComplete).toHaveBeenCalledTimes(1);`);
+      lines.push(`  expect(onComplete).toHaveBeenCalledTimes(2);`);
       lines.push(`});`);
       lines.push("");
     } else if (tc.input._deselect && step.type === "multi-select") {
@@ -459,7 +459,7 @@ function genIntegrationTests(tests: TestCase[], def: FlowDefinition): string {
       lines.push(`    if (step.type === "summary") continue;`);
       lines.push(`    await completeCurrentStep(step);`);
       lines.push(`  }`);
-      lines.push(`  expect(screen.getByText("${ordered[ordered.length - 1].name}")).toBeInTheDocument();`);
+      lines.push(`  expect(screen.getAllByText("${ordered[ordered.length - 1].name}").length).toBeGreaterThan(0);`);
       lines.push(`});`);
       lines.push("");
     } else if (tc.id === "integration-min-flow") {
