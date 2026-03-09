@@ -3,19 +3,10 @@ const path = require("path");
 module.exports = {
   testEnvironment: "jsdom",
   transform: {
-    "^.+\\.tsx?$": ["ts-jest", {
-      diagnostics: false,
-      tsconfig: {
-        jsx: "react-jsx",
-        module: "ESNext",
-        moduleResolution: "node",
-        esModuleInterop: true,
-        strict: false,
-        target: "ES2022",
-        lib: ["ES2022", "DOM", "DOM.Iterable"],
-        skipLibCheck: true,
-        types: ["jest", "@testing-library/jest-dom", "node"],
-        verbatimModuleSyntax: false,
+    "^.+\\.tsx?$": ["@swc/jest", {
+      jsc: {
+        parser: { syntax: "typescript", tsx: true },
+        transform: { react: { runtime: "automatic" } },
       },
     }],
   },
