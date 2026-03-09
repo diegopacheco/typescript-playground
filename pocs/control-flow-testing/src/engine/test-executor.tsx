@@ -1,6 +1,5 @@
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 import { createElement } from "react";
-import { flushSync } from "react-dom";
 import { SingleSelect } from "../components/steps/SingleSelect";
 import { MultiSelect } from "../components/steps/MultiSelect";
 import { FormStep } from "../components/steps/FormStep";
@@ -13,24 +12,30 @@ import type { StepConfig, FlowDefinition, TestCase } from "../types/flow";
 
 const DELAY = 4;
 
+interface TestRoot { render(element: React.ReactNode): void; }
+
 function wait(ms: number) {
   return new Promise<void>((r) => setTimeout(r, ms));
 }
 
-function syncRender(root: ReturnType<typeof createRoot>, element: React.ReactNode): void {
-  flushSync(() => { root.render(element); });
+function syncRender(root: TestRoot, element: React.ReactNode): void {
+  root.render(element);
 }
 
-function setupTest(): { container: HTMLDivElement; root: ReturnType<typeof createRoot>; teardown: () => void } {
+function setupTest(): { container: HTMLDivElement; root: TestRoot; teardown: () => void } {
   const container = document.createElement("div");
   container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:800px;";
   document.body.appendChild(container);
-  const root = createRoot(container);
+  const root: TestRoot = {
+    render(element: React.ReactNode) {
+      (ReactDOM as any).render(element, container);
+    },
+  };
   let tornDown = false;
   const teardown = () => {
     if (tornDown) return;
     tornDown = true;
-    try { flushSync(() => { root.unmount(); }); } catch {}
+    try { (ReactDOM as any).unmountComponentAtNode(container); } catch {}
     try { container.remove(); } catch {}
   };
   return { container, root, teardown };
