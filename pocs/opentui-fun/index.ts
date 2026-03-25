@@ -1,24 +1,47 @@
-import { createCliRenderer, Box, Text, Select, TabSelect } from "@opentui/core"
+import { createCliRenderer, BoxRenderable, TextRenderable, SelectRenderable, TabSelectRenderable } from "@opentui/core"
 
 const renderer = await createCliRenderer({
   exitOnCtrlC: true,
-  useMouse: true,
 })
 
-const header = Box(
-  { borderStyle: "double", padding: 1, justifyContent: "center", width: "100%" },
-  Text({ content: "  OpenTUI Dashboard  ", fg: "#00FFAA", bold: true }),
-)
+const root = renderer.root
 
-const tabs = TabSelect({
+const main = new BoxRenderable(renderer, {
+  flexDirection: "column",
+  gap: 1,
+  padding: 1,
+  width: "100%",
+})
+root.add(main)
+
+const header = new BoxRenderable(renderer, {
+  borderStyle: "double",
+  border: true,
+  padding: 1,
+  justifyContent: "center",
+  width: "100%",
+})
+const headerText = new TextRenderable(renderer, { content: "  OpenTUI Dashboard  " })
+header.add(headerText)
+main.add(header)
+
+const tabs = new TabSelectRenderable(renderer, {
   options: [
     { name: " Charts ", value: "charts" },
     { name: " Select ", value: "select" },
-    { name: " Controls ", value: "controls" },
-    { name: " About ", value: "about" },
+    { name: " Stats  ", value: "stats" },
+    { name: " About  ", value: "about" },
   ],
-  selectedBackgroundColor: "#00FFAA",
-  selectedTextColor: "#000000",
+})
+main.add(tabs)
+
+const chartBox = new BoxRenderable(renderer, {
+  borderStyle: "rounded",
+  border: true,
+  padding: 1,
+  flexDirection: "column",
+  width: "100%",
+  title: " Language Popularity ",
 })
 
 const barData = [
@@ -30,23 +53,24 @@ const barData = [
   { label: "Java      ", value: 70, color: "#ED8B00" },
 ]
 
-const chartBars = barData.map((d) => {
+for (const d of barData) {
+  const row = new BoxRenderable(renderer, { flexDirection: "row", gap: 1, width: "100%" })
   const barWidth = Math.floor(d.value / 2)
-  const bar = "\u2588".repeat(barWidth)
-  return Box(
-    { flexDirection: "row", gap: 1, width: "100%" },
-    Text({ content: d.label, fg: "#AAAAAA" }),
-    Text({ content: bar, fg: d.color }),
-    Text({ content: ` ${d.value}%`, fg: "#FFFFFF" }),
-  )
+  row.add(new TextRenderable(renderer, { content: d.label }))
+  row.add(new TextRenderable(renderer, { content: "\u2588".repeat(barWidth) + " " + d.value + "%" }))
+  chartBox.add(row)
+}
+main.add(chartBox)
+
+const selectBox = new BoxRenderable(renderer, {
+  borderStyle: "rounded",
+  border: true,
+  padding: 1,
+  flexDirection: "column",
+  width: "100%",
+  title: " Actions ",
 })
-
-const chartSection = Box(
-  { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 0, width: "100%", title: " Language Popularity " },
-  ...chartBars,
-)
-
-const select = Select({
+const select = new SelectRenderable(renderer, {
   options: [
     { name: "Build Project", description: "Compile and bundle the application", value: "build" },
     { name: "Run Tests", description: "Execute the test suite", value: "test" },
@@ -54,78 +78,59 @@ const select = Select({
     { name: "Lint Code", description: "Check code quality", value: "lint" },
     { name: "Format Code", description: "Auto-format source files", value: "format" },
   ],
-  selectedBackgroundColor: "#00FFAA",
-  selectedTextColor: "#000000",
   showDescription: true,
   wrapSelection: true,
-  focusable: true,
+})
+selectBox.add(select)
+main.add(selectBox)
+
+const statsBox = new BoxRenderable(renderer, {
+  borderStyle: "rounded",
+  border: true,
+  padding: 1,
+  flexDirection: "column",
+  width: "100%",
+  title: " System Stats ",
 })
 
-const selectSection = Box(
-  { borderStyle: "rounded", padding: 1, flexDirection: "column", width: "100%", title: " Actions " },
-  select,
-)
+const statsData = [
+  { label: "CPU ", pct: 72, color: "#FF6B6B" },
+  { label: "MEM ", pct: 48, color: "#61DAFB" },
+  { label: "DSK ", pct: 84, color: "#F7DF1E" },
+  { label: "NET ", pct: 31, color: "#00FFAA" },
+]
 
-const controlsSection = Box(
-  { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 1, width: "100%", title: " Controls " },
-  Box(
-    { flexDirection: "row", gap: 1 },
-    Text({ content: "VOL ", fg: "#AAAAAA" }),
-    Text({ content: "\u2588".repeat(15) + "\u2591".repeat(10), fg: "#00FFAA" }),
-    Text({ content: " 60%", fg: "#00FFAA" }),
-  ),
-  Box(
-    { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 0, width: "100%", title: " System Stats " },
-    Box(
-      { flexDirection: "row", gap: 1 },
-      Text({ content: "CPU ", fg: "#AAAAAA" }),
-      Text({ content: "\u2588".repeat(18) + "\u2591".repeat(7), fg: "#FF6B6B" }),
-      Text({ content: " 72%", fg: "#FF6B6B" }),
-    ),
-    Box(
-      { flexDirection: "row", gap: 1 },
-      Text({ content: "MEM ", fg: "#AAAAAA" }),
-      Text({ content: "\u2588".repeat(12) + "\u2591".repeat(13), fg: "#61DAFB" }),
-      Text({ content: " 48%", fg: "#61DAFB" }),
-    ),
-    Box(
-      { flexDirection: "row", gap: 1 },
-      Text({ content: "DSK ", fg: "#AAAAAA" }),
-      Text({ content: "\u2588".repeat(21) + "\u2591".repeat(4), fg: "#F7DF1E" }),
-      Text({ content: " 84%", fg: "#F7DF1E" }),
-    ),
-  ),
-)
+for (const s of statsData) {
+  const row = new BoxRenderable(renderer, { flexDirection: "row", gap: 1 })
+  const filled = Math.floor(s.pct / 4)
+  const empty = 25 - filled
+  row.add(new TextRenderable(renderer, { content: s.label }))
+  row.add(new TextRenderable(renderer, { content: "\u2588".repeat(filled) + "\u2591".repeat(empty) + " " + s.pct + "%" }))
+  statsBox.add(row)
+}
+main.add(statsBox)
 
-const aboutSection = Box(
-  { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 1, width: "100%", title: " About " },
-  Text({ content: "OpenTUI - Native Terminal UI", fg: "#00FFAA", bold: true }),
-  Text({ content: "Core written in Zig with TypeScript bindings", fg: "#AAAAAA" }),
-  Text({ content: "Yoga-powered CSS Flexbox layout engine", fg: "#AAAAAA" }),
-  Text({ content: "Built-in tree-sitter syntax highlighting", fg: "#AAAAAA" }),
-  Text({ content: "Keyboard + Mouse interaction support", fg: "#AAAAAA" }),
-  Box(
-    { flexDirection: "row", gap: 2, marginTop: 1 },
-    Text({ content: "Runtime: Bun", fg: "#61DAFB" }),
-    Text({ content: "Lang: TypeScript", fg: "#3178C6" }),
-    Text({ content: "UI: OpenTUI", fg: "#F7A41D" }),
-  ),
-)
+const aboutBox = new BoxRenderable(renderer, {
+  borderStyle: "rounded",
+  border: true,
+  padding: 1,
+  flexDirection: "column",
+  gap: 1,
+  width: "100%",
+  title: " About ",
+})
+aboutBox.add(new TextRenderable(renderer, { content: "OpenTUI - Native Terminal UI" }))
+aboutBox.add(new TextRenderable(renderer, { content: "Core written in Zig with TypeScript bindings" }))
+aboutBox.add(new TextRenderable(renderer, { content: "Yoga-powered CSS Flexbox layout engine" }))
+aboutBox.add(new TextRenderable(renderer, { content: "Built-in tree-sitter syntax highlighting" }))
 
-const footer = Box(
-  { padding: 1, justifyContent: "center", width: "100%" },
-  Text({ content: "Tab/Arrow keys to navigate | Enter to select | Ctrl+C to exit", fg: "#555555" }),
-)
+const techRow = new BoxRenderable(renderer, { flexDirection: "row", gap: 2 })
+techRow.add(new TextRenderable(renderer, { content: "Runtime: Bun" }))
+techRow.add(new TextRenderable(renderer, { content: "Lang: TypeScript" }))
+techRow.add(new TextRenderable(renderer, { content: "UI: OpenTUI" }))
+aboutBox.add(techRow)
+main.add(aboutBox)
 
-renderer.root.add(
-  Box(
-    { flexDirection: "column", gap: 1, padding: 1, width: "100%" },
-    header,
-    tabs,
-    chartSection,
-    selectSection,
-    controlsSection,
-    aboutSection,
-    footer,
-  ),
-)
+const footer = new BoxRenderable(renderer, { padding: 1, justifyContent: "center", width: "100%" })
+footer.add(new TextRenderable(renderer, { content: "Tab/Arrow keys to navigate | Enter to select | Ctrl+C to exit" }))
+main.add(footer)
