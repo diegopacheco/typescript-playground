@@ -66,23 +66,13 @@ const selectSection = Box(
   select,
 )
 
-const slider = Slider({
-  orientation: "horizontal",
-  value: 0.6,
-  min: 0,
-  max: 1,
-  foregroundColor: "#00FFAA",
-  backgroundColor: "#333333",
-  width: 40,
-  height: 1,
-})
-
 const controlsSection = Box(
   { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 1, width: "100%", title: " Controls " },
   Box(
-    { flexDirection: "row", gap: 2, alignItems: "center" },
-    Text({ content: "Volume:", fg: "#AAAAAA" }),
-    slider,
+    { flexDirection: "row", gap: 1 },
+    Text({ content: "VOL ", fg: "#AAAAAA" }),
+    Text({ content: "\u2588".repeat(15) + "\u2591".repeat(10), fg: "#00FFAA" }),
+    Text({ content: " 60%", fg: "#00FFAA" }),
   ),
   Box(
     { borderStyle: "rounded", padding: 1, flexDirection: "column", gap: 0, width: "100%", title: " System Stats " },
