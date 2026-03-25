@@ -34,5 +34,7 @@ bun install
 
 ### Result
 
-Renders a styled terminal UI with a header, info section, and footer.
+Renders a styled terminal dashboard with tabs, bar charts, select menu, system stats, and about section.
 Press `Ctrl+C` to exit.
+
+<img src="open-tui-result.png" alt="OpenTUI Result" width="800">
