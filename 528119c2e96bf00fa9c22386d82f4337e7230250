@@ -1,0 +1,30 @@
+pocs/typescript-6/README.md
+  717316709e599493 3,5,7,9-10,12-33,48-63,70-74,76-82,84-87,91-94,96-97
+pocs/typescript-6/src/index.ts
+  717316709e599493 3-6,8-18,20-21,23-25,27-39,42,49-55,58,62-63,65-66,69-76,83-86,105-106,108-110,112-114,116-117,119-123,126-128,134-136,138-139,141-142
+pocs/typescript-6/tsconfig.json
+  717316709e599493 16
+pocs/typescript-6/package.json
+  717316709e599493 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "528119c2e96bf00fa9c22386d82f4337e7230250",
+  "prompts": {
+    "717316709e599493": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "39e098fb-468d-4455-b644-c6c618c29c85",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 242,
+      "total_deletions": 157,
+      "accepted_lines": 196,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/045fccb6322a24919405b67195ea89963d9bbcf8906a2153683dcc470244e32e"
+    }
+  }
+}
