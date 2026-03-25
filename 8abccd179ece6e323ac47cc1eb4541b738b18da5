@@ -1,0 +1,28 @@
+pocs/opentui-fun/run.sh
+  e17671d0d38eedca 1-2
+pocs/opentui-fun/index.ts
+  e17671d0d38eedca 1-131
+pocs/opentui-fun/README.md
+  e17671d0d38eedca 1,3-4,6-24,29,32,34-35,37-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "8abccd179ece6e323ac47cc1eb4541b738b18da5",
+  "prompts": {
+    "e17671d0d38eedca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0791cc26-0856-46b6-ae14-9f66320276df",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 187,
+      "total_deletions": 32,
+      "accepted_lines": 161,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/e08a14ae38bd2acd8422364766d9ee797e3869f7e47b84fb1b5064dace09ba0f"
+    }
+  }
+}
