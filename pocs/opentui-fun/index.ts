@@ -27,10 +27,10 @@ main.add(header)
 
 const tabs = new TabSelectRenderable(renderer, {
   options: [
-    { name: " Charts ", value: "charts" },
-    { name: " Select ", value: "select" },
-    { name: " Stats  ", value: "stats" },
-    { name: " About  ", value: "about" },
+    { name: " Charts ", value: "charts", description: "" },
+    { name: " Select ", value: "select", description: "" },
+    { name: " Stats  ", value: "stats", description: "" },
+    { name: " About  ", value: "about", description: "" },
   ],
 })
 main.add(tabs)
@@ -134,3 +134,5 @@ main.add(aboutBox)
 const footer = new BoxRenderable(renderer, { padding: 1, justifyContent: "center", width: "100%" })
 footer.add(new TextRenderable(renderer, { content: "Tab/Arrow keys to navigate | Enter to select | Ctrl+C to exit" }))
 main.add(footer)
+
+renderer.start()

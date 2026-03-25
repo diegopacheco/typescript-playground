@@ -17,7 +17,7 @@ with a Yoga-powered CSS Flexbox layout engine.
 ### Stack
 
 * Bun
-* TypeScript
+* TypeScript 5
 * OpenTUI (@opentui/core)
 
 ### Build
