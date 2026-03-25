@@ -13,7 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "lib": ["es2025"],
+    "lib": ["esnext"],
     "types": ["node"]
   },
   "include": ["src/**/*"],
