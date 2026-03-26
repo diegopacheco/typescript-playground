@@ -1,0 +1,40 @@
+pocs/kubb-fun/test.sh
+  4388e2fc7cec78e5 1-5
+pocs/kubb-fun/jest.config.ts
+  4388e2fc7cec78e5 1-14
+pocs/kubb-fun/tsconfig.json
+  4388e2fc7cec78e5 1-19
+pocs/kubb-fun/package.json
+  4388e2fc7cec78e5 4-5,7-10,23-32
+pocs/kubb-fun/src/index.ts
+  4388e2fc7cec78e5 1-29
+pocs/kubb-fun/openapi.yml
+  4388e2fc7cec78e5 1-185
+pocs/kubb-fun/README.md
+  4388e2fc7cec78e5 1-57
+pocs/kubb-fun/run.sh
+  4388e2fc7cec78e5 1-5
+pocs/kubb-fun/tests/catfacts.test.ts
+  4388e2fc7cec78e5 1-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.19",
+  "base_commit_sha": "504df2a2ae3ceda0f5c7d3cafe9e5723960910b7",
+  "prompts": {
+    "4388e2fc7cec78e5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a219bd56-a61e-4f23-800a-d18c7dcb6567",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 434,
+      "total_deletions": 21,
+      "accepted_lines": 418,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/56c6c3443f4453cd3795e61c497bc27f8c812c15809edb7a63b5d8723aa05d1d"
+    }
+  }
+}
