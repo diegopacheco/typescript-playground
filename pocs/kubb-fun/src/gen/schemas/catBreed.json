@@ -1,0 +1,1 @@
+{"type":"object","required":["breed","country","origin","coat","pattern"],"properties":{"breed":{"type":"string"},"country":{"type":"string"},"origin":{"type":"string"},"coat":{"type":"string"},"pattern":{"type":"string"}},"x-readme-ref-name":"CatBreed"}

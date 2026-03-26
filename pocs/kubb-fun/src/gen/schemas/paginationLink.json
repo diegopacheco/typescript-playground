@@ -1,0 +1,1 @@
+{"type":"object","properties":{"url":{"type":"string","nullable":true},"label":{"type":"string"},"active":{"type":"boolean"}},"x-readme-ref-name":"PaginationLink"}
