@@ -1,0 +1,24 @@
+pocs/yup-fun/README.md
+  6d02e831654d9db1 7-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.22",
+  "base_commit_sha": "b8f838ed7144d63ec34c21cfaa41b64261a7d6ee",
+  "prompts": {
+    "6d02e831654d9db1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c5e4665e-9581-456a-9b82-cb003b3d6d31",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 10,
+      "total_deletions": 0,
+      "accepted_lines": 10,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/a5a52fd560759a8665122312718d7ed46bceda1123fd71911f92b98c3deded37"
+    }
+  }
+}
