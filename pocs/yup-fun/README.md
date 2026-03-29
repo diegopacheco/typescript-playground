@@ -4,6 +4,16 @@ A car rental web application built with **Astro**, **Yup** schema validation, **
 
 Based on the article [Zod vs Yup vs TypeBox](https://dev.to/dataformathub/zod-vs-yup-vs-typebox-the-ultimate-schema-validation-guide-for-2025-1l4l), this project uses **Yup** for its chainable validation API and clear error messages — ideal for form-heavy apps.
 
+## Screenshots
+
+The rental form with all fields filled in — Yup validates name, email, phone (regex), dates, and car type server-side on submit.
+
+<img src="app-result-1.png" alt="Car rental form filled in" width="500"/>
+
+After successful validation the user sees a confirmation screen with the email they provided.
+
+<img src="app-result-2.png" alt="Booking confirmed screen" width="500"/>
+
 ## Stack
 
 * **Astro 6** — Server-side rendered pages with built-in form handling
