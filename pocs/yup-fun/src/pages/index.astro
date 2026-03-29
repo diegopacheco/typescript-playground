@@ -1,0 +1,246 @@
+---
+import { validateRental } from "../schemas/rental";
+
+let errors: Record<string, string> = {};
+let success = false;
+let formData: Record<string, string> = {};
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+  formData = {
+    fullName: data.get("fullName")?.toString() ?? "",
+    email: data.get("email")?.toString() ?? "",
+    phone: data.get("phone")?.toString() ?? "",
+    pickupDate: data.get("pickupDate")?.toString() ?? "",
+    returnDate: data.get("returnDate")?.toString() ?? "",
+    carType: data.get("carType")?.toString() ?? "",
+  };
+  const result = await validateRental(formData);
+  if (result.success) {
+    success = true;
+  } else {
+    errors = result.errors ?? {};
+  }
+}
+
+const cars = [
+  { value: "economy", label: "Economy - $29/day", icon: "🚗" },
+  { value: "sedan", label: "Sedan - $49/day", icon: "🚙" },
+  { value: "suv", label: "SUV - $69/day", icon: "🚐" },
+  { value: "luxury", label: "Luxury - $99/day", icon: "🏎️" },
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RentWheels - Car Rental</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      color: #e0e0e0;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 200, 180, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 140, 0, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(0, 160, 220, 0.08) 0%, transparent 50%);
+      animation: drift 20s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-3%, 2%) rotate(4deg); }
+    }
+    body > * { position: relative; z-index: 1; }
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #00c8b4, #00a0dc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+    header p {
+      color: #aaa;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .container {
+      max-width: 560px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .field { margin-bottom: 1.2rem; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #00c8b4;
+      box-shadow: 0 0 0 3px rgba(0,200,180,0.15);
+    }
+    input::placeholder { color: #777; }
+    select option { background: #141414; color: #fff; }
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+    .row { display: flex; gap: 1rem; }
+    .row .field { flex: 1; }
+    button {
+      width: 100%;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00c8b4, #00a0dc);
+      color: #0a0a0a;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,200,180,0.35);
+    }
+    .success-box {
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-box .check {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    .success-box h2 {
+      color: #4ecdc4;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p { color: #aaa; }
+    .success-box a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #00c8b4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #555;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RentWheels</h1>
+    <p>Find your perfect ride. Validated with Yup.</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      {success ? (
+        <div class="success-box">
+          <div class="check">&#10003;</div>
+          <h2>Booking Confirmed!</h2>
+          <p>We sent a confirmation to {formData.email}</p>
+          <a href="/">Book another car</a>
+        </div>
+      ) : (
+        <form method="POST">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" name="fullName" placeholder="John Doe" value={formData.fullName ?? ""} />
+            {errors.fullName && <div class="error-msg">{errors.fullName}</div>}
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="john@mail.com" value={formData.email ?? ""} />
+            {errors.email && <div class="error-msg">{errors.email}</div>}
+          </div>
+
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="1234567890" value={formData.phone ?? ""} />
+            {errors.phone && <div class="error-msg">{errors.phone}</div>}
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label>Pickup Date</label>
+              <input type="date" name="pickupDate" value={formData.pickupDate ?? ""} />
+              {errors.pickupDate && <div class="error-msg">{errors.pickupDate}</div>}
+            </div>
+            <div class="field">
+              <label>Return Date</label>
+              <input type="date" name="returnDate" value={formData.returnDate ?? ""} />
+              {errors.returnDate && <div class="error-msg">{errors.returnDate}</div>}
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Car Type</label>
+            <select name="carType">
+              <option value="">Select a car...</option>
+              {cars.map((c) => (
+                <option value={c.value} selected={formData.carType === c.value}>
+                  {c.icon} {c.label}
+                </option>
+              ))}
+            </select>
+            {errors.carType && <div class="error-msg">{errors.carType}</div>}
+          </div>
+
+          <button type="submit">Reserve Now</button>
+        </form>
+      )}
+    </div>
+  </div>
+
+  <footer>
+    Built with Astro + Yup + TypeScript + Bun
+  </footer>
+</body>
+</html>
