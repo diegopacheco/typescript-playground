@@ -1,0 +1,23 @@
+{
+  "name": "bun-qwik-hydration",
+  "version": "1.0.0",
+  "description": "Qwik resumable hydration app with Bun",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode ssr",
+    "build": "qwik build",
+    "build.client": "vite build",
+    "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "preview": "qwik build preview && vite preview",
+    "start": "vite --open --mode ssr"
+  },
+  "dependencies": {
+    "@builder.io/qwik": "^1.19.2",
+    "@builder.io/qwik-city": "^1.19.2"
+  },
+  "devDependencies": {
+    "typescript": "6.0.2",
+    "vite": "^6.0.0",
+    "vite-tsconfig-paths": "^4.0.0"
+  }
+}
