@@ -1,0 +1,46 @@
+pocs/bun-qwik-hydration/src/routes/index.tsx
+  c0b7645acdea557a 1-308
+pocs/bun-qwik-hydration/vite.config.ts
+  c0b7645acdea557a 1-13
+pocs/bun-qwik-hydration/src/entry.dev.tsx
+  c0b7645acdea557a 1-6
+pocs/bun-qwik-hydration/src/entry.ssr.tsx
+  c0b7645acdea557a 1-17
+pocs/bun-qwik-hydration/src/routes/layout.tsx
+  c0b7645acdea557a 1-13
+pocs/bun-qwik-hydration/package.json
+  c0b7645acdea557a 1-18,20-23
+pocs/bun-qwik-hydration/run.sh
+  c0b7645acdea557a 1-4
+pocs/bun-qwik-hydration/README.md
+  c0b7645acdea557a 1-91
+pocs/bun-qwik-hydration/src/entry.preview.tsx
+  c0b7645acdea557a 1-10
+pocs/bun-qwik-hydration/tsconfig.json
+  c0b7645acdea557a 1-21
+pocs/bun-qwik-hydration/src/root.tsx
+  c0b7645acdea557a 1-24
+pocs/bun-qwik-hydration/src/global.css
+  c0b7645acdea557a 1-350
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "da153073304d9a132a921017753c6a9c5bc50c2b",
+  "prompts": {
+    "c0b7645acdea557a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2188cc91-4a3e-404a-a1f2-b058107a469f",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 880,
+      "total_deletions": 0,
+      "accepted_lines": 879,
+      "overriden_lines": 1,
+      "messages_url": "https://usegitai.com/cas/edbfe55a1699866da667742a8ca4930d4f3a6c66674fe4111d2baf4a45c78a6d"
+    }
+  }
+}
