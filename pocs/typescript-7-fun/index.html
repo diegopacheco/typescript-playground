@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TypeScript 7.0 — Playground</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg"></div>
+
+<header class="hero">
+  <div class="badge">Native Port · Built in Go</div>
+  <h1>TypeScript <span class="grad">7.0</span></h1>
+  <p class="tagline">A 10x faster native port of TypeScript. Same language, native code speed, shared-memory multithreading, and a brand new language server.</p>
+  <div class="cta">
+    <a class="btn primary" href="#playground">Run TS 7 in your browser</a>
+    <a class="btn ghost" href="https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/" target="_blank" rel="noreferrer">Read the announcement</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>8–12x</b><span>faster full builds</span></div>
+    <div class="stat"><b>13x</b><span>faster on real projects</span></div>
+    <div class="stat"><b>80%</b><span>fewer LSP failures</span></div>
+    <div class="stat"><b>60%</b><span>fewer server crashes</span></div>
+  </div>
+</header>
+
+<section class="features">
+  <h2>What's new in 7.0</h2>
+  <div class="grid" id="feature-grid"></div>
+</section>
+
+<section class="playground" id="playground">
+  <h2>Playground</h2>
+  <p class="sub">Edit any snippet and hit <kbd>Run</kbd>. The code is transpiled and executed live in your browser.</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="pg-split">
+    <div class="editor-wrap">
+      <div class="editor-head">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="file" id="file-name">example.ts</span>
+        <button class="run" id="run-btn">▶ Run</button>
+      </div>
+      <div class="code-area">
+        <div class="gutter" id="gutter" aria-hidden="true"></div>
+        <div class="code-box">
+          <pre class="highlight" id="highlight" aria-hidden="true"></pre>
+          <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off"></textarea>
+        </div>
+      </div>
+    </div>
+    <aside class="explain" id="explain"></aside>
+  </div>
+  <div class="console">
+    <div class="console-head"><span>Console output</span><button class="clear" id="clear-btn">clear</button></div>
+    <pre id="output"><span class="hint">Press Run to see the output…</span></pre>
+  </div>
+</section>
+
+<footer>
+  <p>TypeScript 7.0 highlights · built as a playground POC · transpiled in-browser with the TypeScript compiler.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/typescript@5.9.2/lib/typescript.js"></script>
+<script src="playground.js"></script>
+</body>
+</html>
