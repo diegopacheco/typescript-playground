@@ -1,0 +1,58 @@
+pocs/typescript-7-fun/styles.css
+  s_8523101a92e2e1::t_bea6559b3e61fd 195-217
+  s_8523101a92e2e1::t_1b322bceeb5ab4 2-7,9-13
+  s_dd73a7cca67180::t_ad5ebc94890f54 1,8,14-131,134-143,163-167,189,218-262
+  s_8523101a92e2e1::t_40e7a0b26bc123 132-133
+  s_8523101a92e2e1::t_84b6166d82ec04 144-162,168-188,190-194
+pocs/typescript-7-fun/stop.sh
+  s_dd73a7cca67180::t_010786667e6f0d 1-9
+pocs/typescript-7-fun/playground.js
+  s_8523101a92e2e1::t_27af1d57ec5397 167-168,171,173-178,183-235
+  s_8523101a92e2e1::t_a2badb2616d76d 298-303,311
+  s_8523101a92e2e1::t_dac60cdaea282f 259
+  s_8523101a92e2e1::t_31504ea6ecf180 172,179-182
+  s_8523101a92e2e1::t_19972b6c82ae2c 121-156
+  s_8523101a92e2e1::t_681d4dcc600b4c 254-258
+  s_8523101a92e2e1::t_377b7ab7eeab54 169
+  s_dd73a7cca67180::t_d061272064d04e 1-120,157-166,170,236-253,260-297,304-310,312-316
+pocs/typescript-7-fun/index.html
+  s_8523101a92e2e1::t_ac537c39b591ac 37-49,52
+  s_8523101a92e2e1::t_990ce28fb81021 50-51
+  s_dd73a7cca67180::t_430eca7c179db9 10-36,53-65
+  s_dd73a7cca67180::t_d1d437dcbc190b 66-67
+  s_dd73a7cca67180::t_b2800abdeed490 1-9
+pocs/typescript-7-fun/start.sh
+  s_dd73a7cca67180::t_cc55e33880926f 1-14
+pocs/typescript-7-fun/test.sh
+  s_dd73a7cca67180::t_f88978f60ccbef 1-19
+pocs/typescript-7-fun/.gitignore
+  s_dd73a7cca67180::t_fd45670099c9e2 1-2
+pocs/typescript-7-fun/README.md
+  s_dd73a7cca67180::t_0ccfe5e1b9ca3a 1-63
+pocs/typescript-7-fun/server.js
+  s_dd73a7cca67180::t_a01dda6933f1e6 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b5637620c629f36264cd3d0f92cc7ff75fd7de6b",
+  "prompts": {},
+  "sessions": {
+    "s_8523101a92e2e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dd3c1d5e-9da9-4228-b682-46532044db58",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    },
+    "s_dd73a7cca67180": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "117b359a-47d5-4877-9d0a-8ab169931d4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
