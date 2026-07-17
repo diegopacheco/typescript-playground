@@ -1,0 +1,19 @@
+pocs/ts-conditional-types/tsconfig.json
+  s_2b9b0d55f298d0::t_4ad4b128f57fb6 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "6631bf6c031b2fa3cb664e7d2897b6939deacd68",
+  "prompts": {},
+  "sessions": {
+    "s_2b9b0d55f298d0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f6ea8-9c1b-75c1-aa32-a5d62d9db191",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
