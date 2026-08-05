@@ -1,0 +1,25 @@
+pocs/typescript-essentials-decorators/README.md
+  s_81f8d7cabaaa35::t_b0dfeb38c91e21 1-23
+pocs/typescript-essentials-decorators/run.sh
+  s_81f8d7cabaaa35::t_cb313ba61245a7 1-3
+pocs/typescript-essentials-decorators/src/main.ts
+  s_81f8d7cabaaa35::t_365eee3e4e7d4b 1-41
+pocs/typescript-essentials-decorators/tsconfig.json
+  s_81f8d7cabaaa35::t_f64be361c4f296 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "a6551174eb4d2b3fdce3b06891dab8b1c59eb1b1",
+  "prompts": {},
+  "sessions": {
+    "s_81f8d7cabaaa35": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b23a9ed7-f2ea-448a-9e3f-97874958e6d7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
