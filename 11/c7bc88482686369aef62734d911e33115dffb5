@@ -1,0 +1,36 @@
+pocs/nextjs-16.3-fun/README.md
+  h_8e2c3875396153 1-58
+pocs/nextjs-16.3-fun/app/globals.css
+  h_8e2c3875396153 1-292
+pocs/nextjs-16.3-fun/app/layout.tsx
+  h_8e2c3875396153 1-22
+pocs/nextjs-16.3-fun/app/page.tsx
+  h_8e2c3875396153 1-175
+pocs/nextjs-16.3-fun/components/Map.tsx
+  h_8e2c3875396153 1-50
+pocs/nextjs-16.3-fun/next-env.d.ts
+  h_8e2c3875396153 1-7
+pocs/nextjs-16.3-fun/next.config.mjs
+  h_8e2c3875396153 1-2
+pocs/nextjs-16.3-fun/package-lock.json
+  h_8e2c3875396153 1-6205
+pocs/nextjs-16.3-fun/package.json
+  h_8e2c3875396153 1-26
+pocs/nextjs-16.3-fun/start.sh
+  h_8e2c3875396153 1-8
+pocs/nextjs-16.3-fun/stop.sh
+  h_8e2c3875396153 1-2
+pocs/nextjs-16.3-fun/tsconfig.json
+  h_8e2c3875396153 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "11c7bc88482686369aef62734d911e33115dffb5",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
