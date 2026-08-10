@@ -1,0 +1,20 @@
+pocs/ts-7-tanstack-chart-fun/package-lock.json
+  h_8e2c3875396153 12-13,257-265,1217-1228,1233,1249-1252,1698-1701,1703,1707-1715,1717-1718,1722-1725,1728-1731,1733,1737-1740,1743-1746,1748-1761,1765-1768,1770,1774-1777,1779,1812-1816,1900-1903,2029-2032,2035-2052,2055-2056,2059-2062,2064-2077,2079-2082,2085,2088,2173-2177
+pocs/ts-7-tanstack-chart-fun/package.json
+  h_8e2c3875396153 14-15
+pocs/ts-7-tanstack-chart-fun/src/App.tsx
+  h_8e2c3875396153 61
+pocs/ts-7-tanstack-chart-fun/src/components/charts/index.tsx
+  h_8e2c3875396153 1-42,46,51-71,74,79-98,101,106-125,128,133-152,155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2289b043b47d13728400e92b7496ef9cc5500090",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
