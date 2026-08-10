@@ -1,0 +1,476 @@
+src/components/charts/index.ts(7,10): error TS1005: '>' expected.
+src/components/charts/index.ts(7,19): error TS1005: ')' expected.
+src/components/charts/index.ts(8,28): error TS1005: '>' expected.
+src/components/charts/index.ts(8,33): error TS1005: ';' expected.
+src/components/charts/index.ts(8,41): error TS1005: ';' expected.
+src/components/charts/index.ts(9,24): error TS1005: '>' expected.
+src/components/charts/index.ts(9,28): error TS1005: ';' expected.
+src/components/charts/index.ts(9,44): error TS1136: Property assignment expected.
+src/components/charts/index.ts(9,60): error TS1005: ';' expected.
+src/components/charts/index.ts(9,72): error TS1005: ';' expected.
+src/components/charts/index.ts(9,82): error TS1005: ';' expected.
+src/components/charts/index.ts(9,88): error TS1109: Expression expected.
+src/components/charts/index.ts(10,26): error TS1005: '>' expected.
+src/components/charts/index.ts(10,41): error TS1005: ';' expected.
+src/components/charts/index.ts(10,48): error TS1005: ';' expected.
+src/components/charts/index.ts(10,66): error TS1109: Expression expected.
+src/components/charts/index.ts(12,13): error TS1005: '>' expected.
+src/components/charts/index.ts(12,20): error TS1005: ';' expected.
+src/components/charts/index.ts(13,28): error TS1136: Property assignment expected.
+src/components/charts/index.ts(13,32): error TS1005: ';' expected.
+src/components/charts/index.ts(16,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(17,19): error TS1136: Property assignment expected.
+src/components/charts/index.ts(17,39): error TS1005: ';' expected.
+src/components/charts/index.ts(17,52): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(18,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(19,18): error TS1005: ';' expected.
+src/components/charts/index.ts(19,24): error TS1136: Property assignment expected.
+src/components/charts/index.ts(19,44): error TS1005: ';' expected.
+src/components/charts/index.ts(19,57): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(19,59): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(21,22): error TS1136: Property assignment expected.
+src/components/charts/index.ts(21,44): error TS1005: ';' expected.
+src/components/charts/index.ts(24,24): error TS1005: '>' expected.
+src/components/charts/index.ts(24,33): error TS1005: ')' expected.
+src/components/charts/index.ts(25,29): error TS1005: ',' expected.
+src/components/charts/index.ts(26,28): error TS1005: '>' expected.
+src/components/charts/index.ts(26,31): error TS1005: ')' expected.
+src/components/charts/index.ts(26,40): error TS1005: ',' expected.
+src/components/charts/index.ts(27,30): error TS1005: '>' expected.
+src/components/charts/index.ts(27,39): error TS1005: ',' expected.
+src/components/charts/index.ts(27,63): error TS1005: ',' expected.
+src/components/charts/index.ts(27,70): error TS1136: Property assignment expected.
+src/components/charts/index.ts(27,97): error TS1005: ',' expected.
+src/components/charts/index.ts(27,100): error TS1109: Expression expected.
+src/components/charts/index.ts(28,31): error TS1005: '>' expected.
+src/components/charts/index.ts(28,40): error TS1005: ';' expected.
+src/components/charts/index.ts(28,71): error TS1005: ',' expected.
+src/components/charts/index.ts(28,78): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(29,31): error TS1005: ';' expected.
+src/components/charts/index.ts(29,69): error TS1005: ',' expected.
+src/components/charts/index.ts(29,89): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(30,24): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(31,21): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(31,22): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(32,20): error TS1110: Type expected.
+src/components/charts/index.ts(33,17): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(36,13): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(36,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(37,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(38,20): error TS1109: Expression expected.
+src/components/charts/index.ts(39,17): error TS1005: '>' expected.
+src/components/charts/index.ts(39,21): error TS1005: ';' expected.
+src/components/charts/index.ts(39,33): error TS1005: ';' expected.
+src/components/charts/index.ts(39,46): error TS1005: ';' expected.
+src/components/charts/index.ts(39,62): error TS1005: ';' expected.
+src/components/charts/index.ts(39,79): error TS1005: ';' expected.
+src/components/charts/index.ts(39,93): error TS1005: ':' expected.
+src/components/charts/index.ts(39,96): error TS1109: Expression expected.
+src/components/charts/index.ts(40,17): error TS1005: '>' expected.
+src/components/charts/index.ts(40,21): error TS1005: ';' expected.
+src/components/charts/index.ts(40,33): error TS1005: ';' expected.
+src/components/charts/index.ts(40,46): error TS1005: ';' expected.
+src/components/charts/index.ts(40,62): error TS1005: ';' expected.
+src/components/charts/index.ts(40,79): error TS1005: ';' expected.
+src/components/charts/index.ts(40,93): error TS1005: ':' expected.
+src/components/charts/index.ts(40,96): error TS1109: Expression expected.
+src/components/charts/index.ts(41,17): error TS1005: '>' expected.
+src/components/charts/index.ts(41,21): error TS1005: ';' expected.
+src/components/charts/index.ts(41,33): error TS1005: ';' expected.
+src/components/charts/index.ts(41,46): error TS1005: ';' expected.
+src/components/charts/index.ts(41,62): error TS1005: ';' expected.
+src/components/charts/index.ts(41,79): error TS1005: ';' expected.
+src/components/charts/index.ts(41,93): error TS1005: ':' expected.
+src/components/charts/index.ts(41,96): error TS1109: Expression expected.
+src/components/charts/index.ts(42,17): error TS1005: '>' expected.
+src/components/charts/index.ts(42,21): error TS1005: ';' expected.
+src/components/charts/index.ts(42,33): error TS1005: ';' expected.
+src/components/charts/index.ts(42,46): error TS1005: ';' expected.
+src/components/charts/index.ts(42,62): error TS1005: ';' expected.
+src/components/charts/index.ts(42,79): error TS1005: ';' expected.
+src/components/charts/index.ts(42,93): error TS1005: ':' expected.
+src/components/charts/index.ts(42,96): error TS1109: Expression expected.
+src/components/charts/index.ts(43,10): error TS1110: Type expected.
+src/components/charts/index.ts(44,8): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(45,6): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(46,3): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(47,1): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(51,10): error TS1005: '>' expected.
+src/components/charts/index.ts(51,19): error TS1005: ')' expected.
+src/components/charts/index.ts(52,28): error TS1005: '>' expected.
+src/components/charts/index.ts(52,33): error TS1005: ';' expected.
+src/components/charts/index.ts(52,41): error TS1005: ';' expected.
+src/components/charts/index.ts(53,20): error TS1005: '>' expected.
+src/components/charts/index.ts(53,24): error TS1005: ';' expected.
+src/components/charts/index.ts(53,40): error TS1136: Property assignment expected.
+src/components/charts/index.ts(53,56): error TS1005: ';' expected.
+src/components/charts/index.ts(53,66): error TS1005: ';' expected.
+src/components/charts/index.ts(53,77): error TS1005: ';' expected.
+src/components/charts/index.ts(53,83): error TS1109: Expression expected.
+src/components/charts/index.ts(54,26): error TS1005: '>' expected.
+src/components/charts/index.ts(54,41): error TS1005: ';' expected.
+src/components/charts/index.ts(54,48): error TS1005: ';' expected.
+src/components/charts/index.ts(54,66): error TS1109: Expression expected.
+src/components/charts/index.ts(56,13): error TS1005: '>' expected.
+src/components/charts/index.ts(56,20): error TS1005: ';' expected.
+src/components/charts/index.ts(57,28): error TS1136: Property assignment expected.
+src/components/charts/index.ts(57,32): error TS1005: ';' expected.
+src/components/charts/index.ts(60,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(61,19): error TS1136: Property assignment expected.
+src/components/charts/index.ts(61,39): error TS1005: ';' expected.
+src/components/charts/index.ts(61,52): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(62,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(63,18): error TS1005: ';' expected.
+src/components/charts/index.ts(63,24): error TS1136: Property assignment expected.
+src/components/charts/index.ts(63,44): error TS1005: ';' expected.
+src/components/charts/index.ts(63,57): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(63,59): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(65,22): error TS1136: Property assignment expected.
+src/components/charts/index.ts(65,44): error TS1005: ';' expected.
+src/components/charts/index.ts(68,24): error TS1005: '>' expected.
+src/components/charts/index.ts(68,33): error TS1005: ')' expected.
+src/components/charts/index.ts(69,29): error TS1005: ',' expected.
+src/components/charts/index.ts(70,28): error TS1005: '>' expected.
+src/components/charts/index.ts(70,31): error TS1005: ')' expected.
+src/components/charts/index.ts(70,40): error TS1005: ',' expected.
+src/components/charts/index.ts(71,30): error TS1005: '>' expected.
+src/components/charts/index.ts(71,39): error TS1005: ',' expected.
+src/components/charts/index.ts(71,63): error TS1005: ',' expected.
+src/components/charts/index.ts(71,70): error TS1136: Property assignment expected.
+src/components/charts/index.ts(71,97): error TS1005: ',' expected.
+src/components/charts/index.ts(71,100): error TS1109: Expression expected.
+src/components/charts/index.ts(72,31): error TS1005: '>' expected.
+src/components/charts/index.ts(72,40): error TS1005: ';' expected.
+src/components/charts/index.ts(72,57): error TS1005: ',' expected.
+src/components/charts/index.ts(72,63): error TS1005: ';' expected.
+src/components/charts/index.ts(72,91): error TS1110: Type expected.
+src/components/charts/index.ts(73,24): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(74,21): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(74,22): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(75,20): error TS1110: Type expected.
+src/components/charts/index.ts(76,17): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(79,13): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(79,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(80,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(81,17): error TS1005: ';' expected.
+src/components/charts/index.ts(81,33): error TS1005: ';' expected.
+src/components/charts/index.ts(81,46): error TS1005: ';' expected.
+src/components/charts/index.ts(81,61): error TS1005: ';' expected.
+src/components/charts/index.ts(81,78): error TS1005: ';' expected.
+src/components/charts/index.ts(81,95): error TS1005: ';' expected.
+src/components/charts/index.ts(81,108): error TS1109: Expression expected.
+src/components/charts/index.ts(82,17): error TS1005: '>' expected.
+src/components/charts/index.ts(82,21): error TS1005: ';' expected.
+src/components/charts/index.ts(82,33): error TS1005: ';' expected.
+src/components/charts/index.ts(82,46): error TS1005: ';' expected.
+src/components/charts/index.ts(82,61): error TS1005: ';' expected.
+src/components/charts/index.ts(82,78): error TS1005: ';' expected.
+src/components/charts/index.ts(82,95): error TS1005: ';' expected.
+src/components/charts/index.ts(82,108): error TS1109: Expression expected.
+src/components/charts/index.ts(83,17): error TS1005: '>' expected.
+src/components/charts/index.ts(83,21): error TS1005: ';' expected.
+src/components/charts/index.ts(83,33): error TS1005: ';' expected.
+src/components/charts/index.ts(83,46): error TS1005: ';' expected.
+src/components/charts/index.ts(83,61): error TS1005: ';' expected.
+src/components/charts/index.ts(83,78): error TS1005: ';' expected.
+src/components/charts/index.ts(83,95): error TS1005: ';' expected.
+src/components/charts/index.ts(83,108): error TS1109: Expression expected.
+src/components/charts/index.ts(84,17): error TS1005: '>' expected.
+src/components/charts/index.ts(84,21): error TS1005: ';' expected.
+src/components/charts/index.ts(84,33): error TS1005: ';' expected.
+src/components/charts/index.ts(84,46): error TS1005: ';' expected.
+src/components/charts/index.ts(84,61): error TS1005: ';' expected.
+src/components/charts/index.ts(84,78): error TS1005: ';' expected.
+src/components/charts/index.ts(84,95): error TS1005: ';' expected.
+src/components/charts/index.ts(84,108): error TS1109: Expression expected.
+src/components/charts/index.ts(85,10): error TS1110: Type expected.
+src/components/charts/index.ts(86,8): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(87,6): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(88,3): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(89,1): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(93,10): error TS1005: '>' expected.
+src/components/charts/index.ts(93,19): error TS1005: ')' expected.
+src/components/charts/index.ts(94,28): error TS1005: '>' expected.
+src/components/charts/index.ts(94,33): error TS1005: ';' expected.
+src/components/charts/index.ts(94,41): error TS1005: ';' expected.
+src/components/charts/index.ts(95,19): error TS1005: '>' expected.
+src/components/charts/index.ts(95,23): error TS1005: ';' expected.
+src/components/charts/index.ts(95,39): error TS1136: Property assignment expected.
+src/components/charts/index.ts(95,55): error TS1005: ';' expected.
+src/components/charts/index.ts(95,67): error TS1005: ';' expected.
+src/components/charts/index.ts(95,77): error TS1005: ';' expected.
+src/components/charts/index.ts(95,83): error TS1109: Expression expected.
+src/components/charts/index.ts(96,26): error TS1005: '>' expected.
+src/components/charts/index.ts(96,41): error TS1005: ';' expected.
+src/components/charts/index.ts(96,48): error TS1005: ';' expected.
+src/components/charts/index.ts(96,66): error TS1109: Expression expected.
+src/components/charts/index.ts(97,18): error TS1005: '>' expected.
+src/components/charts/index.ts(97,25): error TS1005: ';' expected.
+src/components/charts/index.ts(97,30): error TS1005: ';' expected.
+src/components/charts/index.ts(97,37): error TS1136: Property assignment expected.
+src/components/charts/index.ts(97,40): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(97,59): error TS1005: ';' expected.
+src/components/charts/index.ts(97,69): error TS1005: ':' expected.
+src/components/charts/index.ts(97,71): error TS1005: ';' expected.
+src/components/charts/index.ts(97,77): error TS1136: Property assignment expected.
+src/components/charts/index.ts(97,97): error TS1005: ';' expected.
+src/components/charts/index.ts(97,110): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(97,112): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(98,18): error TS1005: ';' expected.
+src/components/charts/index.ts(98,24): error TS1136: Property assignment expected.
+src/components/charts/index.ts(98,44): error TS1005: ';' expected.
+src/components/charts/index.ts(98,57): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(98,59): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(100,22): error TS1136: Property assignment expected.
+src/components/charts/index.ts(100,44): error TS1005: ';' expected.
+src/components/charts/index.ts(103,24): error TS1005: '>' expected.
+src/components/charts/index.ts(103,33): error TS1005: ')' expected.
+src/components/charts/index.ts(104,29): error TS1005: ',' expected.
+src/components/charts/index.ts(105,28): error TS1005: '>' expected.
+src/components/charts/index.ts(105,31): error TS1005: ')' expected.
+src/components/charts/index.ts(105,40): error TS1005: ',' expected.
+src/components/charts/index.ts(106,30): error TS1005: '>' expected.
+src/components/charts/index.ts(106,39): error TS1005: ',' expected.
+src/components/charts/index.ts(106,63): error TS1005: ',' expected.
+src/components/charts/index.ts(106,70): error TS1136: Property assignment expected.
+src/components/charts/index.ts(106,97): error TS1005: ',' expected.
+src/components/charts/index.ts(106,100): error TS1109: Expression expected.
+src/components/charts/index.ts(107,31): error TS1005: '>' expected.
+src/components/charts/index.ts(107,40): error TS1005: ';' expected.
+src/components/charts/index.ts(107,57): error TS1005: ',' expected.
+src/components/charts/index.ts(107,63): error TS1005: ';' expected.
+src/components/charts/index.ts(107,91): error TS1110: Type expected.
+src/components/charts/index.ts(108,24): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(109,21): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(109,22): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(110,20): error TS1110: Type expected.
+src/components/charts/index.ts(111,17): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(114,13): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(114,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(115,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(116,20): error TS1109: Expression expected.
+src/components/charts/index.ts(117,16): error TS1005: '>' expected.
+src/components/charts/index.ts(117,23): error TS1005: ';' expected.
+src/components/charts/index.ts(117,29): error TS1005: ';' expected.
+src/components/charts/index.ts(117,45): error TS1005: ';' expected.
+src/components/charts/index.ts(117,60): error TS1005: ';' expected.
+src/components/charts/index.ts(117,80): error TS1005: ':' expected.
+src/components/charts/index.ts(117,83): error TS1109: Expression expected.
+src/components/charts/index.ts(118,16): error TS1005: '>' expected.
+src/components/charts/index.ts(118,23): error TS1005: ';' expected.
+src/components/charts/index.ts(118,29): error TS1005: ';' expected.
+src/components/charts/index.ts(118,45): error TS1005: ';' expected.
+src/components/charts/index.ts(118,60): error TS1005: ';' expected.
+src/components/charts/index.ts(118,80): error TS1005: ':' expected.
+src/components/charts/index.ts(118,83): error TS1109: Expression expected.
+src/components/charts/index.ts(119,16): error TS1005: '>' expected.
+src/components/charts/index.ts(119,23): error TS1005: ';' expected.
+src/components/charts/index.ts(119,29): error TS1005: ';' expected.
+src/components/charts/index.ts(119,45): error TS1005: ';' expected.
+src/components/charts/index.ts(119,60): error TS1005: ';' expected.
+src/components/charts/index.ts(119,80): error TS1005: ':' expected.
+src/components/charts/index.ts(119,83): error TS1109: Expression expected.
+src/components/charts/index.ts(120,16): error TS1005: '>' expected.
+src/components/charts/index.ts(120,23): error TS1005: ';' expected.
+src/components/charts/index.ts(120,29): error TS1005: ';' expected.
+src/components/charts/index.ts(120,45): error TS1005: ';' expected.
+src/components/charts/index.ts(120,60): error TS1005: ';' expected.
+src/components/charts/index.ts(120,80): error TS1005: ':' expected.
+src/components/charts/index.ts(120,83): error TS1109: Expression expected.
+src/components/charts/index.ts(121,10): error TS1110: Type expected.
+src/components/charts/index.ts(122,8): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(123,6): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(124,3): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(125,1): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(129,10): error TS1005: '>' expected.
+src/components/charts/index.ts(129,19): error TS1005: ')' expected.
+src/components/charts/index.ts(130,28): error TS1005: '>' expected.
+src/components/charts/index.ts(130,33): error TS1005: ';' expected.
+src/components/charts/index.ts(130,41): error TS1005: ';' expected.
+src/components/charts/index.ts(131,20): error TS1005: '>' expected.
+src/components/charts/index.ts(131,24): error TS1005: ';' expected.
+src/components/charts/index.ts(131,40): error TS1136: Property assignment expected.
+src/components/charts/index.ts(131,56): error TS1005: ';' expected.
+src/components/charts/index.ts(131,68): error TS1005: ';' expected.
+src/components/charts/index.ts(131,78): error TS1005: ';' expected.
+src/components/charts/index.ts(131,84): error TS1109: Expression expected.
+src/components/charts/index.ts(132,26): error TS1005: '>' expected.
+src/components/charts/index.ts(132,41): error TS1005: ';' expected.
+src/components/charts/index.ts(132,48): error TS1005: ';' expected.
+src/components/charts/index.ts(132,66): error TS1109: Expression expected.
+src/components/charts/index.ts(134,13): error TS1005: '>' expected.
+src/components/charts/index.ts(134,20): error TS1005: ';' expected.
+src/components/charts/index.ts(135,28): error TS1136: Property assignment expected.
+src/components/charts/index.ts(135,32): error TS1005: ';' expected.
+src/components/charts/index.ts(138,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(139,19): error TS1136: Property assignment expected.
+src/components/charts/index.ts(139,39): error TS1005: ';' expected.
+src/components/charts/index.ts(139,52): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(140,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(141,18): error TS1005: ';' expected.
+src/components/charts/index.ts(141,24): error TS1136: Property assignment expected.
+src/components/charts/index.ts(141,44): error TS1005: ';' expected.
+src/components/charts/index.ts(141,57): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(141,59): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(143,22): error TS1136: Property assignment expected.
+src/components/charts/index.ts(143,44): error TS1005: ';' expected.
+src/components/charts/index.ts(146,24): error TS1005: '>' expected.
+src/components/charts/index.ts(146,33): error TS1005: ')' expected.
+src/components/charts/index.ts(147,29): error TS1005: ',' expected.
+src/components/charts/index.ts(148,28): error TS1005: '>' expected.
+src/components/charts/index.ts(148,31): error TS1005: ')' expected.
+src/components/charts/index.ts(148,40): error TS1005: ',' expected.
+src/components/charts/index.ts(149,30): error TS1005: '>' expected.
+src/components/charts/index.ts(149,39): error TS1005: ',' expected.
+src/components/charts/index.ts(149,63): error TS1005: ',' expected.
+src/components/charts/index.ts(149,70): error TS1136: Property assignment expected.
+src/components/charts/index.ts(149,97): error TS1005: ',' expected.
+src/components/charts/index.ts(149,100): error TS1109: Expression expected.
+src/components/charts/index.ts(150,31): error TS1005: '>' expected.
+src/components/charts/index.ts(150,40): error TS1005: ';' expected.
+src/components/charts/index.ts(150,57): error TS1005: ',' expected.
+src/components/charts/index.ts(150,63): error TS1005: ';' expected.
+src/components/charts/index.ts(150,91): error TS1110: Type expected.
+src/components/charts/index.ts(151,24): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(152,21): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(152,22): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(153,20): error TS1110: Type expected.
+src/components/charts/index.ts(154,17): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(157,13): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(157,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(158,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(159,20): error TS1109: Expression expected.
+src/components/charts/index.ts(160,17): error TS1005: '>' expected.
+src/components/charts/index.ts(160,21): error TS1005: ';' expected.
+src/components/charts/index.ts(160,33): error TS1005: ';' expected.
+src/components/charts/index.ts(160,46): error TS1005: ';' expected.
+src/components/charts/index.ts(160,62): error TS1005: ';' expected.
+src/components/charts/index.ts(160,79): error TS1005: ';' expected.
+src/components/charts/index.ts(160,93): error TS1005: ':' expected.
+src/components/charts/index.ts(160,96): error TS1109: Expression expected.
+src/components/charts/index.ts(161,10): error TS1110: Type expected.
+src/components/charts/index.ts(162,8): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(163,6): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(164,3): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(165,1): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(169,10): error TS1005: '>' expected.
+src/components/charts/index.ts(169,19): error TS1005: ')' expected.
+src/components/charts/index.ts(170,28): error TS1005: '>' expected.
+src/components/charts/index.ts(170,33): error TS1005: ';' expected.
+src/components/charts/index.ts(170,41): error TS1005: ';' expected.
+src/components/charts/index.ts(171,20): error TS1005: '>' expected.
+src/components/charts/index.ts(171,24): error TS1005: ';' expected.
+src/components/charts/index.ts(171,40): error TS1136: Property assignment expected.
+src/components/charts/index.ts(171,56): error TS1005: ';' expected.
+src/components/charts/index.ts(171,68): error TS1005: ';' expected.
+src/components/charts/index.ts(171,78): error TS1005: ';' expected.
+src/components/charts/index.ts(171,84): error TS1109: Expression expected.
+src/components/charts/index.ts(172,26): error TS1005: '>' expected.
+src/components/charts/index.ts(172,41): error TS1005: ';' expected.
+src/components/charts/index.ts(172,48): error TS1005: ';' expected.
+src/components/charts/index.ts(172,66): error TS1109: Expression expected.
+src/components/charts/index.ts(174,13): error TS1005: '>' expected.
+src/components/charts/index.ts(174,20): error TS1005: ';' expected.
+src/components/charts/index.ts(175,28): error TS1136: Property assignment expected.
+src/components/charts/index.ts(175,32): error TS1005: ';' expected.
+src/components/charts/index.ts(178,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(179,19): error TS1136: Property assignment expected.
+src/components/charts/index.ts(179,39): error TS1005: ';' expected.
+src/components/charts/index.ts(179,52): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(180,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(181,18): error TS1005: ';' expected.
+src/components/charts/index.ts(181,24): error TS1136: Property assignment expected.
+src/components/charts/index.ts(181,44): error TS1005: ';' expected.
+src/components/charts/index.ts(181,57): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(181,59): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(183,22): error TS1136: Property assignment expected.
+src/components/charts/index.ts(183,44): error TS1005: ';' expected.
+src/components/charts/index.ts(186,24): error TS1005: '>' expected.
+src/components/charts/index.ts(186,33): error TS1005: ')' expected.
+src/components/charts/index.ts(187,29): error TS1005: ',' expected.
+src/components/charts/index.ts(188,28): error TS1005: '>' expected.
+src/components/charts/index.ts(188,31): error TS1005: ')' expected.
+src/components/charts/index.ts(188,40): error TS1005: ',' expected.
+src/components/charts/index.ts(189,30): error TS1005: '>' expected.
+src/components/charts/index.ts(189,39): error TS1005: ',' expected.
+src/components/charts/index.ts(189,63): error TS1005: ',' expected.
+src/components/charts/index.ts(189,70): error TS1136: Property assignment expected.
+src/components/charts/index.ts(189,97): error TS1005: ',' expected.
+src/components/charts/index.ts(189,100): error TS1109: Expression expected.
+src/components/charts/index.ts(190,31): error TS1005: '>' expected.
+src/components/charts/index.ts(190,40): error TS1005: ';' expected.
+src/components/charts/index.ts(190,57): error TS1005: ',' expected.
+src/components/charts/index.ts(190,63): error TS1005: ';' expected.
+src/components/charts/index.ts(190,91): error TS1110: Type expected.
+src/components/charts/index.ts(191,24): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(192,21): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(192,22): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(193,20): error TS1110: Type expected.
+src/components/charts/index.ts(194,17): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(197,13): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(197,14): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(198,11): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(199,20): error TS1109: Expression expected.
+src/components/charts/index.ts(200,17): error TS1005: '>' expected.
+src/components/charts/index.ts(200,21): error TS1005: ';' expected.
+src/components/charts/index.ts(200,29): error TS1005: ';' expected.
+src/components/charts/index.ts(200,42): error TS1005: ';' expected.
+src/components/charts/index.ts(200,58): error TS1005: ';' expected.
+src/components/charts/index.ts(200,75): error TS1005: ';' expected.
+src/components/charts/index.ts(200,89): error TS1005: ':' expected.
+src/components/charts/index.ts(200,92): error TS1109: Expression expected.
+src/components/charts/index.ts(201,10): error TS1110: Type expected.
+src/components/charts/index.ts(202,8): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(203,6): error TS1161: Unterminated regular expression literal.
+src/components/charts/index.ts(204,3): error TS1128: Declaration or statement expected.
+src/components/charts/index.ts(205,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(22,7): error TS1005: '>' expected.
+src/components/ui/index.ts(22,14): error TS1005: ')' expected.
+src/components/ui/index.ts(24,18): error TS1136: Property assignment expected.
+src/components/ui/index.ts(25,5): error TS1109: Expression expected.
+src/components/ui/index.ts(27,6): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(28,3): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(29,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(32,8): error TS1005: '>' expected.
+src/components/ui/index.ts(32,17): error TS1005: ')' expected.
+src/components/ui/index.ts(32,19): error TS1136: Property assignment expected.
+src/components/ui/index.ts(32,102): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(32,103): error TS1109: Expression expected.
+src/components/ui/index.ts(34,4): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(35,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(38,8): error TS1005: '>' expected.
+src/components/ui/index.ts(38,17): error TS1005: ')' expected.
+src/components/ui/index.ts(38,19): error TS1136: Property assignment expected.
+src/components/ui/index.ts(38,68): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(38,69): error TS1109: Expression expected.
+src/components/ui/index.ts(39,12): error TS1005: ',' expected.
+src/components/ui/index.ts(39,19): error TS1005: '>' expected.
+src/components/ui/index.ts(39,28): error TS1005: ';' expected.
+src/components/ui/index.ts(39,75): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(39,79): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(40,21): error TS1005: '>' expected.
+src/components/ui/index.ts(40,30): error TS1005: ';' expected.
+src/components/ui/index.ts(40,71): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(41,4): error TS1110: Type expected.
+src/components/ui/index.ts(42,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(45,8): error TS1005: '>' expected.
+src/components/ui/index.ts(45,17): error TS1005: ')' expected.
+src/components/ui/index.ts(45,19): error TS1136: Property assignment expected.
+src/components/ui/index.ts(45,43): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(45,44): error TS1109: Expression expected.
+src/components/ui/index.ts(47,4): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(48,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(51,8): error TS1005: '>' expected.
+src/components/ui/index.ts(51,17): error TS1005: ')' expected.
+src/components/ui/index.ts(51,19): error TS1136: Property assignment expected.
+src/components/ui/index.ts(51,68): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(51,69): error TS1109: Expression expected.
+src/components/ui/index.ts(53,4): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(54,1): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(68,11): error TS1005: '>' expected.
+src/components/ui/index.ts(68,20): error TS1005: ')' expected.
+src/components/ui/index.ts(68,22): error TS1136: Property assignment expected.
+src/components/ui/index.ts(68,130): error TS1005: ',' expected.
+src/components/ui/index.ts(70,6): error TS1161: Unterminated regular expression literal.
+src/components/ui/index.ts(71,3): error TS1128: Declaration or statement expected.
+src/components/ui/index.ts(72,1): error TS1128: Declaration or statement expected.
