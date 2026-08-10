@@ -1,0 +1,44 @@
+pocs/ts-7-tanstack-chart-fun/README.md
+  h_8e2c3875396153 1-88
+pocs/ts-7-tanstack-chart-fun/errors.txt
+  h_8e2c3875396153 1-476
+pocs/ts-7-tanstack-chart-fun/index.html
+  h_8e2c3875396153 1-12
+pocs/ts-7-tanstack-chart-fun/package-lock.json
+  h_8e2c3875396153 1-2171
+pocs/ts-7-tanstack-chart-fun/package.json
+  h_8e2c3875396153 1-24
+pocs/ts-7-tanstack-chart-fun/server.js
+  h_8e2c3875396153 1-83
+pocs/ts-7-tanstack-chart-fun/src/App.tsx
+  h_8e2c3875396153 1-191
+pocs/ts-7-tanstack-chart-fun/src/components/charts/index.tsx
+  h_8e2c3875396153 1-205
+pocs/ts-7-tanstack-chart-fun/src/components/ui/index.tsx
+  h_8e2c3875396153 1-72
+pocs/ts-7-tanstack-chart-fun/src/data/generators.ts
+  h_8e2c3875396153 1-21
+pocs/ts-7-tanstack-chart-fun/src/index.css
+  h_8e2c3875396153 1-98
+pocs/ts-7-tanstack-chart-fun/src/main.tsx
+  h_8e2c3875396153 1-9
+pocs/ts-7-tanstack-chart-fun/src/types/index.ts
+  h_8e2c3875396153 1-8
+pocs/ts-7-tanstack-chart-fun/tsconfig.json
+  h_8e2c3875396153 1-21
+pocs/ts-7-tanstack-chart-fun/tsconfig.node.json
+  h_8e2c3875396153 1-10
+pocs/ts-7-tanstack-chart-fun/vite.config.ts
+  h_8e2c3875396153 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d81314d082e8911e48c2caeac128deeff12ec5bb",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
