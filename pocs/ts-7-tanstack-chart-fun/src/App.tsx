@@ -58,7 +58,7 @@ function App() {
       <header className="header">
         <div className="header-content">
           <div>
-            <h1 className="title">Recharts Playground</h1>
+            <h1 className="title">TanStack Charts Playground</h1>
             <p className="subtitle">Statistical · Spatial · Hierarchy · Network Primitives</p>
           </div>
           <div className={`status-badge ${isRunning ? 'running' : 'stopped'}`}>
