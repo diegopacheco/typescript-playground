@@ -1,0 +1,36 @@
+pocs/ts-7-tanstack-chart-fun/README.md
+  h_8e2c3875396153 1
+pocs/ts-7-tanstack-chart-fun/package-lock.json
+  h_8e2c3875396153 11,13-14,20,764-789,1147-1157,1204-1207,1210-1213,1216-1219,1222-1225,1228,1231-1234,1237-1240,1243,1255-1266,1293-1663,1753-1761,1914-1918,1927-1937,1987-1992,2018-2027,2173-2202,2213-2262,2336-2341,2343-2345,2349,2352-2374,2408-2438
+pocs/ts-7-tanstack-chart-fun/package.json
+  h_8e2c3875396153 13,16,22
+pocs/ts-7-tanstack-chart-fun/src/App.tsx
+  h_8e2c3875396153 2-3,10,24,29-36,57-66,70-84,87-89,91-96,98,102-110,112-114,119-126
+pocs/ts-7-tanstack-chart-fun/src/components/charts/index.tsx
+  h_8e2c3875396153 2-3,7,29,51,72,93,107,129,131,150,161,169,171,190,201
+pocs/ts-7-tanstack-chart-fun/src/components/ui/index.tsx
+  h_8e2c3875396153 37-43
+pocs/ts-7-tanstack-chart-fun/src/index.css
+  h_8e2c3875396153 10-20,22-27,31-34,38,42-50,53-58,61-82,85-87,90-92,95-97,99-162,164-183,186-202,204,207-210,213-239,242-247,250-271
+pocs/ts-7-tanstack-chart-fun/src/main.tsx
+  h_8e2c3875396153 4
+pocs/ts-7-tanstack-chart-fun/src/vite-env.d.ts
+  h_8e2c3875396153 1
+pocs/ts-7-tanstack-chart-fun/start.sh
+  h_8e2c3875396153 1-9
+pocs/ts-7-tanstack-chart-fun/stop.sh
+  h_8e2c3875396153 1-5
+pocs/ts-7-tanstack-chart-fun/tsconfig.json
+  h_8e2c3875396153 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e728bb8dd7f38ab6904f274dda7139bad176fd1c",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
