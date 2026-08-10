@@ -34,10 +34,13 @@ export const Card = ({ children, className = '' }) => (
   </div>
 );
 
-export const CardHeader = ({ title, subtitle, className = '' }) => (
-  <div className={`px-6 py-4 border-b border-gray-100 ${className}`}>
-    {title && <h3 className="text-lg font-semibold text-gray-900">{title}</h3>}
-    {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+export const CardHeader = ({ title = null, subtitle = null, children = null, className = '' }) => (
+  <div className={`px-6 py-4 border-b border-gray-100 flex items-center justify-between ${className}`}>
+    <div>
+      {title && <h3 className="text-lg font-semibold text-gray-900">{title}</h3>}
+      {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+    </div>
+    {children}
   </div>
 );
 

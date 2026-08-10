@@ -1,10 +1,10 @@
 import React from 'react';
-import { Chart as ChartComponent, ComposedChart, LineChart, AreaChart, BarChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from '@tanstack/react-charts';
-import { ChartDataPoint } from '../types';
+import { ComposedChart, LineChart as RechartsLineChart, AreaChart, BarChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line, Area, Bar } from 'recharts';
+import { ChartDataPoint } from '../../types';
 
 export function MultiLineChart({ data }) {
   return (
-    <div className="h-[400px] w-full">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -26,7 +26,7 @@ export function MultiLineChart({ data }) {
                       <div key={index} className="flex items-center gap-2 mb-1">
                         <div className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
                         <span className="text-sm text-gray-600">{entry.name}</span>
-                        <span className="text-sm font-medium">{entry.value?.toFixed(2)}</span>
+                        <span className="text-sm font-medium">{Number(entry.value)?.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -48,7 +48,7 @@ export function MultiLineChart({ data }) {
 
 export function StackedAreaChart({ data }) {
   return (
-    <div className="h-[400px] w-full">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -69,7 +69,7 @@ export function StackedAreaChart({ data }) {
                     {payload.map((entry, index) => (
                       <div key={index} className="flex items-center gap-2 mb-1">
                         <div className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
-                        <span className="text-sm">{entry.name}: {entry.value?.toFixed(2)}</span>
+                        <span className="text-sm">{entry.name}: {Number(entry.value)?.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -90,7 +90,7 @@ export function StackedAreaChart({ data }) {
 
 export function BarChartComponent({ data }) {
   return (
-    <div className="h-[400px] w-full">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -104,7 +104,7 @@ export function BarChartComponent({ data }) {
                     {payload.map((entry, index) => (
                       <div key={index} className="flex items-center gap-2 mb-1">
                         <div className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
-                        <span className="text-sm">{entry.name}: {entry.value?.toFixed(2)}</span>
+                        <span className="text-sm">{entry.name}: {Number(entry.value)?.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -126,9 +126,9 @@ export function BarChartComponent({ data }) {
 
 export function LineChart({ data }) {
   return (
-    <div className="h-[400px] w-full">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
+        <RechartsLineChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis
             dataKey="x"
@@ -147,7 +147,7 @@ export function LineChart({ data }) {
                     {payload.map((entry, index) => (
                       <div key={index} className="flex items-center gap-2 mb-1">
                         <div className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
-                        <span className="text-sm">{entry.name}: {entry.value?.toFixed(2)}</span>
+                        <span className="text-sm">{entry.name}: {Number(entry.value)?.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -158,7 +158,7 @@ export function LineChart({ data }) {
           />
           <Legend />
           <Line type="monotone" dataKey="y1" name="Metric 1" stroke="#8884d8" strokeWidth={2} />
-        </LineChart>
+        </RechartsLineChart>
       </ResponsiveContainer>
     </div>
   );
@@ -166,9 +166,9 @@ export function LineChart({ data }) {
 
 export function StepLineChart({ data }) {
   return (
-    <div className="h-[400px] w-full">
+    <div className="chart-container">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
+        <RechartsLineChart data={data} margin={{ top: 20, right: 20, bottom: 60, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis
             dataKey="x"
@@ -187,7 +187,7 @@ export function StepLineChart({ data }) {
                     {payload.map((entry, index) => (
                       <div key={index} className="flex items-center gap-2 mb-1">
                         <div className="w-3 h-3 rounded-full" style={{ background: entry.color }} />
-                        <span className="text-sm">{entry.name}: {entry.value?.toFixed(2)}</span>
+                        <span className="text-sm">{entry.name}: {Number(entry.value)?.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
@@ -198,7 +198,7 @@ export function StepLineChart({ data }) {
           />
           <Legend />
           <Line type="step" dataKey="y1" name="Metric 1" stroke="#8884d8" strokeWidth={2} />
-        </LineChart>
+        </RechartsLineChart>
       </ResponsiveContainer>
     </div>
   );

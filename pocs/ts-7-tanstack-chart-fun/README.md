@@ -1,4 +1,4 @@
-# TanStack Charts 0.7.0 Demo
+# TanStack Charts 0.7.0 App
 
 A comprehensive demonstration of TanStack Charts 0.7.0 features with React 19, TypeScript 5, and Node.js.
 
