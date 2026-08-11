@@ -1,0 +1,23 @@
+pocs/typescript-essentials-generics/run.sh
+  s_81f8d7cabaaa35::t_cb313ba61245a7 1-3
+pocs/typescript-essentials-generics/src/main.ts
+  s_81f8d7cabaaa35::t_32fae741a932bb 1-50
+pocs/typescript-essentials-generics/README.md
+  s_81f8d7cabaaa35::t_262ebccaaa33ab 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4e82a1299c984a0332f49dd7d76bdb08b0934014",
+  "prompts": {},
+  "sessions": {
+    "s_81f8d7cabaaa35": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b23a9ed7-f2ea-448a-9e3f-97874958e6d7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
