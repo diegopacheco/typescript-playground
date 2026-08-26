@@ -1,0 +1,6 @@
+[
+  { "id": "img-1", "name": "Ridge at dawn", "source": "url", "url": "https://picsum.photos/id/1018/900/600", "bytes": 0, "addedAt": "2024-09-01T10:00:00.000Z" },
+  { "id": "img-2", "name": "Still water", "source": "url", "url": "https://picsum.photos/id/1015/900/600", "bytes": 0, "addedAt": "2024-09-02T10:00:00.000Z" },
+  { "id": "img-3", "name": "Pines", "source": "url", "url": "https://picsum.photos/id/1043/900/600", "bytes": 0, "addedAt": "2024-09-03T10:00:00.000Z" },
+  { "id": "img-4", "name": "Long road", "source": "url", "url": "https://picsum.photos/id/1036/900/600", "bytes": 0, "addedAt": "2024-09-04T10:00:00.000Z" }
+]

@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Blog API
+  version: 1.0.0
+  description: Mini blog with picture and YouTube embeds, kept in a Mockoon data bucket.
+servers:
+  - url: http://localhost:3001/api
+tags:
+  - name: blog
+paths:
+  /posts:
+    x-mockoon:
+      crud: posts
+    get:
+      tags: [blog]
+      operationId: listPosts
+      summary: List posts
+      parameters:
+        - { name: search, in: query, schema: { type: string } }
+        - { name: sort, in: query, schema: { type: string } }
+        - { name: order, in: query, schema: { type: string, enum: [asc, desc] } }
+      responses:
+        '200':
+          description: The posts
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Post' } }
+    post:
+      tags: [blog]
+      operationId: createPost
+      summary: Publish a post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PostDraft' }
+      responses:
+        '201':
+          description: The published post
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Post' }
+  /posts/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [blog]
+      operationId: getPost
+      summary: Get a post
+      responses:
+        '200':
+          description: The post
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Post' }
+        '404': { description: Not found }
+    put:
+      tags: [blog]
+      operationId: updatePost
+      summary: Replace a post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PostDraft' }
+      responses:
+        '200':
+          description: The updated post
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Post' }
+        '404': { description: Not found }
+    delete:
+      tags: [blog]
+      operationId: deletePost
+      summary: Delete a post
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+components:
+  schemas:
+    PostDraft:
+      type: object
+      required: [title, body]
+      properties:
+        title: { type: string }
+        author: { type: string }
+        body:
+          type: string
+          description: Plain text, blank line separated paragraphs.
+        tags: { type: array, items: { type: string } }
+        imageUrl:
+          type: string
+          description: Cover picture, remote URL or data URL.
+        youtubeUrl:
+          type: string
+          description: Any YouTube watch, share or embed URL.
+        publishedAt: { type: string, format: date-time }
+    Post:
+      allOf:
+        - type: object
+          required: [id]
+          properties:
+            id: { type: string }
+        - $ref: '#/components/schemas/PostDraft'

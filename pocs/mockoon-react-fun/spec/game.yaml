@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Rock Paper Scissors API
+  version: 1.0.0
+  description: >
+    The mock picks the computer move and decides the outcome server side with
+    Mockoon templating helpers, then appends the round to a stateful data bucket.
+    The browser never decides who won.
+servers:
+  - url: http://localhost:3001/api
+tags:
+  - name: game
+paths:
+  /rounds:
+    x-mockoon:
+      crud: rounds
+    post:
+      tags: [game]
+      operationId: playRound
+      summary: Play one round against the mock
+      x-mockoon:
+        template: playRound
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RoundDraft' }
+      responses:
+        '201':
+          description: The resolved round
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Round' }
+    get:
+      tags: [game]
+      operationId: listRounds
+      summary: List played rounds, oldest first
+      responses:
+        '200':
+          description: The round history
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Round' } }
+    put:
+      tags: [game]
+      operationId: replaceRounds
+      summary: Replace the round history (send [] to reset the match)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: array, items: { $ref: '#/components/schemas/Round' } }
+      responses:
+        '200':
+          description: The new history
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Round' } }
+components:
+  schemas:
+    Move:
+      type: string
+      enum: [rock, paper, scissors]
+    Outcome:
+      type: string
+      enum: [win, draw, loss]
+      description: Seen from the player's side.
+    RoundDraft:
+      type: object
+      required: [move]
+      properties:
+        move: { $ref: '#/components/schemas/Move' }
+    Round:
+      type: object
+      required: [id, playerMove, computerMove, outcome, playedAt]
+      properties:
+        id: { type: string }
+        playerMove: { $ref: '#/components/schemas/Move' }
+        computerMove: { $ref: '#/components/schemas/Move' }
+        outcome: { $ref: '#/components/schemas/Outcome' }
+        playedAt: { type: string, format: date-time }

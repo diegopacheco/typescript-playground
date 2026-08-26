@@ -1,0 +1,20 @@
+{
+  "name": "mockoon-react-fun",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "React 19 app whose entire backend is a stateful Mockoon mock generated from OpenAPI specs",
+  "scripts": {
+    "mock:build": "bun run mock/build-mock.ts",
+    "mock:start": "bunx --bun @mockoon/cli start --data mock/mockoon-env.json",
+    "build": "./scripts/build.sh",
+    "start": "./scripts/start.sh",
+    "stop": "./scripts/stop.sh",
+    "test": "./scripts/test.sh",
+    "typecheck": "bun run --cwd web typecheck"
+  },
+  "devDependencies": {
+    "@mockoon/cli": "9.8.0",
+    "typescript": "7.0.2"
+  }
+}

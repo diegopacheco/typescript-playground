@@ -1,0 +1,23 @@
+[
+  {
+    "id": "nt-1",
+    "title": "Mockoon reading list",
+    "body": "Everything this playground leans on, in one place.\n\nData buckets are the piece that makes the mock behave like a real service.",
+    "todos": [
+      { "id": "td-1", "text": "Read the CRUD route docs", "done": true },
+      { "id": "td-2", "text": "Try the templating helpers", "done": true },
+      { "id": "td-3", "text": "Write a response rule", "done": false }
+    ],
+    "updatedAt": "2024-10-01T08:30:00.000Z"
+  },
+  {
+    "id": "nt-2",
+    "title": "Weekly review",
+    "body": "What moved, what stalled, what to drop.",
+    "todos": [
+      { "id": "td-4", "text": "Close the stale branches", "done": false },
+      { "id": "td-5", "text": "Write the changelog entry", "done": false }
+    ],
+    "updatedAt": "2024-10-06T17:05:00.000Z"
+  }
+]

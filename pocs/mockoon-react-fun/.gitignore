@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.build/
+mock/mockoon-env.json
+.run/
+*.log
+.DS_Store
+.vite/
+*.tsbuildinfo

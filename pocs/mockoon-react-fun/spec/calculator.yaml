@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: Calculator API
+  version: 1.0.0
+  description: >
+    The mock evaluates the expression server side with Mockoon templating helpers
+    and appends the result to a stateful history data bucket.
+servers:
+  - url: http://localhost:3001/api
+tags:
+  - name: calculator
+paths:
+  /calculations:
+    x-mockoon:
+      crud: calculations
+    post:
+      tags: [calculator]
+      operationId: evaluate
+      summary: Evaluate an expression and record it in the history
+      x-mockoon:
+        template: evaluate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CalculationDraft' }
+      responses:
+        '201':
+          description: The evaluated calculation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Calculation' }
+        '400':
+          description: Division by zero
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ApiError' }
+    get:
+      tags: [calculator]
+      operationId: listCalculations
+      summary: List the calculation history
+      responses:
+        '200':
+          description: History, oldest first
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Calculation' } }
+    put:
+      tags: [calculator]
+      operationId: replaceCalculations
+      summary: Replace the whole history (send [] to clear it)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: array, items: { $ref: '#/components/schemas/Calculation' } }
+      responses:
+        '200':
+          description: The new history
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Calculation' } }
+  /calculations/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    delete:
+      tags: [calculator]
+      operationId: deleteCalculation
+      summary: Drop one entry from the history
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+components:
+  schemas:
+    Operator:
+      type: string
+      enum: ['+', '-', '*', '/', '%']
+    CalculationDraft:
+      type: object
+      required: [a, op, b]
+      properties:
+        a: { type: number }
+        op: { $ref: '#/components/schemas/Operator' }
+        b: { type: number }
+    Calculation:
+      type: object
+      required: [id, a, op, b, result, computedAt]
+      properties:
+        id: { type: string }
+        a: { type: number }
+        op: { $ref: '#/components/schemas/Operator' }
+        b: { type: number }
+        result: { type: number }
+        computedAt: { type: string, format: date-time }
+    ApiError:
+      type: object
+      required: [error, message]
+      properties:
+        error: { type: string }
+        message: { type: string }

@@ -1,0 +1,10 @@
+[
+  { "id": "bk-1", "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "isbn": "978-0201616224", "year": 1999, "genre": "Craft", "rating": 5, "createdAt": "2024-01-12T09:00:00.000Z" },
+  { "id": "bk-2", "title": "Domain-Driven Design", "author": "Eric Evans", "isbn": "978-0321125217", "year": 2003, "genre": "Architecture", "rating": 5, "createdAt": "2024-02-03T09:00:00.000Z" },
+  { "id": "bk-3", "title": "Release It!", "author": "Michael T. Nygard", "isbn": "978-1680502398", "year": 2018, "genre": "Operations", "rating": 4, "createdAt": "2024-03-19T09:00:00.000Z" },
+  { "id": "bk-4", "title": "Designing Data-Intensive Applications", "author": "Martin Kleppmann", "isbn": "978-1449373320", "year": 2017, "genre": "Data", "rating": 5, "createdAt": "2024-04-07T09:00:00.000Z" },
+  { "id": "bk-5", "title": "Refactoring", "author": "Martin Fowler", "isbn": "978-0134757599", "year": 2018, "genre": "Craft", "rating": 4, "createdAt": "2024-05-22T09:00:00.000Z" },
+  { "id": "bk-6", "title": "Accelerate", "author": "Nicole Forsgren", "isbn": "978-1942788331", "year": 2018, "genre": "Delivery", "rating": 4, "createdAt": "2024-06-14T09:00:00.000Z" },
+  { "id": "bk-7", "title": "Team Topologies", "author": "Matthew Skelton", "isbn": "978-1942788812", "year": 2019, "genre": "Organisation", "rating": 4, "createdAt": "2024-07-30T09:00:00.000Z" },
+  { "id": "bk-8", "title": "Working Effectively with Legacy Code", "author": "Michael Feathers", "isbn": "978-0131177055", "year": 2004, "genre": "Craft", "rating": 5, "createdAt": "2024-08-11T09:00:00.000Z" }
+]

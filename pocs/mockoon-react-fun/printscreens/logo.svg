@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 170" width="620" height="170" role="img" aria-label="mockoon react fun">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111825"/>
+      <stop offset="1" stop-color="#070a0f"/>
+    </linearGradient>
+    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb454"/>
+      <stop offset="0.55" stop-color="#ffb454"/>
+      <stop offset="1" stop-color="#59c2ff"/>
+    </linearGradient>
+    <filter id="halo" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="1" y="1" width="618" height="168" rx="18" fill="url(#plate)" stroke="#1e2b3d" stroke-width="2"/>
+
+  <g stroke="#141d2b" stroke-width="1">
+    <path d="M0 42 H620 M0 85 H620 M0 128 H620"/>
+    <path d="M120 0 V170 M240 0 V170 M360 0 V170 M480 0 V170"/>
+  </g>
+
+  <g filter="url(#halo)">
+    <path d="M44 96 h30 l12 -34 l16 62 l14 -46 l12 20 h26"
+          fill="none" stroke="url(#trace)" stroke-width="4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <circle cx="44" cy="96" r="5" fill="#ffb454"/>
+  <circle cx="154" cy="96" r="5" fill="#59c2ff"/>
+
+  <text x="196" y="80" font-family="Chakra Petch, Trebuchet MS, sans-serif" font-size="42" font-weight="700" fill="#eef3fa" letter-spacing="0.5">
+    mockoon<tspan fill="#ffb454"> · </tspan>react
+  </text>
+
+  <text x="198" y="112" font-family="IBM Plex Mono, Menlo, monospace" font-size="14.5" fill="#7c8ba3" letter-spacing="3.4">
+    NO BACKEND WAS HARMED
+  </text>
+
+  <g font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="#4d5a70">
+    <text x="198" y="140">openapi</text>
+    <text x="266" y="140" fill="#2b3d55">/</text>
+    <text x="280" y="140">mockoon</text>
+    <text x="350" y="140" fill="#2b3d55">/</text>
+    <text x="364" y="140">react 19</text>
+    <text x="432" y="140" fill="#2b3d55">/</text>
+    <text x="446" y="140">bun</text>
+    <text x="482" y="140" fill="#2b3d55">/</text>
+    <text x="496" y="140">vite</text>
+    <text x="536" y="140" fill="#2b3d55">/</text>
+    <text x="550" y="140">ts 7</text>
+  </g>
+</svg>

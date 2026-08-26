@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: Books API
+  version: 1.0.0
+  description: Stateful catalogue of books backed by a Mockoon data bucket.
+servers:
+  - url: http://localhost:3001/api
+tags:
+  - name: books
+paths:
+  /books:
+    x-mockoon:
+      crud: books
+    get:
+      tags: [books]
+      operationId: listBooks
+      summary: List books
+      parameters:
+        - { name: search, in: query, schema: { type: string } }
+        - { name: sort, in: query, schema: { type: string } }
+        - { name: order, in: query, schema: { type: string, enum: [asc, desc] } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1 } }
+        - { name: limit, in: query, schema: { type: integer, minimum: 1 } }
+      responses:
+        '200':
+          description: Matching books
+          headers:
+            X-Total-Count: { schema: { type: integer } }
+            X-Filtered-Count: { schema: { type: integer } }
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Book' } }
+    post:
+      tags: [books]
+      operationId: createBook
+      summary: Create a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookDraft' }
+      responses:
+        '201':
+          description: Created book
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Book' }
+  /books/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [books]
+      operationId: getBook
+      summary: Get a book
+      responses:
+        '200':
+          description: The book
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Book' }
+        '404': { description: Not found }
+    put:
+      tags: [books]
+      operationId: updateBook
+      summary: Replace a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookDraft' }
+      responses:
+        '200':
+          description: Updated book
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Book' }
+        '404': { description: Not found }
+    delete:
+      tags: [books]
+      operationId: deleteBook
+      summary: Delete a book
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+components:
+  schemas:
+    BookDraft:
+      type: object
+      required: [title, author]
+      properties:
+        title: { type: string }
+        author: { type: string }
+        isbn: { type: string }
+        year: { type: integer }
+        genre: { type: string }
+        rating: { type: integer, minimum: 0, maximum: 5 }
+        createdAt: { type: string, format: date-time }
+    Book:
+      allOf:
+        - type: object
+          required: [id]
+          properties:
+            id: { type: string }
+        - $ref: '#/components/schemas/BookDraft'

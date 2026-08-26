@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ps-1",
+    "title": "A backend that was never written",
+    "author": "Diego Pacheco",
+    "body": "Every endpoint this app talks to is served by Mockoon.\n\nThe interesting part is that the mock keeps state. Create a book in one request and the next list call returns it, the same way LocalStack answers for AWS.\n\nNo database, no server code, one JSON environment file.",
+    "tags": ["mockoon", "mocking", "frontend"],
+    "imageUrl": "https://picsum.photos/id/180/1200/600",
+    "youtubeUrl": "",
+    "publishedAt": "2024-10-10T12:00:00.000Z"
+  },
+  {
+    "id": "ps-2",
+    "title": "Specs first, mock second, UI last",
+    "author": "Diego Pacheco",
+    "body": "The OpenAPI files under spec/ are the source of truth.\n\nThe generator hands them to Mockoon, upgrades the imported routes into stateful CRUD routes, and the React app is written against the same contract.\n\nChange the spec, regenerate, and the mock follows.",
+    "tags": ["openapi", "contract", "tooling"],
+    "imageUrl": "",
+    "youtubeUrl": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+    "publishedAt": "2024-10-18T09:30:00.000Z"
+  }
+]

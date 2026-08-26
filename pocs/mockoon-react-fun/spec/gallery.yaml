@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Gallery API
+  version: 1.0.0
+  description: >
+    Image gallery backed by a Mockoon data bucket. Images added from a remote URL
+    keep that URL; images dropped from the machine are downscaled in the browser
+    and stored as a data URL, because a Mockoon mock has no filesystem to write to.
+servers:
+  - url: http://localhost:3001/api
+tags:
+  - name: gallery
+paths:
+  /images:
+    x-mockoon:
+      crud: images
+    get:
+      tags: [gallery]
+      operationId: listImages
+      summary: List gallery images
+      parameters:
+        - { name: search, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: The gallery
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Image' } }
+    post:
+      tags: [gallery]
+      operationId: addImage
+      summary: Add an image to the gallery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ImageDraft' }
+      responses:
+        '201':
+          description: The stored image
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Image' }
+  /images/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [gallery]
+      operationId: getImage
+      summary: Get one image
+      responses:
+        '200':
+          description: The image
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Image' }
+        '404': { description: Not found }
+    delete:
+      tags: [gallery]
+      operationId: deleteImage
+      summary: Remove an image from the gallery
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+components:
+  schemas:
+    ImageSource:
+      type: string
+      enum: [url, upload]
+    ImageDraft:
+      type: object
+      required: [name, source, url]
+      properties:
+        name: { type: string }
+        source: { $ref: '#/components/schemas/ImageSource' }
+        url:
+          type: string
+          description: Remote http(s) URL, or a data URL for browser uploads.
+        bytes: { type: integer }
+        addedAt: { type: string, format: date-time }
+    Image:
+      allOf:
+        - type: object
+          required: [id]
+          properties:
+            id: { type: string }
+        - $ref: '#/components/schemas/ImageDraft'

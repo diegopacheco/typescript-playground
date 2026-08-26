@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 700" width="1240" height="700" role="img" aria-label="OpenAPI specs are imported by the generator into a Mockoon environment; Mockoon serves stateful CRUD and templated routes from in-memory data buckets, and the React app is the only other process.">
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="tip" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11 z" fill="#1e1e1e"/>
+    </marker>
+  </defs>
+
+  <style>
+    .hand { font-family: 'Caveat', 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive; }
+    .h1 { font-size: 27px; font-weight: 700; fill: #1e1e1e; }
+    .h2 { font-size: 22px; font-weight: 700; fill: #1e1e1e; }
+    .b  { font-size: 18px; fill: #343a40; }
+    .s  { font-size: 16px; fill: #495057; }
+    .band { font-size: 16px; fill: #868e96; letter-spacing: 2px; }
+    .edge { stroke: #1e1e1e; stroke-width: 2.4; fill: none; }
+  </style>
+
+  <rect x="0" y="0" width="1240" height="700" fill="#fdfdfc"/>
+
+  <g filter="url(#wobble)">
+    <rect x="60" y="82" width="250" height="126" rx="10" fill="#ffec99" stroke="#1e1e1e" stroke-width="2.4"/>
+    <rect x="420" y="82" width="270" height="126" rx="10" fill="#a5d8ff" stroke="#1e1e1e" stroke-width="2.4"/>
+    <rect x="800" y="82" width="250" height="126" rx="10" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2.4"/>
+
+    <rect x="60" y="392" width="330" height="196" rx="10" fill="#d0bfff" stroke="#1e1e1e" stroke-width="2.4"/>
+    <rect x="560" y="372" width="620" height="288" rx="12" fill="#fff9db" stroke="#1e1e1e" stroke-width="2.8"/>
+    <rect x="592" y="432" width="250" height="76" rx="9" fill="#ffd8a8" stroke="#1e1e1e" stroke-width="2.2"/>
+    <rect x="878" y="432" width="270" height="76" rx="9" fill="#ffc9c9" stroke="#1e1e1e" stroke-width="2.2"/>
+    <rect x="592" y="548" width="556" height="88" rx="9" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="2.2"/>
+  </g>
+
+  <g filter="url(#wobble)">
+    <path class="edge" d="M312 145 H408" marker-end="url(#tip)"/>
+    <path class="edge" d="M692 145 H788" marker-end="url(#tip)"/>
+    <path class="edge" d="M925 210 V362" marker-end="url(#tip)"/>
+    <path class="edge" d="M392 468 H548" marker-end="url(#tip)"/>
+    <path class="edge" d="M548 528 H394" marker-end="url(#tip)"/>
+    <path class="edge" d="M717 510 V542" marker-end="url(#tip)"/>
+    <path class="edge" d="M1013 510 V542" marker-end="url(#tip)"/>
+  </g>
+
+  <g class="hand">
+    <text class="band" x="60" y="62">1 · BUILD TIME</text>
+    <text class="band" x="60" y="352">2 · RUN TIME — TWO PROCESSES, NO DATABASE</text>
+
+    <text class="h2" x="82" y="118">spec/*.yaml</text>
+    <text class="b"  x="82" y="147">books · calculator · gallery</text>
+    <text class="b"  x="82" y="170">notes · game · blog</text>
+    <text class="s"  x="82" y="194">x-mockoon: crud | template</text>
+
+    <text class="h2" x="442" y="118">mock/build-mock.ts</text>
+    <text class="b"  x="442" y="147">mockoon-cli import</text>
+    <text class="b"  x="442" y="170">upgrade to crud + templates</text>
+    <text class="s"  x="442" y="194">seed from mock/seed/*.json</text>
+
+    <text class="h2" x="822" y="118">mockoon-env.json</text>
+    <text class="b"  x="822" y="147">6 stateful CRUD routes</text>
+    <text class="b"  x="822" y="170">2 templated routes</text>
+    <text class="s"  x="822" y="194">6 seeded data buckets</text>
+
+    <text class="s" x="360" y="134" text-anchor="middle">reads</text>
+    <text class="s" x="740" y="134" text-anchor="middle">writes</text>
+    <text class="s" x="940" y="270">mockoon-cli start --data</text>
+    <text class="s" x="940" y="292">port 3001</text>
+
+    <text class="h2" x="82" y="428">React 19 · Vite 8</text>
+    <text class="b"  x="82" y="456">Bun runtime · TypeScript 7</text>
+    <text class="b"  x="82" y="480">localhost:5173</text>
+    <text class="s"  x="82" y="512">6 tabs: books, calculator,</text>
+    <text class="s"  x="82" y="534">gallery, notes, game, blog</text>
+    <text class="s"  x="82" y="566">types mirror spec/*.yaml</text>
+
+    <text class="s" x="470" y="426" text-anchor="middle">GET POST PUT</text>
+    <text class="s" x="470" y="448" text-anchor="middle">PATCH DELETE</text>
+    <text class="s" x="470" y="516" text-anchor="middle">JSON + X-Total-Count</text>
+
+    <text class="h1" x="592" y="410">Mockoon 9 — localhost:3001/api</text>
+
+    <text class="h2" x="612" y="462">CRUD routes ×6</text>
+    <text class="s"  x="612" y="488">search · sort · page · 404</text>
+
+    <text class="h2" x="898" y="462">templated routes ×2</text>
+    <text class="s"  x="898" y="488">arithmetic · random move · 400</text>
+
+    <text class="s" x="736" y="532">reads and mutates</text>
+    <text class="s" x="1032" y="532">pushes records</text>
+
+    <text class="h2" x="612" y="578">data buckets — in memory</text>
+    <text class="b"  x="612" y="604">books · calculations · images · notes · rounds · posts</text>
+    <text class="s"  x="612" y="626">every write survives the next read, the way LocalStack answers for AWS</text>
+  </g>
+</svg>
