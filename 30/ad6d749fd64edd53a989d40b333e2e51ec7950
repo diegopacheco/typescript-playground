@@ -1,0 +1,141 @@
+pocs/mockoon-react-fun/mock/build-mock.ts
+  s_14f471e28de918::t_5dd42a329d116b 2-22,24-42,44-152,155-275
+  s_14f471e28de918::t_7b944827f0296b 23,43
+  s_14f471e28de918::t_c763ce66ad7266 1,153-154
+pocs/mockoon-react-fun/spec/gallery.yaml
+  s_14f471e28de918::t_9ba2bcf00e382a 1-87
+pocs/mockoon-react-fun/scripts/start.sh
+  s_14f471e28de918::t_f0c4f520a792ec 11
+  s_14f471e28de918::t_afbef9873677c2 1-10,12-18
+pocs/mockoon-react-fun/web/src/components/Panel.tsx
+  s_14f471e28de918::t_11876e30440e44 1-18
+pocs/mockoon-react-fun/mock/seed/notes.json
+  s_14f471e28de918::t_97adb78f175999 1-23
+pocs/mockoon-react-fun/web/src/main.tsx
+  s_14f471e28de918::t_602817c90608d0 1-13
+pocs/mockoon-react-fun/web/src/hooks/useResource.ts
+  s_14f471e28de918::t_11876e30440e44 1-51
+pocs/mockoon-react-fun/mock/seed/books.json
+  s_14f471e28de918::t_97adb78f175999 1-10
+pocs/mockoon-react-fun/mock/mockoon-types.ts
+  s_14f471e28de918::t_1f56f2a61dd057 1-95
+pocs/mockoon-react-fun/web/src/lib/youtube.ts
+  s_14f471e28de918::t_ddbeb6dee8d089 1-15
+pocs/mockoon-react-fun/scripts/build.sh
+  s_14f471e28de918::t_afbef9873677c2 1-13
+pocs/mockoon-react-fun/scripts/api-check.ts
+  s_14f471e28de918::t_716fc9cca448a8 1-134
+pocs/mockoon-react-fun/web/src/api/client.ts
+  s_14f471e28de918::t_06f772ba54df8d 1-55,62-77
+  s_14f471e28de918::t_1a547d0b7b6d57 56-61
+pocs/mockoon-react-fun/web/src/tabs/GalleryTab.tsx
+  s_14f471e28de918::t_56f5eba37efc18 1-236
+pocs/mockoon-react-fun/web/src/components/Empty.tsx
+  s_14f471e28de918::t_11876e30440e44 1
+pocs/mockoon-react-fun/mock/seed/images.json
+  s_14f471e28de918::t_97adb78f175999 1-6
+pocs/mockoon-react-fun/web/index.html
+  s_14f471e28de918::t_2a4bb4fce2137a 1-18
+pocs/mockoon-react-fun/web/src/components/RequestLog.tsx
+  s_14f471e28de918::t_20c11569e10b63 1-32
+pocs/mockoon-react-fun/.gitignore
+  s_14f471e28de918::t_de8138394e84ca 1-9
+pocs/mockoon-react-fun/web/src/tabs/NotesTab.tsx
+  s_14f471e28de918::t_dbcd1bab2584db 1-267
+pocs/mockoon-react-fun/web/package.json
+  s_14f471e28de918::t_832163c77e8737 1-23
+pocs/mockoon-react-fun/spec/game.yaml
+  s_14f471e28de918::t_171a52ab3dadad 1-81
+pocs/mockoon-react-fun/web/src/styles.css
+  s_14f471e28de918::t_bfa6f1398e994b 343-346,349-357,359-364,366-368,373,403-413,544-547,648
+  s_14f471e28de918::t_c61b3831ca0583 358,365
+  s_14f471e28de918::t_2361833b929abe 1-342,347-348,369-372,374-402,414-543,548-647,649-743
+pocs/mockoon-react-fun/web/src/tabs/BooksTab.tsx
+  s_14f471e28de918::t_a7c2ffbafde73a 1-200
+pocs/mockoon-react-fun/web/src/tabs/BlogTab.tsx
+  s_14f471e28de918::t_ddbeb6dee8d089 1-285,293-294,296-311
+  s_14f471e28de918::t_e97daec817f1a0 286-292,295
+pocs/mockoon-react-fun/web/src/App.tsx
+  s_14f471e28de918::t_602817c90608d0 1-141
+pocs/mockoon-react-fun/spec/calculator.yaml
+  s_14f471e28de918::t_caf0660445726f 77
+  s_14f471e28de918::t_2af413e86019d8 1-76,78-100
+pocs/mockoon-react-fun/web/src/tabs/CalculatorTab.tsx
+  s_14f471e28de918::t_d62af26833c9c1 1-47,49-170
+  s_14f471e28de918::t_e97daec817f1a0 48
+pocs/mockoon-react-fun/scripts/test.sh
+  s_14f471e28de918::t_afbef9873677c2 1-33
+pocs/mockoon-react-fun/web/vite.config.ts
+  s_14f471e28de918::t_832163c77e8737 1-14
+pocs/mockoon-react-fun/printscreens/architecture.svg
+  s_14f471e28de918::t_91e5b5bd4ac6bc 1-39,41-76,79-96
+  s_14f471e28de918::t_86e339432496d4 40,77-78
+pocs/mockoon-react-fun/mock/seed/rounds.json
+  s_14f471e28de918::t_97adb78f175999 1
+pocs/mockoon-react-fun/printscreens/logo.svg
+  s_14f471e28de918::t_152303c9d0f013 1-55
+pocs/mockoon-react-fun/web/src/types/api.ts
+  s_14f471e28de918::t_d2d570ea141216 1-60
+pocs/mockoon-react-fun/mock/templates.ts
+  s_14f471e28de918::t_063fba743ba1f1 1-91
+pocs/mockoon-react-fun/web/src/lib/image.ts
+  s_14f471e28de918::t_b44212909edbd3 3-45
+  s_14f471e28de918::t_78bb57780f616b 1-2
+pocs/mockoon-react-fun/README.md
+  s_14f471e28de918::t_09dc6932cab60c 1-135
+pocs/mockoon-react-fun/CHANGELOG.md
+  s_14f471e28de918::t_3d05a9dde88d43 1-25
+pocs/mockoon-react-fun/package.json
+  s_14f471e28de918::t_de8138394e84ca 1-20
+pocs/mockoon-react-fun/mock/seed/posts.json
+  s_14f471e28de918::t_97adb78f175999 1-18,20-22
+  s_14f471e28de918::t_bfa6f1398e994b 19
+pocs/mockoon-react-fun/spec/books.yaml
+  s_14f471e28de918::t_239adcf83ca0ae 1-104
+pocs/mockoon-react-fun/web/src/components/Alert.tsx
+  s_14f471e28de918::t_11876e30440e44 1-2
+pocs/mockoon-react-fun/scripts/stop.sh
+  s_14f471e28de918::t_afbef9873677c2 1-8
+pocs/mockoon-react-fun/web/tsconfig.json
+  s_14f471e28de918::t_832163c77e8737 1-16,18-22
+  s_14f471e28de918::t_1a547d0b7b6d57 17
+pocs/mockoon-react-fun/web/src/api/index.ts
+  s_14f471e28de918::t_06f772ba54df8d 1-36
+pocs/mockoon-react-fun/web/src/components/Field.tsx
+  s_14f471e28de918::t_78bb57780f616b 1
+  s_14f471e28de918::t_11876e30440e44 2-24
+pocs/mockoon-react-fun/scripts/lib.sh
+  s_14f471e28de918::t_f0c4f520a792ec 91
+  s_14f471e28de918::t_42d728d79fe83e 1-90,92-94
+pocs/mockoon-react-fun/spec/blog.yaml
+  s_14f471e28de918::t_171a52ab3dadad 1-105
+pocs/mockoon-react-fun/mock/seed/calculations.json
+  s_14f471e28de918::t_97adb78f175999 1
+pocs/mockoon-react-fun/web/src/tabs/GameTab.tsx
+  s_14f471e28de918::t_e97daec817f1a0 123
+  s_14f471e28de918::t_e808538182c2d2 1-122,124-157
+pocs/mockoon-react-fun/web/src/api/resource.ts
+  s_14f471e28de918::t_06f772ba54df8d 1-22
+pocs/mockoon-react-fun/spec/notes.yaml
+  s_14f471e28de918::t_9ba2bcf00e382a 1-117
+pocs/mockoon-react-fun/bun.lock
+  s_14f471e28de918::t_b526bc7805fdda 1-556
+pocs/mockoon-react-fun/web/bun.lock
+  s_14f471e28de918::t_75aa9785c32045 1-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "30ad6d749fd64edd53a989d40b333e2e51ec7950",
+  "prompts": {},
+  "sessions": {
+    "s_14f471e28de918": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f42d8be-299b-4f87-a199-91cf26429bbd",
+        "model": "claude-opus-5"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
