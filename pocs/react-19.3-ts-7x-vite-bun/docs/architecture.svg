@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="540" viewBox="0 0 1100 540">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;display=swap');text{font-family:'Caveat',cursive;fill:#374339} .title{font-size:32px}.label{font-size:25px}.small{font-size:20px}</style><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" result="noise" seed="8"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#65745b" stroke-width="2"/></marker></defs>
+<rect width="1100" height="540" rx="16" fill="#fbfaf6"/>
+<text x="45" y="49" class="title">One request. Shared context. Two rendering environments.</text>
+<g filter="url(#wobble)" stroke="#65745b" stroke-width="2" fill="none">
+<rect x="45" y="105" width="210" height="100" rx="12" fill="#f0e2d1"/>
+<rect x="325" y="105" width="280" height="100" rx="12" fill="#e4ecd8"/>
+<rect x="675" y="105" width="370" height="100" rx="12" fill="#e8e3f0"/>
+<rect x="325" y="300" width="280" height="105" rx="12" fill="#e4ecd8"/>
+<rect x="675" y="300" width="370" height="105" rx="12" fill="#f4e9ce"/>
+<path d="M257 155L316 155" marker-end="url(#arrow)"/>
+<path d="M607 155L666 155" marker-end="url(#arrow)"/>
+<path d="M465 208L465 290" marker-end="url(#arrow)"/>
+<path d="M860 208L860 290" marker-end="url(#arrow)"/>
+
+</g>
+<text x="150" y="143" text-anchor="middle" class="label">Browser request</text><text x="150" y="178" text-anchor="middle" class="small">?workspace=studio</text>
+<text x="465" y="143" text-anchor="middle" class="label">Bun + Vite RSC</text><text x="465" y="178" text-anchor="middle" class="small">AsyncLocalStorage per request</text>
+<text x="860" y="143" text-anchor="middle" class="label">Server Components</text><text x="860" y="178" text-anchor="middle" class="small">App → WorkspaceContext + ProjectList</text>
+<text x="480" y="253" class="small">shared server reads</text>
+<text x="875" y="253" class="small">Flight stream</text>
+<text x="465" y="338" text-anchor="middle" class="label">Workspace + project data</text><text x="465" y="374" text-anchor="middle" class="small">Server-owned fixtures, no database</text>
+<text x="860" y="338" text-anchor="middle" class="label">HTML + embedded Flight → Browser</text><text x="860" y="374" text-anchor="middle" class="small">Hydration → FocusNote reads useContext</text>
+<text x="45" y="465" class="label">React 19.3: the server renders an imported Context directly.</text>
+<text x="45" y="501" class="small">Server reads use request storage. Client reads use React Context. A focus click stays in the browser.</text>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "name": "react-19.3-ts-7x-vite-bun",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "bun@1.4.0",
+  "scripts": {
+    "dev": "bun ./node_modules/vite/bin/vite.js",
+    "build": "bun run typecheck && bun ./node_modules/vite/bin/vite.js build",
+    "start": "bun ./node_modules/vite/bin/vite.js preview",
+    "typecheck": "tsgo --noEmit",
+    "test": "bun test tests/context.test.ts",
+    "test:e2e": "npx playwright test"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-server-dom-webpack": "19.3.0",
+    "rsc-html-stream": "0.0.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/bun": "1.4.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@typescript/native-preview": "7.0.0-dev.20260707.2",
+    "@vitejs/plugin-rsc": "0.5.34",
+    "vite": "8.2.2"
+  }
+}
