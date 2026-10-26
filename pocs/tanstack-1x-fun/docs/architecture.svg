@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap');
+      text { font-family: 'Caveat', cursive; fill: #2a2622; }
+      .t { font-size: 27px; font-weight: 700; }
+      .s { font-size: 20px; }
+      .l { font-size: 18px; fill: #6a5f55; }
+      .box { stroke: #4a4038; stroke-width: 2.2; filter: url(#wobble); }
+      .arrow { stroke: #4a4038; stroke-width: 2.2; fill: none; marker-end: url(#head); filter: url(#wobble); }
+    </style>
+    <filter id="wobble" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="580">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" />
+      <feDisplacementMap in="SourceGraphic" scale="3.5" />
+    </filter>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a4038" />
+    </marker>
+  </defs>
+  <rect width="1200" height="580" fill="#fffdf8" />
+
+  <rect class="box" x="30" y="60" width="240" height="90" rx="14" fill="#dceeff" />
+  <text class="t" x="150" y="98" text-anchor="middle">URL + History</text>
+  <text class="s" x="150" y="128" text-anchor="middle">path, ?search, back button</text>
+
+  <rect class="box" x="320" y="60" width="240" height="90" rx="14" fill="#fff1c9" />
+  <text class="t" x="440" y="98" text-anchor="middle">validateSearch</text>
+  <text class="s" x="440" y="128" text-anchor="middle">typed params + loaderDeps</text>
+
+  <rect class="box" x="610" y="60" width="240" height="90" rx="14" fill="#ffd9d9" />
+  <text class="t" x="730" y="98" text-anchor="middle">beforeLoad</text>
+  <text class="s" x="730" y="128" text-anchor="middle">auth guard, redirect</text>
+
+  <rect class="box" x="900" y="60" width="260" height="90" rx="14" fill="#dff5e1" />
+  <text class="t" x="1030" y="98" text-anchor="middle">loader</text>
+  <text class="s" x="1030" y="128" text-anchor="middle">preload, staleTime, deferred</text>
+
+  <path class="arrow" d="M272,105 L316,105" />
+  <path class="arrow" d="M562,105 L606,105" />
+  <path class="arrow" d="M852,105 L896,105" />
+
+  <rect class="box" x="30" y="260" width="240" height="90" rx="14" fill="#efe4ff" />
+  <text class="t" x="150" y="298" text-anchor="middle">Router context</text>
+  <text class="s" x="150" y="328" text-anchor="middle">queryClient, api, auth</text>
+
+  <rect class="box" x="320" y="260" width="240" height="90" rx="14" fill="#ffe3cc" />
+  <text class="t" x="440" y="298" text-anchor="middle">Error boundaries</text>
+  <text class="s" x="440" y="328" text-anchor="middle">errorComponent, notFound</text>
+
+  <rect class="box" x="610" y="260" width="240" height="90" rx="14" fill="#dceeff" />
+  <text class="t" x="730" y="298" text-anchor="middle">Route component</text>
+  <text class="s" x="730" y="328" text-anchor="middle">Await, useBlocker</text>
+
+  <rect class="box" x="900" y="260" width="260" height="90" rx="14" fill="#fff1c9" />
+  <text class="t" x="1030" y="298" text-anchor="middle">Query cache</text>
+  <text class="s" x="1030" y="328" text-anchor="middle">ensureQueryData, mutations</text>
+
+  <path class="arrow" d="M1030,152 L1030,256" />
+  <text class="l" x="1042" y="210">ensureQueryData</text>
+  <path class="arrow" d="M930,152 L800,256" />
+  <text class="l" x="760" y="200">renders</text>
+  <path class="arrow" d="M896,305 L854,305" />
+  <path class="arrow" d="M606,312 L564,312" />
+  <text class="l" x="585" y="285" text-anchor="middle">throws</text>
+  <text class="l" x="150" y="240" text-anchor="middle">injected into every route</text>
+
+  <rect class="box" x="320" y="450" width="240" height="90" rx="14" fill="#dff5e1" />
+  <text class="t" x="440" y="488" text-anchor="middle">Form 1.x</text>
+  <text class="s" x="440" y="518" text-anchor="middle">sync, async, array fields</text>
+
+  <rect class="box" x="610" y="450" width="240" height="90" rx="14" fill="#efe4ff" />
+  <text class="t" x="730" y="488" text-anchor="middle">Table v9</text>
+  <text class="s" x="730" y="518" text-anchor="middle">lazy chunk, sort, filter</text>
+
+  <rect class="box" x="900" y="450" width="260" height="90" rx="14" fill="#ffd9d9" />
+  <text class="t" x="1030" y="488" text-anchor="middle">Fake API</text>
+  <text class="s" x="1030" y="518" text-anchor="middle">in-memory books, latency</text>
+
+  <path class="arrow" d="M680,352 L520,446" />
+  <path class="arrow" d="M730,352 L730,446" />
+  <path class="arrow" d="M1030,352 L1030,446" />
+  <text class="l" x="1042" y="405">queryFn</text>
+</svg>
