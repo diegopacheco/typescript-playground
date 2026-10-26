@@ -61,7 +61,7 @@
   <text class="l" x="760" y="200">renders</text>
   <path class="arrow" d="M896,305 L854,305" />
   <path class="arrow" d="M606,312 L564,312" />
-  <text class="l" x="585" y="285" text-anchor="middle">throws</text>
+  <text class="l" x="585" y="248" text-anchor="middle">throws</text>
   <text class="l" x="150" y="240" text-anchor="middle">injected into every route</text>
 
   <rect class="box" x="320" y="450" width="240" height="90" rx="14" fill="#dff5e1" />
