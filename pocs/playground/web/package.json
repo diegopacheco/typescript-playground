@@ -1,0 +1,27 @@
+{
+  "name": "ts-playground-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "bun@1.4.4",
+  "scripts": {
+    "dev": "bun ./node_modules/vite/bin/vite.js",
+    "build": "tsc --noEmit && bun ./node_modules/vite/bin/vite.js build",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test test"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.108.4",
+    "@tanstack/react-router": "1.170.46",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.5",
+    "@types/react": "19.3.3",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}

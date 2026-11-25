@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="Caveat, 'Comic Sans MS', cursive">
+<defs>
+<filter id="w"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker>
+<style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700');</style>
+</defs>
+<rect width="1000" height="560" fill="#ffffff"/>
+<g filter="url(#w)" stroke="#334155" stroke-width="2.2" fill="none">
+<rect x="30" y="40" width="230" height="110" rx="14" fill="#e0ecff"/>
+<rect x="30" y="220" width="230" height="110" rx="14" fill="#ede4ff"/>
+<rect x="30" y="400" width="230" height="110" rx="14" fill="#fff1d6"/>
+<rect x="360" y="150" width="270" height="260" rx="16" fill="#dcf5e6"/>
+<rect x="730" y="40" width="240" height="100" rx="14" fill="#ffe3e3"/>
+<rect x="730" y="190" width="240" height="100" rx="14" fill="#fff6c9"/>
+<rect x="730" y="340" width="240" height="100" rx="14" fill="#e3f4fb"/>
+<rect x="730" y="460" width="240" height="70" rx="14" fill="#f1f5f9"/>
+</g>
+<g stroke="#334155" stroke-width="2.2" fill="none" marker-end="url(#a)">
+<path d="M145 150 L145 216"/>
+<path d="M260 275 L358 280"/>
+
+<path d="M260 455 C320 440 330 380 358 360"/>
+<path d="M630 200 C680 170 690 110 728 95"/>
+<path d="M630 260 C680 250 700 245 728 240"/>
+<path d="M630 330 C680 350 700 380 728 385"/>
+<path d="M630 380 C690 420 700 480 728 495"/>
+</g>
+<g fill="#1e293b" text-anchor="middle">
+<text x="145" y="85" font-size="30" font-weight="700">React 19 UI</text>
+<text x="145" y="118" font-size="22">editor, docs, samples</text>
+<text x="145" y="265" font-size="30" font-weight="700">TanStack</text>
+<text x="145" y="298" font-size="22">Router + Query, http.ts</text>
+<text x="145" y="445" font-size="30" font-weight="700">Electron shell</text>
+<text x="145" y="478" font-size="20">boot screen, runs the scripts</text>
+<text x="495" y="200" font-size="32" font-weight="700">Bun server</text>
+<text x="495" y="240" font-size="22">api.ts: one router,</text>
+<text x="495" y="268" font-size="22">one error mapper</text>
+<text x="495" y="310" font-size="22">serves web/dist on</text>
+<text x="495" y="338" font-size="22">127.0.0.1 only</text>
+<text x="495" y="380" font-size="22">correlation id logger</text>
+<text x="850" y="85" font-size="28" font-weight="700">runner.ts</text>
+<text x="850" y="117" font-size="21">tsc 7 check, then bun run</text>
+<text x="850" y="235" font-size="28" font-weight="700">complete.ts</text>
+<text x="850" y="267" font-size="21">index built from the runtime</text>
+<text x="850" y="385" font-size="24" font-weight="700">format.ts, markdown.ts</text>
+<text x="850" y="417" font-size="21">no third party libraries</text>
+<text x="850" y="503" font-size="24" font-weight="700">content/ docs + samples</text>
+<text x="310" y="265" font-size="20">/api/*</text><text x="318" y="500" font-size="20">start-all.sh</text>
+</g>
+</svg>
